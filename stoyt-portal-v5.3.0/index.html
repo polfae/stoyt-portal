@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fo">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stoyt Portal v5.3.0</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <section id="adminLoginGate" class="login-gate" aria-label="Stoyt-admin login">
+    <div class="login-card">
+      <div class="login-brand">
+        <img src="assets/stoyt-logo.png" alt="Stoyt logo">
+        <div>
+          <p class="eyebrow">Stoyt Portal</p>
+          <h1>Admin login</h1>
+        </div>
+      </div>
+      <p class="login-lead">Logga inn sum <strong>Stoyt-admin</strong> fyri at fáa atgongd til kappingar, skabelónir og roknaran.</p>
+      <form id="adminLoginForm" class="login-form">
+        <label>
+          <span>Email ella brúkaranavn</span>
+          <input id="adminLoginEmail" type="email" autocomplete="username" placeholder="admin@stoyt.fo">
+        </label>
+        <label>
+          <span>Loyniorð</span>
+          <input id="adminLoginPassword" type="password" autocomplete="current-password" placeholder="Loyniorð">
+        </label>
+        <p id="adminLoginError" class="login-error" role="alert"></p>
+        <button type="submit" class="login-submit">Logga inn</button>
+      </form>
+      <p class="login-note">Phase 1: Login-síðan er gjørd klár. Verulig online innlogging krevur Firebase config.</p>
+    </div>
+  </section>
+
+  <header class="mobile-topbar">
+    <div class="mobile-brand">
+      <div class="brand-mark">K</div>
+      <div><p class="eyebrow">Stoyt</p><h1>Kappingarklárt</h1></div>
+    </div>
+    <button id="mobileMenuToggle" class="mobile-menu-toggle" type="button" aria-label="Lat menu upp" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="brand">
+          <img class="brand-logo" src="assets/stoyt-logo.png" alt="Stoyt" />
+          <div class="brand-text"><p class="eyebrow">Stoyt</p><h1>Kappingarklárt</h1></div>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="nav-link active" data-view="dashboard" title="Kappingar fyrireiking"><span class="nav-icon">⌂</span><span class="nav-text">Kappingar fyrireiking</span></button>
+        <button class="nav-link" data-view="revenue" title="Inntøku býti"><span class="nav-icon">↔</span><span class="nav-text">Inntøku býti</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div id="firestoreStatus" class="firestore-status" aria-live="polite">
+          <span class="firestore-status-dot"></span>
+          <span class="firestore-status-text">Online</span>
+        </div>
+        <button id="adminLogoutButton" class="admin-logout" type="button" title="Logga út">
+          <span>Logga út</span>
+        </button>
+        <p class="sidebar-version">Version 5.3.0</p>
+        <button id="toggleSidebar" class="collapse-btn" title="Fold menu saman"><span class="when-open">←</span><span class="when-closed">→</span></button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="dashboardView" class="view active-view">
+        <header class="page-header">
+          <div><p class="eyebrow">Kappingar fyrireiking</p><h2>Aktivar kappingar</h2><p class="page-description">Skipað yvirlit yvir kappingar, uppgávur, ábyrgd og leiklutir á kappingardegi.</p></div>
+          <div class="header-actions"><button id="openTemplatesFromDashboard" class="secondary-btn">Templates</button><button id="openCreateCompetition" class="primary-btn">+ Nýggj kapping</button></div>
+        </header>
+        <div id="competitionGrid" class="competition-grid"></div>
+      </section>
+
+      <section id="templatesView" class="view">
+        <header class="page-header">
+          <div><p class="eyebrow">Templates</p><h2>Bygg eina fasta checklist</h2><p class="page-description">Ger ein template, sum kann brúkast aftur hvørja ferð Stoyt skipar fyri kapping.</p></div>
+          <button id="createTemplateBtn" class="primary-btn">+ Nýggjur template</button>
+        </header>
+        <div class="template-layout">
+          <section class="panel"><h3>Templates</h3><div id="templateList" class="list"></div></section>
+          <section id="templateEditor" class="panel editor-panel empty-panel"><div class="empty-message"><h3>Vel ein template</h3><p>Vel ein template til vinstru, ella stovna ein nýggjan.</p></div></section>
+        </div>
+      </section>
+
+      <section id="checklistView" class="view">
+        <header class="checklist-header">
+          <button id="backToDashboard" class="ghost-btn">← Aftur</button>
+          <div class="checklist-title-row">
+            <div><p class="eyebrow">Kapping</p><h2 id="checklistTitle">Kapping</h2><p id="checklistMeta" class="page-description"></p></div>
+          </div>
+
+          <section class="roles-overview panel-soft">
+            <div class="roles-overview-top">
+              <div>
+                <p class="eyebrow">Kappingarleiklutur</p>
+                <h3>Leiklutur á kappingardegi</h3>
+              </div>
+              <div class="roles-actions">
+                <button id="toggleRolesBtn" class="secondary-btn" type="button">Vís leiklutir</button>
+                <button id="editRolesBtn" class="icon-action-btn people-icon-btn" type="button" title="Redigera leiklutir" aria-label="Redigera leiklutir">👥</button>
+              </div>
+            </div>
+            <div id="rolesSummary" class="roles-summary" hidden></div>
+          </section>
+
+          <div id="sectionFilterRow" class="filter-row"></div>
+          <div id="responsibleFilterPills" class="responsible-pill-filter" aria-label="Filtrera eftir ábyrgdarpersóni"></div>
+          <button id="downloadChecklistPdfBtn" class="download-pdf-btn" type="button" title="Tak niður PDF" aria-label="Tak niður PDF">↓</button>
+        </header>
+        <div id="checklistColumns" class="checklist-columns"></div>
+      </section>
+
+      <section id="revenueView" class="view revenue-view">
+        <header class="page-header revenue-page-hero">
+          <div>
+            <p class="eyebrow">Inntøku býti</p>
+            <h2>Býti av limainntøku</h2>
+            <p class="page-description">Roknari til býti av limainntøku millum Stoyt og Tvørmegi.</p>
+          </div>
+          <aside class="revenue-hero-card" aria-label="Samlað limainntøka">
+            <span>Samlað limainntøka</span>
+            <strong id="portalRevenueTotalIncome">0 kr</strong>
+            <small id="portalRevenueTotalMembers">0 limir</small>
+          </aside>
+        </header>
+        <div class="revenue-frame-card">
+          <iframe
+            id="revenueCalculatorFrame"
+            class="revenue-frame"
+            src="inntoku-byti/index.html"
+            title="Inntøku býti"
+            loading="lazy"
+            scrolling="no"
+          ></iframe>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="createCompetitionModal" class="modal">
+    <form id="competitionForm" class="modal-card">
+      <div class="modal-header"><div><p class="eyebrow">Nýggj kapping</p><h2>Stovna checklist</h2></div><button type="button" class="icon-btn" id="closeCompetitionModal">×</button></div>
+      <div class="form-grid"><label>Kappingarnavn<input id="competitionName" type="text" placeholder="T.d. Skansi Cup 2026" required /></label><label>Dato<input id="competitionDate" type="date" required /></label></div>
+      <label>Stað<input id="competitionVenue" type="text" placeholder="T.d. Tvørmegi" /></label>
+      <label>Template<select id="competitionTemplate"></select></label>
+      <div class="people-box create-people-box-hidden" hidden><div><h3>Ábyrgdarpersónar til uppgávur</h3><p>Legg fólk afturat, sum kunnu veljast sum ábyrgdarpersónar á checklist-uppgávum. Hvør persónur fær sín egna lit.</p></div><div class="person-input-row"><input id="personNameInput" type="text" placeholder="Navn, t.d. Pól" /><button id="addPersonBtn" type="button" class="secondary-btn">Legg afturat</button></div><div id="personList" class="person-list"></div></div>
+      <label>Atgongdarloyniorð<input id="competitionPassword" type="text" placeholder="T.d. stoyt2026" /></label>
+      <button class="primary-btn full-width" type="submit">Stovna kapping</button>
+    </form>
+  </dialog>
+
+
+  <dialog id="editCompetitionModal" class="modal">
+    <form id="editCompetitionForm" class="modal-card">
+      <div class="modal-header"><div><p class="eyebrow">Kapping</p><h2>Redigera kapping</h2></div><button type="button" class="icon-btn" id="closeEditCompetitionModal">×</button></div>
+      <div class="form-grid"><label>Kappingarnavn<input id="editCompetitionName" type="text" placeholder="T.d. Skansi Cup 2026" required /></label><label>Dato<input id="editCompetitionDate" type="date" required /></label></div>
+      <label>Stað<input id="editCompetitionVenue" type="text" placeholder="T.d. Tvørmegi" /></label>
+      <div class="people-box"><div><h3>Ábyrgdarpersónar til uppgávur</h3><p>Broyt listan av fólkum, sum kunnu veljast sum ábyrgdarpersónar á checklist-uppgávum.</p></div><div class="person-input-row"><input id="editPersonNameInput" type="text" placeholder="Navn, t.d. Pól" /><button id="editAddPersonBtn" type="button" class="secondary-btn">Legg afturat</button></div><div id="editPersonList" class="person-list"></div></div>
+      <label>Atgongdarloyniorð<input id="editCompetitionPassword" type="text" placeholder="T.d. stoyt2026" /></label>
+      <button class="primary-btn full-width" type="submit">Goym broytingar</button>
+    </form>
+  </dialog>
+
+  <dialog id="taskEditModal" class="modal">
+    <form id="taskEditForm" class="modal-card">
+      <div class="modal-header"><div><p class="eyebrow">Uppgáva</p><h2>Redigera uppgávu</h2></div><button type="button" class="icon-btn" id="closeTaskEditModal">×</button></div>
+      <label>Heiti<input id="editTaskTitle" type="text" placeholder="T.d. Finna dómarar" required /></label>
+      <div class="responsible-editor">
+        <div class="responsible-editor-heading">
+          <p class="field-label">Ábyrgd</p>
+          <button id="showAddTaskPersonBtn" class="role-add-btn" type="button" title="Legg persón afturat">+</button>
+        </div>
+        <div id="taskPersonAddRow" class="person-input-row hidden" hidden>
+          <input id="taskPersonNameInput" type="text" placeholder="Navn, t.d. Pól" />
+          <button id="addTaskPersonBtn" type="button" class="secondary-btn">Legg afturat</button>
+        </div>
+        <div id="editTaskResponsibleList" class="responsible-check-list"></div>
+      </div>
+      <label class="checkbox-row"><input id="editTaskHasDeadline" type="checkbox" /><span>Legg freist afturat</span></label>
+      <div id="deadlineFields" class="deadline-fields hidden"><label>Freist dato<input id="editTaskDeadlineDate" type="date" /></label><label>Klokkuslettur, valfrítt<input id="editTaskDeadlineTime" type="text" inputmode="numeric" maxlength="5" placeholder="HH:MM" pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$" /></label></div>
+      <label>Viðmerking<textarea id="editTaskNote" rows="3" placeholder="T.d. hvør skal spyrjast, backup plan, ella hvat skal minnast til."></textarea></label>
+      <div class="modal-actions"><button id="deleteTaskBtn" type="button" class="danger-btn">Strika uppgávu</button><button class="primary-btn" type="submit">Goym broytingar</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="rolesModal" class="modal modal-wide">
+    <form id="rolesForm" class="modal-card">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Leiklutur</p>
+          <h2>Redigera kappingarleiklutir</h2>
+          <p class="page-description">Skriva nøvnini á fólkunum í teigarnar. Tómir leiklutir verða ikki vístir á kappingarsíðuni.</p>
+        </div>
+        <button type="button" class="icon-btn" id="closeRolesModal">×</button>
+      </div>
+
+      <div id="rolesEditor" class="roles-editor"></div>
+
+      <button class="primary-btn full-width" type="submit">Goym leiklutir</button>
+    </form>
+  </dialog>
+
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCw0MoDq1UVeThbMAt3sQLuX9VsdXd5sjM",
+      authDomain: "stoyt-portal.firebaseapp.com",
+      projectId: "stoyt-portal",
+      storageBucket: "stoyt-portal.firebasestorage.app",
+      messagingSenderId: "379424783181",
+      appId: "1:379424783181:web:61b7f581ce80fea7705504",
+      measurementId: "G-JLL3M3XQTC"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const portalStateRef = doc(db, "portal", "state");
+
+    window.StoytFirebaseAuth = {
+      signIn: (email, password) => signInWithEmailAndPassword(auth, email, password),
+      signOut: () => signOut(auth),
+      getCurrentUser: () => auth.currentUser
+    };
+
+    window.StoytFirestore = {
+      loadPortalState: async () => {
+        const snapshot = await getDoc(portalStateRef);
+        return snapshot.exists() ? snapshot.data().state : null;
+      },
+      savePortalState: async (state) => {
+        await setDoc(portalStateRef, {
+          state,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+      }
+    };
+
+    onAuthStateChanged(auth, user => {
+      window.dispatchEvent(new CustomEvent("stoyt-auth-changed", { detail: { user } }));
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
