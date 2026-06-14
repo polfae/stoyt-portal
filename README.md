@@ -1,17 +1,14 @@
-# Stoyt Portal v5.5.4
+# Stoyt Portal v5.5.5
 
-Small final UI refinements.
+Small sidebar and modal polish update.
 
 Updates:
-- Settings panel now opens as a floating panel above the cog
-- The cog stays fixed in place when the settings panel opens
-- Collapsed sidebar cog is now only the icon with no circle/border/background
-- Collapsed sidebar navigation icons have more spacing
-- Main competition card icon actions are aligned bottom-right
-- Added an edit competition button inside the competition screen
-- Inside competition action order is now edit, public link, PDF
-- Added an Aftur button on the template page
-- Version/status/logout remain inside the settings panel
+- Settings cog is hidden when the main menu is collapsed
+- Settings cog remains unchanged when the main menu is expanded
+- Collapsed sidebar icons are larger
+- The role-modal button now uses a cleaner SVG icon that matches the portal icon style
+- Removed the top-right X from the task modal
+- Task modal is now controlled by the bottom action buttons
 - Firestore saving, public password access, admin login, planner and calculator are kept
 
 Open `index.html` in your browser.

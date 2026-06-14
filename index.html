@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stoyt Portal v5.5.4</title>
+  <title>Stoyt Portal v5.5.5</title>
   <script>
     if (new URLSearchParams(window.location.search).has("competition")) {
       document.documentElement.classList.add("public-competition-route");
@@ -93,7 +93,7 @@
               <span class="firestore-status-dot"></span>
               <span class="firestore-status-text">Online</span>
             </div>
-            <p class="settings-version">Version 5.5.4</p>
+            <p class="settings-version">Version 5.5.5</p>
             <button id="adminLogoutButton" class="admin-logout" type="button" title="Logga út">
               <span>Logga út</span>
             </button>
@@ -141,7 +141,12 @@
               </div>
               <div class="roles-actions">
                 <button id="toggleRolesBtn" class="secondary-btn" type="button">Vís leiklutir</button>
-                <button id="editRolesBtn" class="icon-action-btn people-icon-btn" type="button" title="Redigera leiklutir" aria-label="Redigera leiklutir">👥</button>
+                <button id="editRolesBtn" class="icon-action-btn people-icon-btn" type="button" title="Redigera leiklutir" aria-label="Redigera leiklutir"><svg class="button-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+  <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"></path>
+  <circle cx="9.5" cy="7" r="4"></circle>
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+</svg></button>
               </div>
             </div>
             <div id="rolesSummary" class="roles-summary" hidden></div>
@@ -218,7 +223,7 @@
 
   <dialog id="taskEditModal" class="modal">
     <form id="taskEditForm" class="modal-card">
-      <div class="modal-header"><div><p class="eyebrow">Uppgáva</p><h2>Redigera uppgávu</h2></div><button type="button" class="icon-btn" id="closeTaskEditModal">×</button></div>
+      <div class="modal-header"><div><p class="eyebrow">Uppgáva</p><h2>Redigera uppgávu</h2></div></div>
       <label>Heiti<input id="editTaskTitle" type="text" placeholder="T.d. Finna dómarar" required /></label>
       <div class="responsible-editor">
         <div class="responsible-editor-heading">
