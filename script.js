@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.4.1";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.4.2";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -120,10 +120,23 @@ function getCompetitionShareUrl(competitionId) {
 
 
 function updateEditCompetitionShareLink() {
-  if (!editingCompetitionId) return;
+  const competitionId = editingCompetitionId || activeCompetitionId;
   const input = $("#editCompetitionShareLink");
-  if (!input) return;
-  input.value = getCompetitionShareUrl(editingCompetitionId);
+  const openLink = $("#openEditCompetitionShareLinkBtn");
+  if (!competitionId) return "";
+
+  const shareLink = getCompetitionShareUrl(competitionId);
+
+  if (input) {
+    input.value = shareLink;
+    input.setAttribute("value", shareLink);
+  }
+
+  if (openLink) {
+    openLink.href = shareLink;
+  }
+
+  return shareLink;
 }
 
 async function copyTextToClipboard(text) {
@@ -695,7 +708,7 @@ function renderDashboard() {
 
       <div class="competition-actions">
         <button class="secondary-btn" data-open-competition>Opna checklist</button>
-        <button class="secondary-btn" data-copy-share-link>Deil</button>
+        <button class="secondary-btn" data-copy-share-link="${competition.id}">Deil</button>
         <button class="icon-action-btn" data-edit-competition title="Redigera kapping">✎</button>
         <button class="icon-action-btn danger" data-delete-competition title="Strika kapping">×</button>
       </div>
@@ -719,7 +732,7 @@ function renderDashboard() {
 
     card.querySelector("[data-copy-share-link]").addEventListener("click", async event => {
       event.stopPropagation();
-      const didCopy = await copyTextToClipboard(getCompetitionShareUrl(competition.id));
+      const didCopy = await copyTextToClipboard(getCompetitionShareUrl(event.currentTarget.dataset.copyShareLink || competition.id));
       event.currentTarget.textContent = didCopy ? "Kopierað" : "Deil";
       setTimeout(() => {
         event.currentTarget.textContent = "Deil";
@@ -1161,6 +1174,9 @@ function openCompetitionEditor(competitionId) {
 
   renderEditPeopleDraft();
   $("#editCompetitionModal").showModal();
+  updateEditCompetitionShareLink();
+  requestAnimationFrame(updateEditCompetitionShareLink);
+  setTimeout(updateEditCompetitionShareLink, 100);
 }
 
 function deleteCompetitionWithConfirmation(competitionId) {
@@ -2358,10 +2374,10 @@ $("#personNameInput").addEventListener("keydown", event => {
 $("#closeEditCompetitionModal").addEventListener("click", () => $("#editCompetitionModal").close());
 $("#editCompetitionPassword")?.addEventListener("input", updateEditCompetitionShareLink);
 
-$("#copyEditCompetitionShareLinkBtn")?.addEventListener("click", async () => {
-  updateEditCompetitionShareLink();
-  const input = $("#editCompetitionShareLink");
-  const link = input?.value || (editingCompetitionId ? getCompetitionShareUrl(editingCompetitionId) : "");
+$("#copyEditCompetitionShareLinkBtn")?.addEventListener("click", async event => {
+  event.preventDefault();
+  event.stopPropagation();
+  const link = updateEditCompetitionShareLink();
   if (!link) return;
   const didCopy = await copyTextToClipboard(link);
   $("#copyEditCompetitionShareLinkBtn").textContent = didCopy ? "Kopierað" : "Kopiera leinkju";
@@ -2647,6 +2663,42 @@ function syncRevenueHeaderSummary() {
 }
 
 syncRevenueHeaderSummary();
+
+
+document.addEventListener("click", async event => {
+  const copyButton = event.target.closest("#copyEditCompetitionShareLinkBtn, [data-copy-share-link]");
+  if (!copyButton) return;
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  let link = "";
+
+  if (copyButton.matches("[data-copy-share-link]")) {
+    link = copyButton.dataset.copyShareLink ? getCompetitionShareUrl(copyButton.dataset.copyShareLink) : "";
+  } else {
+    link = updateEditCompetitionShareLink();
+  }
+
+  if (!link) return;
+
+  const didCopy = await copyTextToClipboard(link);
+  const originalText = copyButton.textContent;
+  copyButton.textContent = didCopy ? "Kopierað" : originalText;
+  setTimeout(() => {
+    copyButton.textContent = originalText;
+  }, 1400);
+}, true);
+
+$("#editCompetitionShareLink")?.addEventListener("focus", event => {
+  updateEditCompetitionShareLink();
+  event.target.select();
+});
+
+$("#editCompetitionShareLink")?.addEventListener("click", event => {
+  updateEditCompetitionShareLink();
+  event.target.select();
+});
 
 setupPublicCompetitionAccess();
 setupAdminLogin();

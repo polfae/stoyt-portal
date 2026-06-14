@@ -3022,3 +3022,14 @@ body[data-firestore-status="error"] .firestore-status-text::after {
   color: #334155;
   background: #f8fafc;
 }
+
+
+/* v5.4.2 share-link fallback polish */
+.share-open-link {
+  text-align: center;
+  text-decoration: none;
+}
+
+#editCompetitionShareLink {
+  font-size: 0.9rem;
+}
