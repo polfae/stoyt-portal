@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.4.7";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.4.8";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -690,6 +690,7 @@ function applyPublicLayoutFix() {
   const mobileTopbar = $(".mobile-topbar");
   const isPublic = isPublicCompetitionMode && isPublicCompetitionUnlocked;
 
+  document.documentElement.classList.toggle("public-competition-route", isPublicCompetitionMode);
   document.body.classList.toggle("public-competition-active", isPublic);
   checklistView?.classList.toggle("public-centered-checklist", isPublic);
   main?.classList.toggle("public-centered-main", isPublic);
@@ -697,15 +698,15 @@ function applyPublicLayoutFix() {
 
   if (!isPublic) return;
 
-  // Fully remove the public back button from the DOM. Public users have nowhere to go back to.
+  // This is the real back button ID in the HTML.
   backButton?.remove();
 
   if (sidebar) sidebar.style.display = "none";
   if (mobileTopbar) mobileTopbar.style.display = "none";
 
   if (appShell) {
-    appShell.style.display = "block";
-    appShell.style.gridTemplateColumns = "1fr";
+    appShell.style.display = "grid";
+    appShell.style.gridTemplateColumns = "0 minmax(0, 1fr)";
     appShell.style.width = "100%";
     appShell.style.maxWidth = "none";
     appShell.style.margin = "0";
@@ -713,9 +714,8 @@ function applyPublicLayoutFix() {
   }
 
   if (main) {
-    main.style.display = "flex";
-    main.style.justifyContent = "center";
-    main.style.alignItems = "flex-start";
+    main.style.gridColumn = "1 / -1";
+    main.style.display = "block";
     main.style.width = "100%";
     main.style.maxWidth = "none";
     main.style.margin = "0";
@@ -726,8 +726,8 @@ function applyPublicLayoutFix() {
 
   if (checklistView) {
     checklistView.style.display = "block";
-    checklistView.style.width = "min(1480px, calc(100vw - clamp(2rem, 6vw, 4.5rem)))";
-    checklistView.style.maxWidth = "1480px";
+    checklistView.style.width = "min(1180px, calc(100vw - clamp(2rem, 6vw, 4.5rem)))";
+    checklistView.style.maxWidth = "1180px";
     checklistView.style.marginLeft = "auto";
     checklistView.style.marginRight = "auto";
     checklistView.style.paddingLeft = "0";

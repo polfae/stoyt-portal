@@ -1,16 +1,18 @@
-# Stoyt Portal v5.4.7
+# Stoyt Portal v5.4.8
 
-Deep public-layout fix.
+Definitive public competition layout fix.
 
-What was wrong:
-- The code was trying to hide `#backToDashboardBtn`, but the real button ID is `#backToDashboard`.
-- The code was trying to center `.main-content`, but the real main container class is `.main`.
+Root cause:
+- Earlier fixes still depended on public/auth classes being applied after load.
+- The previous JavaScript also forced the app shell to `display: block`, which worked against the original grid layout.
+- The public view needs the app grid to become `0 + full width`, not a shifted block.
 
 Updates:
-- Fully removes the real `#backToDashboard` button from the DOM in public competition mode
-- Centers the actual `.main` / `#checklistView` structure across the browser width
-- Adds direct inline style fallback from JavaScript, not only CSS
-- Keeps public competition tools identical to admin checklist view
+- Adds an early `html.public-competition-route` class before CSS loads when the URL has `?competition=...`
+- Uses the real selectors: `#backToDashboard`, `.main`, `#appShell`, and `#checklistView`
+- Fully hides/removes the Aftur button in public competition links
+- Centers the public competition content using the full browser width
+- Keeps the public competition screen otherwise identical to the admin checklist view
 - Firestore saving, public password access, admin login, planner and calculator are kept
 
 Open `index.html` in your browser.
