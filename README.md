@@ -1,15 +1,12 @@
-# Stoyt Portal v5.4.3
+# Stoyt Portal v5.4.4
 
-Public competition and share-button polish from v5.4.2.
+Public competition layout correction.
 
 Updates:
-- Competition card share button is now icon-only and aligned with edit/delete buttons
-- Competition card action buttons stay on one row
-- Public competition view is centered across the full screen width
-- Public users can add sections
-- Public users can remove sections
-- Public users can remove tasks
-- Public back button is hidden
-- Public password access, Firestore saving, admin login, planner and calculator are kept
+- Public competition screen now uses the same competition checklist interface as admin view
+- Public view keeps the same roles controls, roles modal, filters, section controls and task controls
+- Public view only removes the sidebar/main menu and the back button
+- Public competition content is centered across the full screen width
+- Firestore saving, public password access, admin login, planner and calculator are kept
 
 Open `index.html` in your browser.

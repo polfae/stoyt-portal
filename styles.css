@@ -3086,3 +3086,77 @@ body[data-firestore-status="error"] .firestore-status-text::after {
   display: none !important;
 }
 
+
+/* v5.4.4 public competition = admin checklist layout, without sidebar/back button */
+.public-competition-mode .sidebar,
+.public-competition-mode .mobile-topbar,
+.public-competition-mode #dashboardView,
+.public-competition-mode #templatesView,
+.public-competition-mode #revenueView,
+.public-competition-mode #backToDashboardBtn {
+  display: none !important;
+}
+
+.public-competition-mode .app-shell {
+  display: block !important;
+  min-height: 100vh;
+}
+
+.public-competition-mode .main-content {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: clamp(1rem, 3vw, 2.25rem) !important;
+}
+
+.public-competition-mode #checklistView,
+.public-competition-mode .checklist-view {
+  width: min(100%, 1480px) !important;
+  max-width: 1480px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.public-competition-mode .checklist-view.active-view {
+  display: block !important;
+}
+
+.public-competition-mode .page-header,
+.public-competition-mode .filter-panel,
+.public-competition-mode #checklistColumns {
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Re-enable the same competition controls as admin view */
+.public-competition-mode #competitionSelect,
+.public-competition-mode #downloadPdfBtn,
+.public-competition-mode #editRolesBtn,
+.public-competition-mode #toggleRolesBtn,
+.public-competition-mode #rolesSummary,
+.public-competition-mode .delete-task-btn,
+.public-competition-mode .delete-section-btn,
+.public-competition-mode .section-drag-handle,
+.public-competition-mode .add-section-panel,
+.public-competition-mode .task-actions {
+  display: revert !important;
+}
+
+.public-competition-mode .add-section-panel {
+  display: flex !important;
+}
+
+.public-competition-mode .section-title-input {
+  pointer-events: auto !important;
+  border-color: var(--border) !important;
+  background: #fff !important;
+  font-weight: inherit !important;
+}
+
+@media (max-width: 860px) {
+  .public-competition-mode .main-content {
+    padding: 1rem !important;
+  }
+}
+
