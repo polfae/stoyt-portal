@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stoyt Portal v5.5.3</title>
+  <title>Stoyt Portal v5.5.4</title>
   <script>
     if (new URLSearchParams(window.location.search).has("competition")) {
       document.documentElement.classList.add("public-competition-route");
@@ -93,7 +93,7 @@
               <span class="firestore-status-dot"></span>
               <span class="firestore-status-text">Online</span>
             </div>
-            <p class="settings-version">Version 5.5.3</p>
+            <p class="settings-version">Version 5.5.4</p>
             <button id="adminLogoutButton" class="admin-logout" type="button" title="Logga út">
               <span>Logga út</span>
             </button>
@@ -114,7 +114,10 @@
 
       <section id="templatesView" class="view">
         <header class="page-header">
-          <div><p class="eyebrow">Templates</p><h2>Bygg eina fasta checklist</h2><p class="page-description">Ger ein template, sum kann brúkast aftur hvørja ferð Stoyt skipar fyri kapping.</p></div>
+          <div class="page-header-copy">
+            <button id="backFromTemplatesBtn" class="ghost-btn page-back-btn" type="button">← Aftur</button>
+            <div><p class="eyebrow">Templates</p><h2>Bygg eina fasta checklist</h2><p class="page-description">Ger ein template, sum kann brúkast aftur hvørja ferð Stoyt skipar fyri kapping.</p></div>
+          </div>
           <button id="createTemplateBtn" class="primary-btn">+ Nýggjur template</button>
         </header>
         <div class="template-layout">
@@ -146,6 +149,7 @@
 
           <div id="sectionFilterRow" class="filter-row"></div>
           <div id="responsibleFilterPills" class="responsible-pill-filter" aria-label="Filtrera eftir ábyrgdarpersóni"></div>
+          <button id="editCurrentCompetitionBtn" class="download-pdf-btn edit-current-competition-btn" type="button" title="Redigera kapping" aria-label="Redigera kapping">✎</button>
           <button id="copyChecklistShareLinkBtn" class="download-pdf-btn share-checklist-link-btn" type="button" title="Kopiera kappingarleinkju" aria-label="Kopiera kappingarleinkju"><svg class="button-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
   <path d="M9.5 14.5l5-5"></path>
   <path d="M13.5 6.5l1.15-1.15a4 4 0 0 1 5.66 5.66l-2.3 2.3a4 4 0 0 1-5.66 0"></path>
