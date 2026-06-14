@@ -3538,3 +3538,106 @@ html.public-competition-route #checklistView > * {
   }
 }
 
+
+/* v5.5.1 settings menu and link-icon polish */
+.button-icon-svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-action-btn.link-icon-btn,
+.share-checklist-link-btn {
+  display: inline-grid !important;
+  place-items: center !important;
+}
+
+.icon-action-btn.link-icon-btn.copied::after,
+.share-checklist-link-btn.copied::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  background: inherit;
+  color: currentColor;
+  font-weight: 950;
+}
+
+.icon-action-btn.link-icon-btn,
+.share-checklist-link-btn {
+  position: relative;
+}
+
+.share-checklist-link-btn {
+  right: calc(clamp(1.15rem, 3vw, 2rem) + 3.15rem) !important;
+}
+
+.sidebar-settings {
+  position: relative;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.sidebar-settings-button {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 0.65rem 0.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.sidebar-settings-button:hover,
+.sidebar-settings-button[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.settings-cog {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.sidebar-settings-panel {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.sidebar-settings-panel[hidden] {
+  display: none !important;
+}
+
+.firestore-status {
+  margin-bottom: 0 !important;
+}
+
+.sidebar-collapsed .settings-label,
+.sidebar-collapsed .sidebar-settings-panel {
+  display: none !important;
+}
+
+.sidebar-collapsed .sidebar-settings-button {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+}
+

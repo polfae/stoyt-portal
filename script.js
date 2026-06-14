@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.5.0";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.8", "stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.5.1";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.5.0", "stoyt-portal-v5.4.8", "stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -778,7 +778,11 @@ function renderDashboard() {
 
       <div class="competition-actions">
         <button class="secondary-btn open-checklist-btn" data-open-competition>Opna checklist</button>
-        <button class="icon-action-btn" data-copy-share-link="${competition.id}" title="Kopiera kappingarleinkju" aria-label="Kopiera kappingarleinkju">🔗</button>
+        <button class="icon-action-btn link-icon-btn" data-copy-share-link="${competition.id}" title="Kopiera kappingarleinkju" aria-label="Kopiera kappingarleinkju"><svg class="button-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+  <path d="M9.5 14.5l5-5"></path>
+  <path d="M13.5 6.5l1.15-1.15a4 4 0 0 1 5.66 5.66l-2.3 2.3a4 4 0 0 1-5.66 0"></path>
+  <path d="M10.5 17.5l-1.15 1.15a4 4 0 0 1-5.66-5.66l2.3-2.3a4 4 0 0 1 5.66 0"></path>
+</svg></button>
         <button class="icon-action-btn" data-edit-competition title="Redigera kapping">✎</button>
         <button class="icon-action-btn danger" data-delete-competition title="Strika kapping">×</button>
       </div>
@@ -803,9 +807,9 @@ function renderDashboard() {
     card.querySelector("[data-copy-share-link]").addEventListener("click", async event => {
       event.stopPropagation();
       const didCopy = await copyTextToClipboard(getCompetitionShareUrl(event.currentTarget.dataset.copyShareLink || competition.id));
-      event.currentTarget.textContent = didCopy ? "✓" : "🔗";
+      event.currentTarget.classList.toggle("copied", didCopy);
       setTimeout(() => {
-        event.currentTarget.textContent = "🔗";
+        event.currentTarget.classList.remove("copied");
       }, 1400);
     });
 
@@ -2816,6 +2820,31 @@ $("#rolesForm").addEventListener("submit", event => {
   $("#rolesModal").close();
 });
 
+
+$("#sidebarSettingsButton")?.addEventListener("click", () => {
+  const panel = $("#sidebarSettingsPanel");
+  const button = $("#sidebarSettingsButton");
+  if (!panel || !button) return;
+
+  const shouldOpen = panel.hidden;
+  panel.hidden = !shouldOpen;
+  button.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+});
+
+$("#copyChecklistShareLinkBtn")?.addEventListener("click", async event => {
+  event.preventDefault();
+  event.stopPropagation();
+
+  const competitionId = activeCompetitionId || publicCompetitionId;
+  if (!competitionId) return;
+
+  const didCopy = await copyTextToClipboard(getCompetitionShareUrl(competitionId));
+  event.currentTarget.classList.toggle("copied", didCopy);
+  setTimeout(() => {
+    event.currentTarget.classList.remove("copied");
+  }, 1400);
+});
+
 normalizeState();
 applySidebarState();
 saveState();
@@ -2904,11 +2933,16 @@ document.addEventListener("click", async event => {
 
   const didCopy = await copyTextToClipboard(link);
   const originalText = copyButton.textContent;
-  const isCardShareButton = copyButton.matches("[data-copy-share-link]");
-  copyButton.textContent = didCopy ? (isCardShareButton ? "✓" : "Kopierað") : originalText;
-  setTimeout(() => {
-    copyButton.textContent = isCardShareButton ? "🔗" : originalText;
-  }, 1400);
+  const isIconShareButton = copyButton.matches("[data-copy-share-link], #copyChecklistShareLinkBtn");
+  if (isIconShareButton) {
+    copyButton.classList.toggle("copied", didCopy);
+    setTimeout(() => copyButton.classList.remove("copied"), 1400);
+  } else {
+    copyButton.textContent = didCopy ? "Kopierað" : originalText;
+    setTimeout(() => {
+      copyButton.textContent = originalText;
+    }, 1400);
+  }
 }, true);
 
 $("#editCompetitionShareLink")?.addEventListener("focus", event => {

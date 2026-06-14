@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stoyt Portal v5.5.0</title>
+  <title>Stoyt Portal v5.5.1</title>
   <script>
     if (new URLSearchParams(window.location.search).has("competition")) {
       document.documentElement.classList.add("public-competition-route");
@@ -84,14 +84,22 @@
         <button class="nav-link" data-view="revenue" title="Inntøku býti"><span class="nav-icon">↔</span><span class="nav-text">Inntøku býti</span></button>
       </nav>
       <div class="sidebar-bottom">
-        <div id="firestoreStatus" class="firestore-status" aria-live="polite">
-          <span class="firestore-status-dot"></span>
-          <span class="firestore-status-text">Online</span>
+        <div class="sidebar-settings">
+          <button id="sidebarSettingsButton" class="sidebar-settings-button" type="button" title="Innstillingar" aria-expanded="false">
+            <span class="settings-cog">⚙</span>
+            <span class="settings-label">Innstillingar</span>
+          </button>
+          <div id="sidebarSettingsPanel" class="sidebar-settings-panel" hidden>
+            <div id="firestoreStatus" class="firestore-status" aria-live="polite">
+              <span class="firestore-status-dot"></span>
+              <span class="firestore-status-text">Online</span>
+            </div>
+            <button id="adminLogoutButton" class="admin-logout" type="button" title="Logga út">
+              <span>Logga út</span>
+            </button>
+          </div>
         </div>
-        <button id="adminLogoutButton" class="admin-logout" type="button" title="Logga út">
-          <span>Logga út</span>
-        </button>
-        <p class="sidebar-version">Version 5.5.0</p>
+        <p class="sidebar-version">Version 5.5.1</p>
         <button id="toggleSidebar" class="collapse-btn" title="Fold menu saman"><span class="when-open">←</span><span class="when-closed">→</span></button>
       </div>
     </aside>
@@ -139,6 +147,11 @@
 
           <div id="sectionFilterRow" class="filter-row"></div>
           <div id="responsibleFilterPills" class="responsible-pill-filter" aria-label="Filtrera eftir ábyrgdarpersóni"></div>
+          <button id="copyChecklistShareLinkBtn" class="download-pdf-btn share-checklist-link-btn" type="button" title="Kopiera kappingarleinkju" aria-label="Kopiera kappingarleinkju"><svg class="button-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+  <path d="M9.5 14.5l5-5"></path>
+  <path d="M13.5 6.5l1.15-1.15a4 4 0 0 1 5.66 5.66l-2.3 2.3a4 4 0 0 1-5.66 0"></path>
+  <path d="M10.5 17.5l-1.15 1.15a4 4 0 0 1-5.66-5.66l2.3-2.3a4 4 0 0 1 5.66 0"></path>
+</svg></button>
           <button id="downloadChecklistPdfBtn" class="download-pdf-btn" type="button" title="Tak niður PDF" aria-label="Tak niður PDF">↓</button>
         </header>
         <div id="checklistColumns" class="checklist-columns"></div>
