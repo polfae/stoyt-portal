@@ -1,14 +1,14 @@
-# Stoyt Portal v5.5.2
+# Stoyt Portal v5.5.3
 
-Small settings and revenue calculator access update.
+Sidebar layout refinement.
 
 Updates:
-- Sidebar settings button is now only a cog icon
-- Version number has been moved inside the settings panel
-- Online/Firestore status remains inside the settings panel
-- Logout remains inside the settings panel
-- Removed the separate password gate from the revenue split calculator
-- Revenue split calculator is now protected by the main Stoyt-admin portal login only
-- Firestore saving, public password access, planner and calculator are kept
+- Settings cog is positioned at the bottom-left of the expanded sidebar
+- When the sidebar is collapsed, the settings cog sits above the expand button
+- Collapsed sidebar navigation now shows icons only
+- Removed the circular/pill background around collapsed navigation fields
+- Collapsed sidebar icons are horizontally centered
+- Version/status/logout remain inside the settings panel
+- Firestore saving, public password access, admin login, planner and calculator are kept
 
 Open `index.html` in your browser.
