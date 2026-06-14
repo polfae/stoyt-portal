@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.4.6";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.4.7";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -187,6 +187,7 @@ function applyPublicCompetitionView() {
   render();
   setAuthUi();
   applyPublicLayoutFix();
+  requestAnimationFrame(applyPublicLayoutFix);
 }
 
 async function setupPublicCompetitionAccess() {
@@ -234,6 +235,9 @@ async function setupPublicCompetitionAccess() {
     $("#publicCompetitionPasswordError").textContent = "";
     isPublicCompetitionUnlocked = true;
     applyPublicCompetitionView();
+    requestAnimationFrame(applyPublicLayoutFix);
+    setTimeout(applyPublicLayoutFix, 100);
+    setTimeout(applyPublicLayoutFix, 350);
   });
 }
 
@@ -679,19 +683,56 @@ function setView(viewName) {
 
 function applyPublicLayoutFix() {
   const checklistView = $("#checklistView");
-  const backButton = $("#backToDashboardBtn");
-  const mainContent = $(".main-content");
-  const appShell = $(".app-shell");
+  const backButton = $("#backToDashboard");
+  const main = $(".main");
+  const appShell = $("#appShell") || $(".app-shell");
+  const sidebar = $(".sidebar");
+  const mobileTopbar = $(".mobile-topbar");
   const isPublic = isPublicCompetitionMode && isPublicCompetitionUnlocked;
 
+  document.body.classList.toggle("public-competition-active", isPublic);
   checklistView?.classList.toggle("public-centered-checklist", isPublic);
-  mainContent?.classList.toggle("public-centered-main", isPublic);
+  main?.classList.toggle("public-centered-main", isPublic);
   appShell?.classList.toggle("public-shell", isPublic);
 
-  if (backButton) {
-    backButton.hidden = isPublicCompetitionMode;
-    backButton.style.display = isPublicCompetitionMode ? "none" : "";
-    backButton.setAttribute("aria-hidden", isPublicCompetitionMode ? "true" : "false");
+  if (!isPublic) return;
+
+  // Fully remove the public back button from the DOM. Public users have nowhere to go back to.
+  backButton?.remove();
+
+  if (sidebar) sidebar.style.display = "none";
+  if (mobileTopbar) mobileTopbar.style.display = "none";
+
+  if (appShell) {
+    appShell.style.display = "block";
+    appShell.style.gridTemplateColumns = "1fr";
+    appShell.style.width = "100%";
+    appShell.style.maxWidth = "none";
+    appShell.style.margin = "0";
+    appShell.style.padding = "0";
+  }
+
+  if (main) {
+    main.style.display = "flex";
+    main.style.justifyContent = "center";
+    main.style.alignItems = "flex-start";
+    main.style.width = "100%";
+    main.style.maxWidth = "none";
+    main.style.margin = "0";
+    main.style.padding = "clamp(1rem, 3vw, 2.25rem)";
+    main.style.boxSizing = "border-box";
+    main.style.overflow = "visible";
+  }
+
+  if (checklistView) {
+    checklistView.style.display = "block";
+    checklistView.style.width = "min(1480px, calc(100vw - clamp(2rem, 6vw, 4.5rem)))";
+    checklistView.style.maxWidth = "1480px";
+    checklistView.style.marginLeft = "auto";
+    checklistView.style.marginRight = "auto";
+    checklistView.style.paddingLeft = "0";
+    checklistView.style.paddingRight = "0";
+    checklistView.style.transform = "none";
   }
 }
 

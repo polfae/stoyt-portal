@@ -3277,3 +3277,75 @@ body.public-competition-layout-fix button#backToDashboardBtn,
   left: -9999px !important;
 }
 
+
+/* v5.4.7 real selector fix: #backToDashboard + .main */
+body.public-competition-active,
+body.public-competition-mode.public-competition-unlocked {
+  overflow-x: hidden !important;
+}
+
+body.public-competition-active #backToDashboard,
+body.public-competition-mode #backToDashboard,
+body.public-competition-layout-fix #backToDashboard,
+.app-shell.public-shell #backToDashboard {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.public-competition-active .app-shell,
+body.public-competition-mode.public-competition-unlocked .app-shell,
+.app-shell.public-shell {
+  display: block !important;
+  grid-template-columns: 1fr !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.public-competition-active .main,
+body.public-competition-mode.public-competition-unlocked .main,
+.app-shell.public-shell .main {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: clamp(1rem, 3vw, 2.25rem) !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+body.public-competition-active #checklistView,
+body.public-competition-mode.public-competition-unlocked #checklistView,
+.app-shell.public-shell #checklistView {
+  display: block !important;
+  width: min(1480px, calc(100vw - clamp(2rem, 6vw, 4.5rem))) !important;
+  max-width: 1480px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  transform: none !important;
+}
+
+body.public-competition-active #checklistView > *,
+body.public-competition-mode.public-competition-unlocked #checklistView > *,
+.app-shell.public-shell #checklistView > * {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+body.public-competition-active .sidebar,
+body.public-competition-active .mobile-topbar {
+  display: none !important;
+}
+
