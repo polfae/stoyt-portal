@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.4.5";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.4.6";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -90,7 +90,10 @@ function setAuthUi() {
   if (isPublicCompetitionMode) {
     if (loginGate) loginGate.classList.add("is-hidden");
     if (publicGate) publicGate.classList.toggle("is-hidden", isPublicCompetitionUnlocked);
-    if (app) app.classList.toggle("is-authenticated", isPublicCompetitionUnlocked);
+    if (app) {
+      app.classList.toggle("is-authenticated", isPublicCompetitionUnlocked);
+      app.classList.toggle("public-shell", isPublicCompetitionUnlocked);
+    }
     document.body.classList.toggle("admin-authenticated", false);
     document.body.classList.toggle("admin-locked", !isPublicCompetitionUnlocked);
     document.body.classList.toggle("public-competition-mode", true);
@@ -101,7 +104,10 @@ function setAuthUi() {
 
   if (publicGate) publicGate.classList.add("is-hidden");
   if (loginGate) loginGate.classList.toggle("is-hidden", isAdminAuthenticated);
-  if (app) app.classList.toggle("is-authenticated", isAdminAuthenticated);
+  if (app) {
+    app.classList.toggle("is-authenticated", isAdminAuthenticated);
+    app.classList.toggle("public-shell", false);
+  }
   document.body.classList.toggle("admin-authenticated", isAdminAuthenticated);
   document.body.classList.toggle("admin-locked", !isAdminAuthenticated);
   document.body.classList.toggle("public-competition-mode", false);
@@ -180,6 +186,7 @@ function applyPublicCompetitionView() {
 
   render();
   setAuthUi();
+  applyPublicLayoutFix();
 }
 
 async function setupPublicCompetitionAccess() {
@@ -669,6 +676,25 @@ function setView(viewName) {
   render();
 }
 
+
+function applyPublicLayoutFix() {
+  const checklistView = $("#checklistView");
+  const backButton = $("#backToDashboardBtn");
+  const mainContent = $(".main-content");
+  const appShell = $(".app-shell");
+  const isPublic = isPublicCompetitionMode && isPublicCompetitionUnlocked;
+
+  checklistView?.classList.toggle("public-centered-checklist", isPublic);
+  mainContent?.classList.toggle("public-centered-main", isPublic);
+  appShell?.classList.toggle("public-shell", isPublic);
+
+  if (backButton) {
+    backButton.hidden = isPublicCompetitionMode;
+    backButton.style.display = isPublicCompetitionMode ? "none" : "";
+    backButton.setAttribute("aria-hidden", isPublicCompetitionMode ? "true" : "false");
+  }
+}
+
 function render() {
   if (isPublicCompetitionMode && isPublicCompetitionUnlocked) {
     activeView = "checklist";
@@ -681,6 +707,7 @@ function render() {
   renderTemplateEditor();
   renderCompetitionSelect();
   renderChecklist();
+  applyPublicLayoutFix();
 }
 
 function renderDashboard() {

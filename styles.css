@@ -3209,3 +3209,71 @@ body.public-competition-layout-fix .back-btn {
   visibility: hidden !important;
 }
 
+
+/* v5.4.6 final public-mode centering and back-button removal */
+body.public-competition-mode,
+body.public-competition-layout-fix {
+  width: 100% !important;
+  min-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+body.public-competition-mode .app-shell.public-shell,
+body.public-competition-layout-fix .app-shell.public-shell,
+.app-shell.public-shell {
+  display: block !important;
+  position: static !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+body.public-competition-mode .main-content.public-centered-main,
+body.public-competition-layout-fix .main-content.public-centered-main,
+.app-shell.public-shell .main-content {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: clamp(1rem, 3vw, 2.25rem) !important;
+  box-sizing: border-box !important;
+  transform: none !important;
+}
+
+body.public-competition-mode #checklistView.public-centered-checklist,
+body.public-competition-layout-fix #checklistView.public-centered-checklist,
+.app-shell.public-shell #checklistView {
+  display: block !important;
+  width: min(1480px, calc(100vw - clamp(2rem, 6vw, 4.5rem))) !important;
+  max-width: 1480px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  transform: none !important;
+}
+
+body.public-competition-mode #checklistView > *,
+body.public-competition-layout-fix #checklistView > *,
+.app-shell.public-shell #checklistView > * {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+body.public-competition-mode #backToDashboardBtn,
+body.public-competition-layout-fix #backToDashboardBtn,
+body.public-competition-mode button#backToDashboardBtn,
+body.public-competition-layout-fix button#backToDashboardBtn,
+.app-shell.public-shell #backToDashboardBtn {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+

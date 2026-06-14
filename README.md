@@ -1,10 +1,11 @@
-# Stoyt Portal v5.4.5
+# Stoyt Portal v5.4.6
 
-Public competition layout fix.
+Final public competition layout fix.
 
 Updates:
-- Public competition content container is now horizontally centered across the full browser width
-- The “Aftur” button is hidden in public competition mode
+- Fully removes the Aftur button in public competition mode
+- Forces the public competition container to be horizontally centered across the full browser width
+- Adds direct public-mode classes from JavaScript so the layout is more reliable
 - Public competition still keeps the same checklist tools as admin view
 - Firestore saving, public password access, admin login, planner and calculator are kept
 
