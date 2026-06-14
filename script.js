@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.4.0";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.4.1";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -110,9 +110,20 @@ function setAuthUi() {
 
 function getCompetitionShareUrl(competitionId) {
   const url = new URL(window.location.href);
-  url.searchParams.set("competition", competitionId);
+  url.search = "";
   url.hash = "";
+  const path = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
+  url.pathname = path;
+  url.searchParams.set("competition", competitionId);
   return url.toString();
+}
+
+
+function updateEditCompetitionShareLink() {
+  if (!editingCompetitionId) return;
+  const input = $("#editCompetitionShareLink");
+  if (!input) return;
+  input.value = getCompetitionShareUrl(editingCompetitionId);
 }
 
 async function copyTextToClipboard(text) {
@@ -1145,7 +1156,7 @@ function openCompetitionEditor(competitionId) {
   $("#editCompetitionDate").value = competition.date || "";
   $("#editCompetitionVenue").value = competition.venue || "";
   $("#editCompetitionPassword").value = competition.password || "";
-  $("#editCompetitionShareLink").value = getCompetitionShareUrl(competition.id);
+  updateEditCompetitionShareLink();
   $("#editPersonNameInput").value = "";
 
   renderEditPeopleDraft();
@@ -2345,11 +2356,14 @@ $("#personNameInput").addEventListener("keydown", event => {
 });
 
 $("#closeEditCompetitionModal").addEventListener("click", () => $("#editCompetitionModal").close());
+$("#editCompetitionPassword")?.addEventListener("input", updateEditCompetitionShareLink);
 
 $("#copyEditCompetitionShareLinkBtn")?.addEventListener("click", async () => {
+  updateEditCompetitionShareLink();
   const input = $("#editCompetitionShareLink");
-  if (!input?.value) return;
-  const didCopy = await copyTextToClipboard(input.value);
+  const link = input?.value || (editingCompetitionId ? getCompetitionShareUrl(editingCompetitionId) : "");
+  if (!link) return;
+  const didCopy = await copyTextToClipboard(link);
   $("#copyEditCompetitionShareLinkBtn").textContent = didCopy ? "Kopierað" : "Kopiera leinkju";
   setTimeout(() => {
     $("#copyEditCompetitionShareLinkBtn").textContent = "Kopiera leinkju";

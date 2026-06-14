@@ -3015,3 +3015,10 @@ body[data-firestore-status="error"] .firestore-status-text::after {
   }
 }
 
+
+
+/* v5.4.1 share-link reliability polish */
+.share-link-box input[readonly] {
+  color: #334155;
+  background: #f8fafc;
+}

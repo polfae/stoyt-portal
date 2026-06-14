@@ -1,20 +1,15 @@
-# Stoyt Portal v5.4.0
+# Stoyt Portal v5.4.1
 
-Phase 3: public competition share links and passwords.
+Share-link fix from v5.4.0.
 
 Updates:
-- Each competition can now be shared using a competition-specific link
-- The link format is `?competition=COMPETITION_ID`
-- Public users do not need a login
-- Public users enter the competition password chosen by Stoyt-admin
-- Public users only see that one competition
-- Public users can mark tasks as done, edit tasks, add tasks, add responsible people and assign responsible people
-- Public users do not see the dashboard, templates or revenue calculator
-- Stoyt-admin keeps full access to everything
-- Firestore online saving is kept
+- Fixed the empty share-link field in the competition edit modal
+- Share link is generated automatically from the current GitHub Pages URL
+- Copy button now regenerates the link before copying
+- Public competition password access from v5.4.0 is kept
+- Firestore online saving, admin login, calculator, and planner functionality are kept
 
-Notes:
-- Competition passwords are currently stored in the portal state as plain text for this phase.
-- A later security phase should move password validation into a safer server/rules setup.
+Share links use this format:
+`https://polfae.github.io/stoyt-portal/?competition=COMPETITION_ID`
 
 Open `index.html` in your browser.
