@@ -1,16 +1,15 @@
-# Stoyt Portal v5.4.2
+# Stoyt Portal v5.4.3
 
-Share-link reliability fix.
+Public competition and share-button polish from v5.4.2.
 
 Updates:
-- Share-link field is now filled when the edit modal opens and again after render
-- Copy button has a delegated fallback listener
-- Competition card Deil button now carries the exact competition ID
-- Added an “Opna leinkju” button in the edit modal
-- Share-link input selects the full link when clicked
-- Public competition password access, Firestore saving, admin login, planner and calculator are kept
-
-Share links use this format:
-`https://polfae.github.io/stoyt-portal/?competition=COMPETITION_ID`
+- Competition card share button is now icon-only and aligned with edit/delete buttons
+- Competition card action buttons stay on one row
+- Public competition view is centered across the full screen width
+- Public users can add sections
+- Public users can remove sections
+- Public users can remove tasks
+- Public back button is hidden
+- Public password access, Firestore saving, admin login, planner and calculator are kept
 
 Open `index.html` in your browser.

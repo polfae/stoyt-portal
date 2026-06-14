@@ -2959,10 +2959,7 @@ body[data-firestore-status="error"] .firestore-status-text::after {
 .public-competition-mode #downloadPdfBtn,
 .public-competition-mode #editRolesBtn,
 .public-competition-mode #toggleRolesBtn,
-.public-competition-mode .delete-task-btn,
-.public-competition-mode .delete-section-btn,
-.public-competition-mode .section-drag-handle,
-.public-competition-mode .add-section-panel {
+.public-competition-mode .section-drag-handle {
   display: none !important;
 }
 
@@ -3033,3 +3030,59 @@ body[data-firestore-status="error"] .firestore-status-text::after {
 #editCompetitionShareLink {
   font-size: 0.9rem;
 }
+
+
+/* v5.4.3 public competition layout and card action polish */
+.competition-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: nowrap !important;
+}
+
+.competition-actions .open-checklist-btn {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.competition-actions .icon-action-btn {
+  flex: 0 0 auto;
+}
+
+.public-competition-mode .main-content {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto !important;
+  padding: clamp(1rem, 3vw, 2.25rem) !important;
+}
+
+.public-competition-mode .checklist-view {
+  width: min(100%, 1480px);
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.public-competition-mode #checklistColumns {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.public-competition-mode .page-header {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.public-competition-mode .delete-task-btn,
+.public-competition-mode .delete-section-btn,
+.public-competition-mode .add-section-panel {
+  display: revert !important;
+}
+
+.public-competition-mode .add-section-panel {
+  display: flex !important;
+}
+
+.public-competition-mode #backToDashboardBtn {
+  display: none !important;
+}
+
