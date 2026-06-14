@@ -1,12 +1,11 @@
-# Stoyt Portal v5.4.4
+# Stoyt Portal v5.4.5
 
-Public competition layout correction.
+Public competition layout fix.
 
 Updates:
-- Public competition screen now uses the same competition checklist interface as admin view
-- Public view keeps the same roles controls, roles modal, filters, section controls and task controls
-- Public view only removes the sidebar/main menu and the back button
-- Public competition content is centered across the full screen width
+- Public competition content container is now horizontally centered across the full browser width
+- The “Aftur” button is hidden in public competition mode
+- Public competition still keeps the same checklist tools as admin view
 - Firestore saving, public password access, admin login, planner and calculator are kept
 
 Open `index.html` in your browser.

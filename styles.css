@@ -3160,3 +3160,52 @@ body[data-firestore-status="error"] .firestore-status-text::after {
   }
 }
 
+
+/* v5.4.5 public competition centering + remove back button */
+body.public-competition-mode,
+body.public-competition-layout-fix {
+  overflow-x: hidden;
+}
+
+body.public-competition-mode .app-shell,
+body.public-competition-layout-fix .app-shell {
+  display: block !important;
+  width: 100vw !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.public-competition-mode .main-content,
+body.public-competition-layout-fix .main-content {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  width: 100vw !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: clamp(1rem, 3vw, 2.25rem) !important;
+  box-sizing: border-box !important;
+}
+
+body.public-competition-mode #checklistView,
+body.public-competition-layout-fix #checklistView,
+body.public-competition-mode .checklist-view,
+body.public-competition-layout-fix .checklist-view {
+  width: min(1480px, 100%) !important;
+  max-width: 1480px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  justify-self: center !important;
+}
+
+body.public-competition-mode #backToDashboardBtn,
+body.public-competition-layout-fix #backToDashboardBtn,
+body.public-competition-mode [data-back-to-dashboard],
+body.public-competition-layout-fix [data-back-to-dashboard],
+body.public-competition-mode .back-btn,
+body.public-competition-layout-fix .back-btn {
+  display: none !important;
+  visibility: hidden !important;
+}
+
