@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stoyt Portal v5.5.1</title>
+  <title>Stoyt Portal v5.5.2</title>
   <script>
     if (new URLSearchParams(window.location.search).has("competition")) {
       document.documentElement.classList.add("public-competition-route");
@@ -87,19 +87,18 @@
         <div class="sidebar-settings">
           <button id="sidebarSettingsButton" class="sidebar-settings-button" type="button" title="Innstillingar" aria-expanded="false">
             <span class="settings-cog">⚙</span>
-            <span class="settings-label">Innstillingar</span>
-          </button>
+            </button>
           <div id="sidebarSettingsPanel" class="sidebar-settings-panel" hidden>
             <div id="firestoreStatus" class="firestore-status" aria-live="polite">
               <span class="firestore-status-dot"></span>
               <span class="firestore-status-text">Online</span>
             </div>
+            <p class="settings-version">Version 5.5.2</p>
             <button id="adminLogoutButton" class="admin-logout" type="button" title="Logga út">
               <span>Logga út</span>
             </button>
           </div>
         </div>
-        <p class="sidebar-version">Version 5.5.1</p>
         <button id="toggleSidebar" class="collapse-btn" title="Fold menu saman"><span class="when-open">←</span><span class="when-closed">→</span></button>
       </div>
     </aside>

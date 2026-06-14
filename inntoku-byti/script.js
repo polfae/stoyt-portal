@@ -7,36 +7,13 @@ function unlockSite() {
 }
 
 function setupPasswordGate() {
-  const passwordScreen = document.querySelector("#passwordScreen");
-  const passwordForm = document.querySelector("#passwordForm");
-  const passwordInput = document.querySelector("#sitePassword");
-  const passwordError = document.querySelector("#passwordError");
-
-  if (!passwordScreen || !passwordForm || !passwordInput) return;
-
-  if (sessionStorage.getItem(PASSWORD_SESSION_KEY) === "true") {
-    unlockSite();
-    return;
-  }
-
-  passwordInput.focus();
-
-  passwordForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (passwordInput.value === SITE_PASSWORD) {
-      sessionStorage.setItem(PASSWORD_SESSION_KEY, "true");
-      unlockSite();
-      return;
-    }
-
-    if (passwordError) passwordError.hidden = false;
-    passwordInput.value = "";
-    passwordInput.focus();
-  });
+  document.body.classList.remove("auth-locked");
+  document.body.classList.add("auth-unlocked");
 }
 
-setupPasswordGate();
+
+document.body.classList.remove("auth-locked");
+document.body.classList.add("auth-unlocked");
 
 const defaultMemberships = [
   { id: "adult", name: "Vaksin", cost: 350, members: 10 },

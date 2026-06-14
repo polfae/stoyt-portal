@@ -1,15 +1,14 @@
-# Stoyt Portal v5.5.1
+# Stoyt Portal v5.5.2
 
-Small UI polish update.
+Small settings and revenue calculator access update.
 
 Updates:
-- Public-link/copy icon now uses an SVG icon that matches the portal icon-button style
-- Added a public-link copy button inside the competition screen
-- The competition-screen public-link button is placed beside the PDF download button
-- Public-link button is visible for both admin and public competition users
-- Moved the Online/Firestore status behind a settings cog in the sidebar
-- Moved logout behind the same settings cog
-- Settings cog can later contain more preferences
-- Firestore saving, public password access, admin login, planner and calculator are kept
+- Sidebar settings button is now only a cog icon
+- Version number has been moved inside the settings panel
+- Online/Firestore status remains inside the settings panel
+- Logout remains inside the settings panel
+- Removed the separate password gate from the revenue split calculator
+- Revenue split calculator is now protected by the main Stoyt-admin portal login only
+- Firestore saving, public password access, planner and calculator are kept
 
 Open `index.html` in your browser.

@@ -10,3 +10,8 @@ Version v29:
 - Membership prices are edited under `Limahald`.
 - Stoyt / Tvørmegi membership defaults to 650 kr with a 270 / 380 split.
 - Settings are only applied after clicking `Goym`.
+
+
+v5.5.2 portal note:
+- The calculator's own password gate has been removed.
+- Access is now controlled by the main Stoyt Portal admin login.

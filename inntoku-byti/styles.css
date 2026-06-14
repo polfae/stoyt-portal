@@ -2189,3 +2189,22 @@ body {
   background-color: rgba(255, 255, 255, 0.96) !important;
 }
 
+
+
+/* v5.5.2 portal-only access: calculator password gate removed */
+.password-screen {
+  display: none !important;
+}
+
+body.auth-locked .site-header,
+body.auth-locked .page,
+body.auth-locked .footer {
+  display: initial !important;
+  filter: none !important;
+  pointer-events: auto !important;
+  user-select: auto !important;
+}
+
+body.auth-locked {
+  overflow: auto !important;
+}

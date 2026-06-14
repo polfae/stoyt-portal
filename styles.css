@@ -3641,3 +3641,37 @@ html.public-competition-route #checklistView > * {
   padding: 0;
 }
 
+
+
+/* v5.5.2 sidebar settings polish */
+.sidebar-settings-button {
+  width: 42px !important;
+  height: 42px !important;
+  padding: 0 !important;
+  justify-self: end;
+}
+
+.sidebar-settings-button .settings-cog {
+  font-size: 1.05rem;
+}
+
+.settings-version {
+  margin: 0;
+  padding: 0.45rem 0.2rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.sidebar-version {
+  display: none !important;
+}
+
+.sidebar-settings-panel {
+  min-width: 160px;
+}
+
+.sidebar-collapsed .sidebar-settings-button {
+  justify-self: center;
+}
