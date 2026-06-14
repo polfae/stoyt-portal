@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.3.0";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.4.0";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -58,6 +58,13 @@ const ADMIN_DISPLAY_NAME = "Stoyt-admin";
 let isAdminAuthenticated = false;
 let currentAdminUser = null;
 
+const urlParams = new URLSearchParams(window.location.search);
+const publicCompetitionId = urlParams.get("competition");
+const isPublicCompetitionMode = Boolean(publicCompetitionId);
+let isPublicCompetitionUnlocked = false;
+let publicCompetition = null;
+
+
 function firebaseErrorToMessage(error) {
   const code = error?.code || "";
   if (code.includes("invalid-credential") || code.includes("wrong-password") || code.includes("user-not-found")) {
@@ -77,12 +84,126 @@ function firebaseErrorToMessage(error) {
 
 function setAuthUi() {
   const loginGate = $("#adminLoginGate");
+  const publicGate = $("#publicCompetitionGate");
   const app = $(".app-shell");
+
+  if (isPublicCompetitionMode) {
+    if (loginGate) loginGate.classList.add("is-hidden");
+    if (publicGate) publicGate.classList.toggle("is-hidden", isPublicCompetitionUnlocked);
+    if (app) app.classList.toggle("is-authenticated", isPublicCompetitionUnlocked);
+    document.body.classList.toggle("admin-authenticated", false);
+    document.body.classList.toggle("admin-locked", !isPublicCompetitionUnlocked);
+    document.body.classList.toggle("public-competition-mode", true);
+    document.body.classList.toggle("public-competition-unlocked", isPublicCompetitionUnlocked);
+    return;
+  }
+
+  if (publicGate) publicGate.classList.add("is-hidden");
   if (loginGate) loginGate.classList.toggle("is-hidden", isAdminAuthenticated);
   if (app) app.classList.toggle("is-authenticated", isAdminAuthenticated);
   document.body.classList.toggle("admin-authenticated", isAdminAuthenticated);
   document.body.classList.toggle("admin-locked", !isAdminAuthenticated);
+  document.body.classList.toggle("public-competition-mode", false);
+  document.body.classList.toggle("public-competition-unlocked", false);
 }
+
+
+function getCompetitionShareUrl(competitionId) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("competition", competitionId);
+  url.hash = "";
+  return url.toString();
+}
+
+async function copyTextToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (error) {
+    window.prompt("Kopiera leinkjuna:", text);
+    return false;
+  }
+}
+
+function getPublicCompetition() {
+  return state.competitions.find(competition => competition.id === publicCompetitionId) || null;
+}
+
+function applyPublicCompetitionView() {
+  publicCompetition = getPublicCompetition();
+
+  if (!publicCompetition) {
+    $("#publicCompetitionGateTitle").textContent = "Kapping ikki funnin";
+    $("#publicCompetitionPasswordError").textContent = "Kappingin varð ikki funnin.";
+    setAuthUi();
+    return;
+  }
+
+  $("#publicCompetitionGateTitle").textContent = publicCompetition.name || "Kapping";
+
+  activeCompetitionId = publicCompetition.id;
+  activeResponsibleFilters = [];
+  activeSectionFilters = [];
+  showIncompleteOnly = false;
+  rolesVisible = false;
+  activeView = "checklist";
+
+  Object.entries(views).forEach(([name, view]) => {
+    view?.classList.toggle("active-view", name === "checklist");
+  });
+
+  render();
+  setAuthUi();
+}
+
+async function setupPublicCompetitionAccess() {
+  if (!isPublicCompetitionMode) return;
+
+  setAuthUi();
+
+  try {
+    await loadStateFromFirestore();
+    publicCompetition = getPublicCompetition();
+
+    if (!publicCompetition) {
+      $("#publicCompetitionGateTitle").textContent = "Kapping ikki funnin";
+      $("#publicCompetitionPasswordError").textContent = "Kappingin varð ikki funnin.";
+      return;
+    }
+
+    $("#publicCompetitionGateTitle").textContent = publicCompetition.name || "Kapping";
+  } catch (error) {
+    $("#publicCompetitionPasswordError").textContent = "Kappingin kundi ikki lesast. Royn aftur.";
+  }
+
+  $("#publicCompetitionPasswordForm")?.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const competition = getPublicCompetition();
+    const typedPassword = $("#publicCompetitionPasswordInput")?.value || "";
+    const savedPassword = competition?.password || "";
+
+    if (!competition) {
+      $("#publicCompetitionPasswordError").textContent = "Kappingin varð ikki funnin.";
+      return;
+    }
+
+    if (!savedPassword) {
+      $("#publicCompetitionPasswordError").textContent = "Hendan kappingin hevur einki loyniorð.";
+      return;
+    }
+
+    if (typedPassword !== savedPassword) {
+      $("#publicCompetitionPasswordError").textContent = "Skeivt loyniorð.";
+      return;
+    }
+
+    $("#publicCompetitionPasswordError").textContent = "";
+    isPublicCompetitionUnlocked = true;
+    applyPublicCompetitionView();
+  });
+}
+
 
 function setupAdminLogin() {
   const form = $("#adminLoginForm");
@@ -125,6 +246,8 @@ function setupAdminLogin() {
   });
 
   window.addEventListener("stoyt-auth-changed", async event => {
+    if (isPublicCompetitionMode) return;
+
     currentAdminUser = event.detail.user || null;
     isAdminAuthenticated = Boolean(currentAdminUser);
     setAuthUi();
@@ -293,7 +416,7 @@ function setFirestoreStatus(status) {
 function saveState() {
   cacheStateLocally();
 
-  if (!isAdminAuthenticated || isLoadingFirestoreState || !window.StoytFirestore?.savePortalState) return;
+  if ((!isAdminAuthenticated && !isPublicCompetitionUnlocked) || isLoadingFirestoreState || !window.StoytFirestore?.savePortalState) return;
 
   clearTimeout(firestoreSaveTimer);
   setFirestoreStatus("saving");
@@ -521,6 +644,11 @@ function setView(viewName) {
 }
 
 function render() {
+  if (isPublicCompetitionMode && isPublicCompetitionUnlocked) {
+    activeView = "checklist";
+    activeCompetitionId = publicCompetitionId;
+  }
+
   applySidebarState();
   renderDashboard();
   renderTemplateList();
@@ -556,6 +684,7 @@ function renderDashboard() {
 
       <div class="competition-actions">
         <button class="secondary-btn" data-open-competition>Opna checklist</button>
+        <button class="secondary-btn" data-copy-share-link>Deil</button>
         <button class="icon-action-btn" data-edit-competition title="Redigera kapping">✎</button>
         <button class="icon-action-btn danger" data-delete-competition title="Strika kapping">×</button>
       </div>
@@ -575,6 +704,15 @@ function renderDashboard() {
     card.querySelector("[data-open-competition]").addEventListener("click", event => {
       event.stopPropagation();
       openCompetition();
+    });
+
+    card.querySelector("[data-copy-share-link]").addEventListener("click", async event => {
+      event.stopPropagation();
+      const didCopy = await copyTextToClipboard(getCompetitionShareUrl(competition.id));
+      event.currentTarget.textContent = didCopy ? "Kopierað" : "Deil";
+      setTimeout(() => {
+        event.currentTarget.textContent = "Deil";
+      }, 1400);
     });
 
     card.querySelector("[data-edit-competition]").addEventListener("click", event => {
@@ -1007,6 +1145,7 @@ function openCompetitionEditor(competitionId) {
   $("#editCompetitionDate").value = competition.date || "";
   $("#editCompetitionVenue").value = competition.venue || "";
   $("#editCompetitionPassword").value = competition.password || "";
+  $("#editCompetitionShareLink").value = getCompetitionShareUrl(competition.id);
   $("#editPersonNameInput").value = "";
 
   renderEditPeopleDraft();
@@ -1329,7 +1468,9 @@ function renderChecklist() {
   if (!competition) return;
 
   $("#checklistTitle").textContent = competition.name;
-  $("#checklistMeta").textContent = `${formatDate(competition.date)} · ${competition.venue || "Einki stað ásett"} · Lykilorð: ${competition.password || "einki"}`;
+  $("#checklistMeta").textContent = isPublicCompetitionMode
+    ? `${formatDate(competition.date)} · ${competition.venue || "Einki stað ásett"}`
+    : `${formatDate(competition.date)} · ${competition.venue || "Einki stað ásett"} · Lykilorð: ${competition.password || "einki"}`;
 
   renderRolesSummary(competition);
   renderSectionFilters(competition);
@@ -2205,6 +2346,16 @@ $("#personNameInput").addEventListener("keydown", event => {
 
 $("#closeEditCompetitionModal").addEventListener("click", () => $("#editCompetitionModal").close());
 
+$("#copyEditCompetitionShareLinkBtn")?.addEventListener("click", async () => {
+  const input = $("#editCompetitionShareLink");
+  if (!input?.value) return;
+  const didCopy = await copyTextToClipboard(input.value);
+  $("#copyEditCompetitionShareLinkBtn").textContent = didCopy ? "Kopierað" : "Kopiera leinkju";
+  setTimeout(() => {
+    $("#copyEditCompetitionShareLinkBtn").textContent = "Kopiera leinkju";
+  }, 1400);
+});
+
 $("#editAddPersonBtn").addEventListener("click", () => {
   const input = $("#editPersonNameInput");
   const name = formatName(input.value);
@@ -2483,5 +2634,6 @@ function syncRevenueHeaderSummary() {
 
 syncRevenueHeaderSummary();
 
+setupPublicCompetitionAccess();
 setupAdminLogin();
 render();

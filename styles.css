@@ -2947,3 +2947,71 @@ body[data-firestore-status="error"] .firestore-status-text::after {
   display: none;
 }
 
+
+/* v5.4.0 public competition password access */
+.public-competition-mode .sidebar,
+.public-competition-mode .mobile-topbar,
+.public-competition-mode #dashboardView,
+.public-competition-mode #templatesView,
+.public-competition-mode #revenueView,
+.public-competition-mode #competitionSelect,
+.public-competition-mode #backToDashboardBtn,
+.public-competition-mode #downloadPdfBtn,
+.public-competition-mode #editRolesBtn,
+.public-competition-mode #toggleRolesBtn,
+.public-competition-mode .delete-task-btn,
+.public-competition-mode .delete-section-btn,
+.public-competition-mode .section-drag-handle,
+.public-competition-mode .add-section-panel {
+  display: none !important;
+}
+
+.public-competition-mode .main-content {
+  margin: 0;
+  padding: clamp(1rem, 3vw, 2rem);
+  width: 100%;
+}
+
+.public-competition-mode .app-shell {
+  grid-template-columns: 1fr;
+}
+
+.public-competition-mode .checklist-view {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.public-competition-mode .section-title-input {
+  pointer-events: none;
+  border-color: transparent !important;
+  background: transparent !important;
+  font-weight: 900;
+}
+
+.public-competition-mode .task-actions {
+  display: none;
+}
+
+.public-competition-gate {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(59, 130, 246, 0.20), transparent 26rem),
+    linear-gradient(135deg, #071626 0%, #123d6a 58%, #0d253f 100%);
+}
+
+.share-link-box {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 0.75rem;
+}
+
+.share-link-box input {
+  cursor: text;
+}
+
+@media (max-width: 720px) {
+  .share-link-box {
+    grid-template-columns: 1fr;
+  }
+}
+
