@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.4.8";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.5.0";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.4.8", "stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -1213,13 +1213,28 @@ function renderEditPeopleDraft() {
   editDraftPeople.forEach((person, index) => {
     const color = PERSON_COLORS[index % PERSON_COLORS.length];
     const pill = document.createElement("span");
-    pill.className = "person-pill person-color-pill";
+    pill.className = "person-pill person-color-pill editable-person-pill";
     pill.style.setProperty("--person-color", color.border);
     pill.style.setProperty("--person-bg", color.bg);
     pill.style.setProperty("--person-text", color.text);
-    pill.innerHTML = `${escapeHTML(person)} <button type="button">×</button>`;
+    pill.innerHTML = `
+      <span>${escapeHTML(person)}</span>
+      <button type="button" data-rename-person title="Broyt navn">✎</button>
+      <button type="button" data-delete-person title="Strika persón">×</button>
+    `;
 
-    pill.querySelector("button").addEventListener("click", () => {
+    pill.querySelector("[data-rename-person]").addEventListener("click", () => {
+      const newName = formatName(window.prompt("Nýtt navn:", person) || "");
+      if (!newName || newName === person) return;
+      if (editDraftPeople.some((item, itemIndex) => itemIndex !== index && item.toLocaleLowerCase("fo") === newName.toLocaleLowerCase("fo"))) {
+        window.alert(`"${newName}" er longu á listanum.`);
+        return;
+      }
+      editDraftPeople[index] = newName;
+      renderEditPeopleDraft();
+    });
+
+    pill.querySelector("[data-delete-person]").addEventListener("click", () => {
       editDraftPeople.splice(index, 1);
       renderEditPeopleDraft();
     });
@@ -2136,6 +2151,104 @@ function deleteTaskWithConfirmation(competitionId, sectionId, taskId) {
   renderChecklist();
 }
 
+
+function replaceResponsibleNameInCompetition(competition, oldName, newName) {
+  const oldFormatted = formatName(oldName);
+  const newFormatted = formatName(newName);
+  if (!competition || !oldFormatted || !newFormatted) return false;
+
+  const exists = (competition.people || []).some(person =>
+    person.toLocaleLowerCase("fo") === newFormatted.toLocaleLowerCase("fo") &&
+    person.toLocaleLowerCase("fo") !== oldFormatted.toLocaleLowerCase("fo")
+  );
+
+  if (exists) {
+    window.alert(`"${newFormatted}" er longu á listanum.`);
+    return false;
+  }
+
+  competition.people = uniqueNames((competition.people || []).map(person =>
+    person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo") ? newFormatted : person
+  ));
+
+  getAllTasks(competition).forEach(task => {
+    task.responsibles = uniqueNames(taskResponsibles(task).map(person =>
+      person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo") ? newFormatted : person
+    ));
+    task.responsible = task.responsibles[0] || "";
+  });
+
+  ROLE_DEFINITIONS.forEach(role => {
+    if (!Array.isArray(competition.roles?.[role.key])) return;
+    competition.roles[role.key] = uniqueNames(competition.roles[role.key].map(person =>
+      person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo") ? newFormatted : person
+    )).slice(0, role.max);
+  });
+
+  activeResponsibleFilters = activeResponsibleFilters.map(person =>
+    person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo") ? newFormatted : person
+  );
+
+  return true;
+}
+
+function removeResponsibleNameFromCompetition(competition, name) {
+  const formatted = formatName(name);
+  if (!competition || !formatted) return false;
+
+  competition.people = (competition.people || []).filter(person =>
+    person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
+  );
+
+  getAllTasks(competition).forEach(task => {
+    task.responsibles = taskResponsibles(task).filter(person =>
+      person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
+    );
+    task.responsible = task.responsibles[0] || "";
+  });
+
+  ROLE_DEFINITIONS.forEach(role => {
+    if (!Array.isArray(competition.roles?.[role.key])) return;
+    competition.roles[role.key] = competition.roles[role.key].filter(person =>
+      person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
+    );
+  });
+
+  activeResponsibleFilters = activeResponsibleFilters.filter(person =>
+    person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
+  );
+
+  return true;
+}
+
+function renameResponsiblePerson(competition, oldName, task = null) {
+  const newName = formatName(window.prompt("Nýtt navn:", oldName) || "");
+  if (!newName || newName === oldName) return;
+
+  const changed = replaceResponsibleNameInCompetition(competition, oldName, newName);
+  if (!changed) return;
+
+  saveState();
+  if (task) renderResponsibleChoices(competition, task);
+  renderDashboard();
+  renderChecklist();
+  renderRolesSummary(competition);
+}
+
+function deleteResponsiblePerson(competition, name, task = null) {
+  const confirmed = window.confirm(`Vilt tú strika "${name}" sum ábyrgdarpersón? Navnið verður eisini tikið av øllum uppgávum og leiklutum.`);
+  if (!confirmed) return;
+
+  const changed = removeResponsibleNameFromCompetition(competition, name);
+  if (!changed) return;
+
+  saveState();
+  if (task) renderResponsibleChoices(competition, task);
+  renderDashboard();
+  renderChecklist();
+  renderRolesSummary(competition);
+}
+
 function renderResponsibleChoices(competition, task) {
   const container = $("#editTaskResponsibleList");
   const selected = new Set(sortNames(taskResponsibles(task)));
@@ -2148,12 +2261,34 @@ function renderResponsibleChoices(competition, task) {
   container.innerHTML = sortNames(competition.people).map(person => {
     const checked = selected.has(person) ? "checked" : "";
     return `
-      <label class="responsible-choice" style="${colorStyle(competition, person)}">
-        <input type="checkbox" value="${escapeHTML(person)}" ${checked} />
-        <span>${escapeHTML(person)}</span>
-      </label>
+      <div class="responsible-choice-row" style="${colorStyle(competition, person)}">
+        <label class="responsible-choice">
+          <input type="checkbox" value="${escapeHTML(person)}" ${checked} />
+          <span>${escapeHTML(person)}</span>
+        </label>
+        <div class="responsible-choice-actions">
+          <button type="button" class="tiny-icon-btn" data-rename-responsible="${escapeHTML(person)}" title="Broyt navn">✎</button>
+          <button type="button" class="tiny-icon-btn danger" data-delete-responsible="${escapeHTML(person)}" title="Strika persón">×</button>
+        </div>
+      </div>
     `;
   }).join("");
+
+  container.querySelectorAll("[data-rename-responsible]").forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      renameResponsiblePerson(competition, button.dataset.renameResponsible, task);
+    });
+  });
+
+  container.querySelectorAll("[data-delete-responsible]").forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      deleteResponsiblePerson(competition, button.dataset.deleteResponsible, task);
+    });
+  });
 }
 
 function openTaskEditor(competitionId, sectionId, taskId) {
@@ -2479,10 +2614,20 @@ $("#editCompetitionForm").addEventListener("submit", event => {
   const competition = state.competitions.find(item => item.id === editingCompetitionId);
   if (!competition) return;
 
+  const previousPeople = [...(competition.people || [])];
+
   competition.name = $("#editCompetitionName").value;
   competition.date = $("#editCompetitionDate").value;
   competition.venue = $("#editCompetitionVenue").value;
   competition.password = $("#editCompetitionPassword").value;
+
+  previousPeople.forEach((oldName, index) => {
+    const newName = editDraftPeople[index];
+    if (newName && oldName !== newName) {
+      replaceResponsibleNameInCompetition(competition, oldName, newName);
+    }
+  });
+
   competition.people = uniqueNames(editDraftPeople);
 
   activeResponsibleFilters = activeResponsibleFilters
@@ -2492,6 +2637,11 @@ $("#editCompetitionForm").addEventListener("submit", event => {
   getAllTasks(competition).forEach(task => {
     task.responsibles = uniqueNames(taskResponsibles(task)).filter(person => competition.people.includes(person));
     task.responsible = task.responsibles[0] || "";
+  });
+
+  ROLE_DEFINITIONS.forEach(role => {
+    if (!Array.isArray(competition.roles?.[role.key])) return;
+    competition.roles[role.key] = competition.roles[role.key].filter(person => competition.people.includes(person));
   });
 
   saveState();

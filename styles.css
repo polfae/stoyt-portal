@@ -3424,3 +3424,117 @@ html.public-competition-route #checklistView > * {
   max-width: 100% !important;
 }
 
+
+/* v5.5.0 responsible-person management and fixed task columns */
+.responsible-choice-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid var(--person-color, var(--border));
+  border-radius: 16px;
+  background: var(--person-bg, #fff);
+  color: var(--person-text, var(--text));
+  padding: 0.35rem 0.45rem;
+}
+
+.responsible-choice-row .responsible-choice {
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0.35rem !important;
+}
+
+.responsible-choice-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tiny-icon-btn,
+.editable-person-pill button {
+  width: 1.65rem;
+  height: 1.65rem;
+  display: inline-grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  color: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.tiny-icon-btn.danger,
+.editable-person-pill button[data-delete-person] {
+  color: var(--red);
+}
+
+.editable-person-pill {
+  gap: 0.35rem;
+}
+
+/* Fixed task row columns in both admin and public competition views */
+.task-card {
+  display: grid !important;
+  grid-template-columns: 34px minmax(0, 1fr) 32px !important;
+  align-items: stretch !important;
+  column-gap: 0.75rem !important;
+}
+
+.task-row-content {
+  display: grid !important;
+  grid-template-columns:
+    minmax(180px, 1.35fr)
+    minmax(110px, 0.8fr)
+    minmax(170px, 0.9fr)
+    minmax(170px, 1fr) !important;
+  align-items: start !important;
+  gap: clamp(0.75rem, 1.5vw, 1.15rem) !important;
+  width: 100% !important;
+}
+
+.task-title-cell,
+.task-people-cell,
+.task-deadline-cell,
+.task-comment-cell {
+  min-width: 0 !important;
+  align-self: start !important;
+}
+
+.task-meta,
+.task-deadline-cell,
+.task-comment-cell {
+  overflow-wrap: anywhere;
+}
+
+.task-actions {
+  display: flex !important;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+  .task-card {
+    grid-template-columns: 34px minmax(0, 1fr) 32px !important;
+  }
+
+  .task-row-content {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .task-card {
+    grid-template-columns: 34px minmax(0, 1fr) !important;
+  }
+
+  .task-row-content {
+    grid-template-columns: 1fr !important;
+  }
+
+  .task-actions {
+    grid-column: 2;
+    justify-content: flex-end;
+  }
+}
+
