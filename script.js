@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.5.4";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.5.3", "stoyt-portal-v5.5.2", "stoyt-portal-v5.5.1", "stoyt-portal-v5.5.0", "stoyt-portal-v5.4.8", "stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.5.5";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.5.4", "stoyt-portal-v5.5.3", "stoyt-portal-v5.5.2", "stoyt-portal-v5.5.1", "stoyt-portal-v5.5.0", "stoyt-portal-v5.4.8", "stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -2295,7 +2295,7 @@ function renderResponsibleChoices(competition, task) {
   });
 }
 
-function openTaskEditor(competitionId, sectionId, taskId) {
+function openTaskEditor(competitionId, sectionId, taskId, options = {}) {
   const competition = state.competitions.find(item => item.id === competitionId);
   if (!competition) return;
 
@@ -2305,7 +2305,13 @@ function openTaskEditor(competitionId, sectionId, taskId) {
   const task = (section.tasks || []).find(item => item.id === taskId);
   if (!task) return;
 
-  editingTask = { competitionId, sectionId, taskId };
+  editingTask = {
+    competitionId,
+    sectionId,
+    taskId,
+    isNew: Boolean(options.isNew),
+    competitionSnapshot: structuredClone(competition)
+  };
 
   const taskForm = $("#taskEditForm");
   taskForm.reset();
@@ -2366,16 +2372,14 @@ function addTaskToCompetition(sectionId) {
     done: false
   };
 
+  // Add the task temporarily so the normal editor can use it.
+  // It is not saved until the user clicks "Goym broytingar".
   section.tasks.push(task);
-  saveState();
-
-  // Re-render immediately so the new task exists visually and the add button remains active.
   renderDashboard();
   renderChecklist();
 
-  // Open after the render cycle so repeated additions always target the newly created task.
   requestAnimationFrame(() => {
-    openTaskEditor(competition.id, section.id, task.id);
+    openTaskEditor(competition.id, section.id, task.id, { isNew: true });
   });
 }
 
@@ -2719,12 +2723,35 @@ $("#createTemplateBtn").addEventListener("click", () => {
   render();
 });
 
-$("#closeTaskEditModal").addEventListener("click", () => {
+
+function restoreCompetitionFromTaskSnapshot() {
+  if (!editingTask?.competitionSnapshot) return false;
+
+  const index = state.competitions.findIndex(item => item.id === editingTask.competitionId);
+  if (index === -1) return false;
+
+  state.competitions[index] = structuredClone(editingTask.competitionSnapshot);
+  return true;
+}
+
+function cancelTaskEdit() {
+  const shouldRestore = Boolean(editingTask?.competitionSnapshot);
+
+  if (shouldRestore) {
+    restoreCompetitionFromTaskSnapshot();
+
+    // Only save on cancel if something inside the modal had already changed saved state,
+    // such as adding a new responsible person from the task editor.
+    saveState();
+  }
+
   $("#taskEditModal").close();
   editingTask = null;
   renderDashboard();
   renderChecklist();
-});
+}
+
+$("#closeTaskEditModal").addEventListener("click", cancelTaskEdit);
 
 $("#showAddTaskPersonBtn").addEventListener("click", () => {
   const row = $("#taskPersonAddRow");

@@ -1,17 +1,16 @@
-# Stoyt Portal v5.5.4
+# Stoyt Portal v5.5.5
 
-Small final UI refinements.
+Task modal cancel behavior fix.
 
 Updates:
-- Settings panel now opens as a floating panel above the cog
-- The cog stays fixed in place when the settings panel opens
-- Collapsed sidebar cog is now only the icon with no circle/border/background
-- Collapsed sidebar navigation icons have more spacing
-- Main competition card icon actions are aligned bottom-right
-- Added an edit competition button inside the competition screen
-- Inside competition action order is now edit, public link, PDF
-- Added an Aftur button on the template page
-- Version/status/logout remain inside the settings panel
+- The X button in the task modal now cancels/discards changes
+- If a new task is opened and the user clicks X, the new task is not created
+- If an existing task is edited and the user clicks X, unsaved changes are discarded
+- The bottom buttons keep their meaning:
+  - Strika uppgávu = delete task
+  - Goym broytingar = save/create task
+- The task modal is separate from login/logout behavior
 - Firestore saving, public password access, admin login, planner and calculator are kept
 
+Base: user-uploaded v5.5.4.
 Open `index.html` in your browser.
