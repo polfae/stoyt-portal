@@ -1,5 +1,66 @@
 const STORAGE_KEY = "stoyt-portal-v5.5.6";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.5.5", "stoyt-portal-v5.5.4", "stoyt-portal-v5.5.3", "stoyt-portal-v5.5.2", "stoyt-portal-v5.5.1", "stoyt-portal-v5.5.0", "stoyt-portal-v5.4.8", "stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const PREVIOUS_STORAGE_KEYS = [
+  "stoyt-portal-v5.5.4",
+  "stoyt-portal-v5.5.3",
+  "stoyt-portal-v5.5.2",
+  "stoyt-portal-v5.5.1",
+  "stoyt-portal-v5.5.0",
+  "stoyt-portal-v5.4.8",
+  "stoyt-portal-v5.4.7",
+  "stoyt-portal-v5.4.6",
+  "stoyt-portal-v5.4.5",
+  "stoyt-portal-v5.4.4",
+  "stoyt-portal-v5.4.3",
+  "stoyt-portal-v5.4.2",
+  "stoyt-portal-v5.4.1",
+  "stoyt-portal-v5.4.0",
+  "stoyt-portal-v5.3.0",
+  "stoyt-portal-v5.2.1",
+  "stoyt-portal-v5.2.0",
+  "stoyt-portal-v5.1.4",
+  "stoyt-portal-v5.1.3",
+  "stoyt-portal-v5.1.2",
+  "stoyt-portal-v5.1.1",
+  "stoyt-portal-v5.1.0",
+  "stoyt-portal-v5.0.0",
+  "kappingarklart-v4.9.6",
+  "kappingarklart-v4.9.5",
+  "kappingarklart-v4.9.4",
+  "kappingarklart-v4.9.3",
+  "kappingarklart-v4.9.2",
+  "kappingarklart-v4.9.1",
+  "kappingarklart-v4.9.0",
+  "kappingarklart-v4.8.9",
+  "kappingarklart-v4.8.8",
+  "kappingarklart-v4.8.7",
+  "kappingarklart-v4.8.6",
+  "kappingarklart-v4.8.5",
+  "kappingarklart-v4.8.4",
+  "kappingarklart-v4.8.3",
+  "kappingarklart-v4.8.2",
+  "kappingarklart-v4.8.1",
+  "kappingarklart-v4.8",
+  "kappingarklart-v4.7.1",
+  "kappingarklart-v4.7",
+  "kappingarklart-v4.6",
+  "kappingarklart-v4.5.2",
+  "kappingarklart-v4.5.1",
+  "kappingarklart-v4.5",
+  "kappingarklart-v4.4.2",
+  "kappingarklart-v4.4.1",
+  "kappingarklart-v4.4",
+  "kappingarklart-v4.3",
+  "kappingarklart-v4.2",
+  "kappingarklart-v4.1",
+  "kappingarklart-v4.0",
+  "kappingarklart-v3.9",
+  "kappingarklart-v3.8",
+  "kappingarklart-v3.7.1",
+  "kappingarklart-v3.7",
+  "kappingarklart-v3.6",
+  "kappingarklart-v3.5",
+  "kappingarklart-v3.4",
+];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -9,22 +70,22 @@ const PERSON_COLORS = [
   { border: "#dc2626", bg: "#fee2e2", text: "#7f1d1d" },
   { border: "#0891b2", bg: "#cffafe", text: "#164e63" },
   { border: "#be185d", bg: "#fce7f3", text: "#831843" },
-  { border: "#4f46e5", bg: "#e0e7ff", text: "#312e81" }
+  { border: "#4f46e5", bg: "#e0e7ff", text: "#312e81" },
 ];
 
 const ROLE_DEFINITIONS = [
-  { key: "competitionLeader", label: "Competition leader", max: 2 },
-  { key: "judges", label: "Judges", max: 3 },
+  { key: "competitionLeader", label: "Kappingar leiðari", max: 2 },
+  { key: "judges", label: "Dómarar", max: 3 },
   { key: "jury", label: "Jury", max: 5 },
-  { key: "loaders", label: "Loaders", max: 6 },
+  { key: "loaders", label: "Løðarar", max: 6 },
   { key: "technicalController", label: "Technical controller", max: 1 },
-  { key: "doctor", label: "Doctor", max: 1 },
+  { key: "doctor", label: "Lækni", max: 1 },
   { key: "marshal", label: "Marshal", max: 1 },
-  { key: "speaker", label: "Speaker", max: 1 },
+  { key: "speaker", label: "Røðari", max: 1 },
   { key: "weighInOfficials", label: "Weigh-in officials", max: 2 },
   { key: "secretary", label: "Secretary", max: 2 },
-  { key: "timekeeper", label: "Timekeeper", max: 1 },
-  { key: "dj", label: "DJ", max: 1 }
+  { key: "timekeeper", label: "Tíð takari", max: 1 },
+  { key: "dj", label: "DJ", max: 1 },
 ];
 
 const defaultTemplates = [];
@@ -52,8 +113,6 @@ let draggedTemplateTask = null;
 let draggedTemplateSectionIndex = null;
 let suppressTemplateClick = false;
 
-
-
 const ADMIN_DISPLAY_NAME = "Stoyt-admin";
 let isAdminAuthenticated = false;
 let currentAdminUser = null;
@@ -64,10 +123,13 @@ const isPublicCompetitionMode = Boolean(publicCompetitionId);
 let isPublicCompetitionUnlocked = false;
 let publicCompetition = null;
 
-
 function firebaseErrorToMessage(error) {
   const code = error?.code || "";
-  if (code.includes("invalid-credential") || code.includes("wrong-password") || code.includes("user-not-found")) {
+  if (
+    code.includes("invalid-credential") ||
+    code.includes("wrong-password") ||
+    code.includes("user-not-found")
+  ) {
     return "Skeivur teldupostur ella skeivt loyniorð.";
   }
   if (code.includes("invalid-email")) {
@@ -77,9 +139,9 @@ function firebaseErrorToMessage(error) {
     return "Ov nógvar royndir. Bíða eina løtu og royn aftur.";
   }
   if (code.includes("network-request-failed")) {
-    return "Eingin sambinding. Kanna internetið og royn aftur.";
+    return "Eingin samband. Kannað internetið og royn aftur.";
   }
-  return "Innlogging miseydnaðist. Royn aftur.";
+  return "Innritan miseydnaðist. Royn aftur.";
 }
 
 function setAuthUi() {
@@ -89,15 +151,22 @@ function setAuthUi() {
 
   if (isPublicCompetitionMode) {
     if (loginGate) loginGate.classList.add("is-hidden");
-    if (publicGate) publicGate.classList.toggle("is-hidden", isPublicCompetitionUnlocked);
+    if (publicGate)
+      publicGate.classList.toggle("is-hidden", isPublicCompetitionUnlocked);
     if (app) {
       app.classList.toggle("is-authenticated", isPublicCompetitionUnlocked);
       app.classList.toggle("public-shell", isPublicCompetitionUnlocked);
     }
     document.body.classList.toggle("admin-authenticated", false);
-    document.body.classList.toggle("admin-locked", !isPublicCompetitionUnlocked);
+    document.body.classList.toggle(
+      "admin-locked",
+      !isPublicCompetitionUnlocked
+    );
     document.body.classList.toggle("public-competition-mode", true);
-    document.body.classList.toggle("public-competition-unlocked", isPublicCompetitionUnlocked);
+    document.body.classList.toggle(
+      "public-competition-unlocked",
+      isPublicCompetitionUnlocked
+    );
     document.body.classList.toggle("public-competition-layout-fix", true);
     return;
   }
@@ -115,7 +184,6 @@ function setAuthUi() {
   document.body.classList.toggle("public-competition-layout-fix", false);
 }
 
-
 function getCompetitionShareUrl(competitionId) {
   const url = new URL(window.location.href);
   url.search = "";
@@ -125,7 +193,6 @@ function getCompetitionShareUrl(competitionId) {
   url.searchParams.set("competition", competitionId);
   return url.toString();
 }
-
 
 function updateEditCompetitionShareLink() {
   const competitionId = editingCompetitionId || activeCompetitionId;
@@ -158,20 +225,27 @@ async function copyTextToClipboard(text) {
 }
 
 function getPublicCompetition() {
-  return state.competitions.find(competition => competition.id === publicCompetitionId) || null;
+  return (
+    state.competitions.find(
+      (competition) => competition.id === publicCompetitionId
+    ) || null
+  );
 }
 
 function applyPublicCompetitionView() {
   publicCompetition = getPublicCompetition();
 
   if (!publicCompetition) {
-    $("#publicCompetitionGateTitle").textContent = "Kapping ikki funnin";
-    $("#publicCompetitionPasswordError").textContent = "Kappingin varð ikki funnin.";
+    $("#publicCompetitionGateTitle").textContent =
+      "Kappingin bleiv ikki funnin";
+    $("#publicCompetitionPasswordError").textContent =
+      "Kappingin bleiv ikki funnin.";
     setAuthUi();
     return;
   }
 
-  $("#publicCompetitionGateTitle").textContent = publicCompetition.name || "Kapping";
+  $("#publicCompetitionGateTitle").textContent =
+    publicCompetition.name || "Kapping";
 
   activeCompetitionId = publicCompetition.id;
   activeResponsibleFilters = [];
@@ -200,17 +274,21 @@ async function setupPublicCompetitionAccess() {
     publicCompetition = getPublicCompetition();
 
     if (!publicCompetition) {
-      $("#publicCompetitionGateTitle").textContent = "Kapping ikki funnin";
-      $("#publicCompetitionPasswordError").textContent = "Kappingin varð ikki funnin.";
+      $("#publicCompetitionGateTitle").textContent =
+        "Kappingin bleiv ikki funnin";
+      $("#publicCompetitionPasswordError").textContent =
+        "Kappingin bleiv ikki funnin.";
       return;
     }
 
-    $("#publicCompetitionGateTitle").textContent = publicCompetition.name || "Kapping";
+    $("#publicCompetitionGateTitle").textContent =
+      publicCompetition.name || "Kapping";
   } catch (error) {
-    $("#publicCompetitionPasswordError").textContent = "Kappingin kundi ikki lesast. Royn aftur.";
+    $("#publicCompetitionPasswordError").textContent =
+      "Kappingin kundi ikki lesast. Royn aftur.";
   }
 
-  $("#publicCompetitionPasswordForm")?.addEventListener("submit", event => {
+  $("#publicCompetitionPasswordForm")?.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const competition = getPublicCompetition();
@@ -218,12 +296,14 @@ async function setupPublicCompetitionAccess() {
     const savedPassword = competition?.password || "";
 
     if (!competition) {
-      $("#publicCompetitionPasswordError").textContent = "Kappingin varð ikki funnin.";
+      $("#publicCompetitionPasswordError").textContent =
+        "Kappingin bleiv ikki funnin.";
       return;
     }
 
     if (!savedPassword) {
-      $("#publicCompetitionPasswordError").textContent = "Hendan kappingin hevur einki loyniorð.";
+      $("#publicCompetitionPasswordError").textContent =
+        "Hendan kappingin hevur einki loyniorð.";
       return;
     }
 
@@ -241,27 +321,28 @@ async function setupPublicCompetitionAccess() {
   });
 }
 
-
 function setupAdminLogin() {
   const form = $("#adminLoginForm");
   const error = $("#adminLoginError");
   const logout = $("#adminLogoutButton");
   const submitButton = form?.querySelector(".login-submit");
 
-  form?.addEventListener("submit", async event => {
+  form?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const email = $("#adminLoginEmail")?.value.trim() || "";
     const password = $("#adminLoginPassword")?.value || "";
 
     if (!window.StoytFirebaseAuth?.signIn) {
-      if (error) error.textContent = "Firebase er ikki klárt enn. Royn aftur um eina løtu.";
+      if (error)
+        error.textContent =
+          "Firebase er ikki klárt enn. Royn aftur um eina løtu.";
       return;
     }
 
     if (error) error.textContent = "";
     if (submitButton) {
       submitButton.disabled = true;
-      submitButton.textContent = "Loggar inn...";
+      submitButton.textContent = "Ritar inn...";
     }
 
     try {
@@ -271,7 +352,7 @@ function setupAdminLogin() {
     } finally {
       if (submitButton) {
         submitButton.disabled = false;
-        submitButton.textContent = "Logga inn";
+        submitButton.textContent = "Rita inn";
       }
     }
   });
@@ -282,7 +363,7 @@ function setupAdminLogin() {
     }
   });
 
-  window.addEventListener("stoyt-auth-changed", async event => {
+  window.addEventListener("stoyt-auth-changed", async (event) => {
     if (isPublicCompetitionMode) return;
 
     currentAdminUser = event.detail.user || null;
@@ -312,23 +393,26 @@ const views = {
   dashboard: $("#dashboardView"),
   templates: $("#templatesView"),
   checklist: $("#checklistView"),
-  revenue: $("#revenueView")
+  revenue: $("#revenueView"),
 };
 
 function makeId() {
-  return crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`;
+  return crypto.randomUUID
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random()}`;
 }
 
 function makeEmptyRoles() {
   const roles = {};
-  ROLE_DEFINITIONS.forEach(role => {
+  ROLE_DEFINITIONS.forEach((role) => {
     roles[role.key] = [];
   });
   return roles;
 }
 
 function taskResponsibles(task) {
-  if (Array.isArray(task.responsibles)) return task.responsibles.filter(Boolean);
+  if (Array.isArray(task.responsibles))
+    return task.responsibles.filter(Boolean);
   if (task.responsible) return [task.responsible];
   return [];
 }
@@ -337,13 +421,13 @@ function migrateTasksObjectToSections(tasksObject) {
   const sectionInfo = [
     ["before", "Áðrenn kapping"],
     ["during", "Undir kapping"],
-    ["after", "Eftir kapping"]
+    ["after", "Eftir kapping"],
   ];
 
   return sectionInfo.map(([key, title]) => ({
     id: key,
     title,
-    tasks: (tasksObject?.[key] || []).map(task => ({
+    tasks: (tasksObject?.[key] || []).map((task) => ({
       title: task.title || "",
       note: task.note || "",
       responsible: task.responsible || "",
@@ -351,8 +435,8 @@ function migrateTasksObjectToSections(tasksObject) {
       hasDeadline: Boolean(task.hasDeadline && task.deadlineDate),
       deadlineDate: task.deadlineDate || "",
       deadlineTime: task.deadlineTime || "",
-      done: Boolean(task.done)
-    }))
+      done: Boolean(task.done),
+    })),
   }));
 }
 
@@ -366,7 +450,7 @@ function normalizeTemplateSections(template) {
     section.id ||= makeId();
     section.title ||= `Sektion ${index + 1}`;
     section.tasks ||= [];
-    section.tasks.forEach(task => {
+    section.tasks.forEach((task) => {
       task.title ||= "";
       task.note ||= "";
       delete task.responsible;
@@ -389,7 +473,7 @@ function normalizeCompetitionSections(competition) {
     section.id ||= makeId();
     section.title ||= `Sektion ${index + 1}`;
     section.tasks ||= [];
-    section.tasks.forEach(task => {
+    section.tasks.forEach((task) => {
       task.id ||= makeId();
       task.title ||= "";
       task.note ||= "";
@@ -404,10 +488,10 @@ function normalizeCompetitionSections(competition) {
 }
 
 function cloneSections(sections) {
-  return (sections || []).map(section => ({
+  return (sections || []).map((section) => ({
     id: makeId(),
     title: section.title || "Nýggj sektion",
-    tasks: (section.tasks || []).map(task => ({
+    tasks: (section.tasks || []).map((task) => ({
       id: makeId(),
       title: task.title || "",
       note: task.note || "",
@@ -416,8 +500,8 @@ function cloneSections(sections) {
       hasDeadline: false,
       deadlineDate: "",
       deadlineTime: "",
-      done: false
-    }))
+      done: false,
+    })),
   }));
 }
 
@@ -425,7 +509,7 @@ function makeEmptyState() {
   return {
     sidebarCollapsed: false,
     templates: [],
-    competitions: []
+    competitions: [],
   };
 }
 
@@ -453,7 +537,12 @@ function setFirestoreStatus(status) {
 function saveState() {
   cacheStateLocally();
 
-  if ((!isAdminAuthenticated && !isPublicCompetitionUnlocked) || isLoadingFirestoreState || !window.StoytFirestore?.savePortalState) return;
+  if (
+    (!isAdminAuthenticated && !isPublicCompetitionUnlocked) ||
+    isLoadingFirestoreState ||
+    !window.StoytFirestore?.savePortalState
+  )
+    return;
 
   clearTimeout(firestoreSaveTimer);
   setFirestoreStatus("saving");
@@ -480,7 +569,12 @@ async function loadStateFromFirestore() {
     normalizeState();
 
     activeTemplateId = state.templates[0]?.id || null;
-    if (activeCompetitionId && !state.competitions.some(competition => competition.id === activeCompetitionId)) {
+    if (
+      activeCompetitionId &&
+      !state.competitions.some(
+        (competition) => competition.id === activeCompetitionId
+      )
+    ) {
       activeCompetitionId = null;
       activeView = "dashboard";
     }
@@ -502,19 +596,25 @@ function normalizeState() {
   state.competitions ||= [];
 
   state.templates.forEach(normalizeTemplateSections);
-  if (typeof activeTemplateId !== "undefined" && activeTemplateId && !state.templates.some(template => template.id === activeTemplateId)) {
+  if (
+    typeof activeTemplateId !== "undefined" &&
+    activeTemplateId &&
+    !state.templates.some((template) => template.id === activeTemplateId)
+  ) {
     activeTemplateId = state.templates[0]?.id || null;
   }
 
-  state.competitions.forEach(competition => {
+  state.competitions.forEach((competition) => {
     competition.people = uniqueNames(competition.people || []);
     competition.roles ||= makeEmptyRoles();
 
-    ROLE_DEFINITIONS.forEach(role => {
+    ROLE_DEFINITIONS.forEach((role) => {
       if (!Array.isArray(competition.roles[role.key])) {
         competition.roles[role.key] = [];
       }
-      competition.roles[role.key] = uniqueNames(competition.roles[role.key]).slice(0, role.max);
+      competition.roles[role.key] = uniqueNames(
+        competition.roles[role.key]
+      ).slice(0, role.max);
     });
 
     normalizeCompetitionSections(competition);
@@ -522,13 +622,15 @@ function normalizeState() {
 }
 
 function getAllTasks(competition) {
-  return (competition.sections || []).flatMap(section => section.tasks || []);
+  return (competition.sections || []).flatMap((section) => section.tasks || []);
 }
 
 function getProgress(competition) {
   const tasks = getAllTasks(competition);
   if (tasks.length === 0) return 0;
-  return Math.round((tasks.filter(task => task.done).length / tasks.length) * 100);
+  return Math.round(
+    (tasks.filter((task) => task.done).length / tasks.length) * 100
+  );
 }
 
 function escapeHTML(value) {
@@ -542,9 +644,12 @@ function escapeHTML(value) {
 function capitalizeNamePart(part) {
   return part
     .split("-")
-    .map(piece => {
+    .map((piece) => {
       if (!piece) return piece;
-      return piece.charAt(0).toLocaleUpperCase("fo") + piece.slice(1).toLocaleLowerCase("fo");
+      return (
+        piece.charAt(0).toLocaleUpperCase("fo") +
+        piece.slice(1).toLocaleLowerCase("fo")
+      );
     })
     .join("-");
 }
@@ -567,7 +672,7 @@ function sortNames(names) {
 
 function uniqueNames(names) {
   const seen = new Set();
-  return sortNames(names).filter(name => {
+  return sortNames(names).filter((name) => {
     const key = name.toLocaleLowerCase("fo");
     if (seen.has(key)) return false;
     seen.add(key);
@@ -581,7 +686,7 @@ function formatDate(value) {
   return new Intl.DateTimeFormat("fo-FO", {
     day: "numeric",
     month: "short",
-    year: "numeric"
+    year: "numeric",
   }).format(date);
 }
 
@@ -591,7 +696,6 @@ function formatDeadline(task) {
   const timeText = normalizeTimeValue(task.deadlineTime);
   return timeText ? `${dateText} kl. ${timeText}` : dateText;
 }
-
 
 function normalizeTimeValue(value) {
   const raw = String(value || "").trim();
@@ -618,10 +722,19 @@ function normalizeTimeValue(value) {
   const hourNumber = Number(hours);
   const minuteNumber = Number(minutes);
 
-  if (!Number.isInteger(hourNumber) || !Number.isInteger(minuteNumber)) return "";
-  if (hourNumber < 0 || hourNumber > 23 || minuteNumber < 0 || minuteNumber > 59) return "";
+  if (!Number.isInteger(hourNumber) || !Number.isInteger(minuteNumber))
+    return "";
+  if (
+    hourNumber < 0 ||
+    hourNumber > 23 ||
+    minuteNumber < 0 ||
+    minuteNumber > 59
+  )
+    return "";
 
-  return `${String(hourNumber).padStart(2, "0")}:${String(minuteNumber).padStart(2, "0")}`;
+  return `${String(hourNumber).padStart(2, "0")}:${String(
+    minuteNumber
+  ).padStart(2, "0")}`;
 }
 
 function keepTimeInputReadable(input) {
@@ -635,8 +748,6 @@ function keepTimeInputReadable(input) {
   input.value = `${digits.slice(0, 2)}:${digits.slice(2)}`;
 }
 
-
-
 function getPersonColor(competition, person) {
   const index = (competition.people || []).indexOf(person);
   return PERSON_COLORS[index >= 0 ? index % PERSON_COLORS.length : 0];
@@ -649,15 +760,24 @@ function colorStyle(competition, person) {
 
 function personPillHTML(competition, person) {
   const formattedPerson = formatName(person);
-  return `<span class="person-pill person-color-pill" style="${colorStyle(competition, formattedPerson)}">${escapeHTML(formattedPerson)}</span>`;
+  return `<span class="person-pill person-color-pill" style="${colorStyle(
+    competition,
+    formattedPerson
+  )}">${escapeHTML(formattedPerson)}</span>`;
 }
 
 function applySidebarState() {
   appShell.classList.toggle("sidebar-collapsed", state.sidebarCollapsed);
   appShell.classList.toggle("mobile-menu-open", mobileMenuOpen);
   appShell.classList.toggle("portal-revenue-active", activeView === "revenue");
-  appShell.classList.toggle("portal-competition-active", activeView !== "revenue");
-  $("#mobileMenuToggle")?.setAttribute("aria-expanded", mobileMenuOpen ? "true" : "false");
+  appShell.classList.toggle(
+    "portal-competition-active",
+    activeView !== "revenue"
+  );
+  $("#mobileMenuToggle")?.setAttribute(
+    "aria-expanded",
+    mobileMenuOpen ? "true" : "false"
+  );
 }
 
 function setView(viewName) {
@@ -669,17 +789,17 @@ function setView(viewName) {
     view?.classList.toggle("active-view", name === viewName);
   });
 
-  navLinks.forEach(link => {
+  navLinks.forEach((link) => {
     const linkView = link.dataset.view;
     const isActive =
       linkView === viewName ||
-      (linkView === "dashboard" && (viewName === "templates" || viewName === "checklist"));
+      (linkView === "dashboard" &&
+        (viewName === "templates" || viewName === "checklist"));
     link.classList.toggle("active", isActive);
   });
 
   render();
 }
-
 
 function applyPublicLayoutFix() {
   const checklistView = $("#checklistView");
@@ -690,7 +810,10 @@ function applyPublicLayoutFix() {
   const mobileTopbar = $(".mobile-topbar");
   const isPublic = isPublicCompetitionMode && isPublicCompetitionUnlocked;
 
-  document.documentElement.classList.toggle("public-competition-route", isPublicCompetitionMode);
+  document.documentElement.classList.toggle(
+    "public-competition-route",
+    isPublicCompetitionMode
+  );
   document.body.classList.toggle("public-competition-active", isPublic);
   checklistView?.classList.toggle("public-centered-checklist", isPublic);
   main?.classList.toggle("public-centered-main", isPublic);
@@ -726,7 +849,8 @@ function applyPublicLayoutFix() {
 
   if (checklistView) {
     checklistView.style.display = "block";
-    checklistView.style.width = "min(1180px, calc(100vw - clamp(2rem, 6vw, 4.5rem)))";
+    checklistView.style.width =
+      "min(1180px, calc(100vw - clamp(2rem, 6vw, 4.5rem)))";
     checklistView.style.maxWidth = "1180px";
     checklistView.style.marginLeft = "auto";
     checklistView.style.marginRight = "auto";
@@ -755,7 +879,7 @@ function renderDashboard() {
   const competitionGrid = $("#competitionGrid");
   competitionGrid.innerHTML = "";
 
-  state.competitions.forEach(competition => {
+  state.competitions.forEach((competition) => {
     const progress = getProgress(competition);
     const card = document.createElement("article");
     card.className = "competition-card";
@@ -764,9 +888,13 @@ function renderDashboard() {
       <div class="card-top">
         <div>
           <h3>${escapeHTML(competition.name)}</h3>
-          <p class="card-meta">${formatDate(competition.date)} · ${escapeHTML(competition.venue || "Einki stað ásett")}</p>
+          <p class="card-meta">${formatDate(competition.date)} · ${escapeHTML(
+      competition.venue || "Einki stað ásett"
+    )}</p>
         </div>
-        <span class="status-badge">${progress === 100 ? "Klárt" : "Í gongd"}</span>
+        <span class="status-badge">${
+          progress === 100 ? "Klárt" : "Í gongd"
+        }</span>
       </div>
 
       <div class="mini-progress">
@@ -778,7 +906,9 @@ function renderDashboard() {
 
       <div class="competition-actions">
         <button class="secondary-btn open-checklist-btn" data-open-competition>Opna checklist</button>
-        <button class="icon-action-btn link-icon-btn" data-copy-share-link="${competition.id}" title="Kopiera kappingarleinkju" aria-label="Kopiera kappingarleinkju"><svg class="button-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+        <button class="icon-action-btn link-icon-btn" data-copy-share-link="${
+          competition.id
+        }" title="Kopiera kappingarleinkju" aria-label="Kopiera kappingarleinkju"><svg class="button-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
   <path d="M9.5 14.5l5-5"></path>
   <path d="M13.5 6.5l1.15-1.15a4 4 0 0 1 5.66 5.66l-2.3 2.3a4 4 0 0 1-5.66 0"></path>
   <path d="M10.5 17.5l-1.15 1.15a4 4 0 0 1-5.66-5.66l2.3-2.3a4 4 0 0 1 5.66 0"></path>
@@ -799,29 +929,41 @@ function renderDashboard() {
 
     card.addEventListener("click", openCompetition);
 
-    card.querySelector("[data-open-competition]").addEventListener("click", event => {
-      event.stopPropagation();
-      openCompetition();
-    });
+    card
+      .querySelector("[data-open-competition]")
+      .addEventListener("click", (event) => {
+        event.stopPropagation();
+        openCompetition();
+      });
 
-    card.querySelector("[data-copy-share-link]").addEventListener("click", async event => {
-      event.stopPropagation();
-      const didCopy = await copyTextToClipboard(getCompetitionShareUrl(event.currentTarget.dataset.copyShareLink || competition.id));
-      event.currentTarget.classList.toggle("copied", didCopy);
-      setTimeout(() => {
-        event.currentTarget.classList.remove("copied");
-      }, 1400);
-    });
+    card
+      .querySelector("[data-copy-share-link]")
+      .addEventListener("click", async (event) => {
+        event.stopPropagation();
+        const didCopy = await copyTextToClipboard(
+          getCompetitionShareUrl(
+            event.currentTarget.dataset.copyShareLink || competition.id
+          )
+        );
+        event.currentTarget.classList.toggle("copied", didCopy);
+        setTimeout(() => {
+          event.currentTarget.classList.remove("copied");
+        }, 1400);
+      });
 
-    card.querySelector("[data-edit-competition]").addEventListener("click", event => {
-      event.stopPropagation();
-      openCompetitionEditor(competition.id);
-    });
+    card
+      .querySelector("[data-edit-competition]")
+      .addEventListener("click", (event) => {
+        event.stopPropagation();
+        openCompetitionEditor(competition.id);
+      });
 
-    card.querySelector("[data-delete-competition]").addEventListener("click", event => {
-      event.stopPropagation();
-      deleteCompetitionWithConfirmation(competition.id);
-    });
+    card
+      .querySelector("[data-delete-competition]")
+      .addEventListener("click", (event) => {
+        event.stopPropagation();
+        deleteCompetitionWithConfirmation(competition.id);
+      });
 
     competitionGrid.appendChild(card);
   });
@@ -835,10 +977,10 @@ function renderTemplateList() {
     return;
   }
 
-  state.templates.forEach(template => {
+  state.templates.forEach((template) => {
     const button = document.createElement("button");
     button.className = "list-item";
-    button.textContent = template.name || "Ónevndur template";
+    button.textContent = template.name || "Ónevnd skapilón";
 
     if (template.id === activeTemplateId) button.classList.add("active");
 
@@ -854,14 +996,14 @@ function renderTemplateList() {
 
 function renderTemplateEditor() {
   const templateEditor = $("#templateEditor");
-  const template = state.templates.find(item => item.id === activeTemplateId);
+  const template = state.templates.find((item) => item.id === activeTemplateId);
 
   if (!template) {
     templateEditor.className = "panel editor-panel empty-panel";
     templateEditor.innerHTML = `
       <div class="empty-message">
-        <h3>Vel ein template</h3>
-        <p>Vel ein template til vinstru, ella stovna ein nýggjan.</p>
+        <h3>Vel eina skapilón</h3>
+        <p>Vel eina skapilón til vinstru, ella stovna eina nýggja.</p>
       </div>
     `;
     return;
@@ -874,7 +1016,7 @@ function renderTemplateEditor() {
         Template navn
         <input id="templateNameInput" value="${escapeHTML(template.name)}" />
       </label>
-      <p class="page-description">Her byggir tú template-sektionir og uppgávur. Ábyrgd og freistir verða sett inni á sjálvari kappingini.</p>
+      <p class="page-description">Her stovnar tú skapilón sektiónir og uppgávur. Ábyrgd og freistir verða sett inni á sjálvari kappingini.</p>
     </div>
 
     <div class="template-editor-actions">
@@ -883,11 +1025,15 @@ function renderTemplateEditor() {
     </div>
 
     <div class="editor-grid">
-      ${template.sections.map((section, sectionIndex) => renderTemplateSection(section, sectionIndex, template)).join("")}
+      ${template.sections
+        .map((section, sectionIndex) =>
+          renderTemplateSection(section, sectionIndex, template)
+        )
+        .join("")}
     </div>
   `;
 
-  $("#templateNameInput").addEventListener("input", event => {
+  $("#templateNameInput").addEventListener("input", (event) => {
     template.name = event.target.value;
     saveState();
     renderTemplateList();
@@ -901,8 +1047,8 @@ function renderTemplateEditor() {
   $("#addTemplateSectionBtn")?.addEventListener("click", () => {
     template.sections.push({
       id: makeId(),
-      title: "Nýggj sektion",
-      tasks: []
+      title: "Stovna sektion",
+      tasks: [],
     });
     saveState();
     renderTemplateEditor();
@@ -910,41 +1056,43 @@ function renderTemplateEditor() {
 
   setupTemplateDragAndDrop(template, templateEditor);
 
-  templateEditor.querySelectorAll("[data-section-title]").forEach(input => {
+  templateEditor.querySelectorAll("[data-section-title]").forEach((input) => {
     input.addEventListener("input", () => {
       const sectionIndex = Number(input.dataset.sectionTitle);
       template.sections[sectionIndex].title = input.value;
       saveState();
     });
 
-    input.addEventListener("dragover", event => {
+    input.addEventListener("dragover", (event) => {
       event.preventDefault();
       event.stopPropagation();
     });
 
-    input.addEventListener("drop", event => {
+    input.addEventListener("drop", (event) => {
       event.preventDefault();
       event.stopPropagation();
     });
   });
 
-  templateEditor.querySelectorAll("[data-add-task]").forEach(button => {
+  templateEditor.querySelectorAll("[data-add-task]").forEach((button) => {
     button.addEventListener("click", () => {
       const sectionIndex = Number(button.dataset.sectionIndex);
       template.sections[sectionIndex].tasks.push({
-        title: "Nýggj uppgáva",
-        note: ""
+        title: "Stovna uppgáva",
+        note: "",
       });
       saveState();
       renderTemplateEditor();
     });
   });
 
-  templateEditor.querySelectorAll("[data-delete-section]").forEach(button => {
+  templateEditor.querySelectorAll("[data-delete-section]").forEach((button) => {
     button.addEventListener("click", () => {
       const sectionIndex = Number(button.dataset.sectionIndex);
       const section = template.sections[sectionIndex];
-      const confirmed = window.confirm(`Vilt tú strika sektionina "${section.title}"?`);
+      const confirmed = window.confirm(
+        `Vilt tú strika sektiónina "${section.title}"?`
+      );
       if (!confirmed) return;
       template.sections.splice(sectionIndex, 1);
       saveState();
@@ -952,7 +1100,7 @@ function renderTemplateEditor() {
     });
   });
 
-  templateEditor.querySelectorAll("[data-task-field]").forEach(input => {
+  templateEditor.querySelectorAll("[data-task-field]").forEach((input) => {
     input.addEventListener("input", () => {
       const sectionIndex = Number(input.dataset.sectionIndex);
       const taskIndex = Number(input.dataset.taskIndex);
@@ -962,7 +1110,7 @@ function renderTemplateEditor() {
     });
   });
 
-  templateEditor.querySelectorAll("[data-delete-task]").forEach(button => {
+  templateEditor.querySelectorAll("[data-delete-task]").forEach((button) => {
     button.addEventListener("click", () => {
       const sectionIndex = Number(button.dataset.sectionIndex);
       const taskIndex = Number(button.dataset.taskIndex);
@@ -973,131 +1121,188 @@ function renderTemplateEditor() {
   });
 }
 
-
 function setupTemplateDragAndDrop(template, templateEditor) {
-  templateEditor.querySelectorAll("[data-template-task]").forEach(taskElement => {
-    taskElement.addEventListener("dragstart", event => {
-      if (event.target.matches("input, button")) {
+  templateEditor
+    .querySelectorAll("[data-template-task]")
+    .forEach((taskElement) => {
+      taskElement.addEventListener("dragstart", (event) => {
+        if (event.target.matches("input, button")) {
+          event.preventDefault();
+          return;
+        }
+
+        draggedTemplateTask = {
+          sectionIndex: Number(taskElement.dataset.sectionIndex),
+          taskIndex: Number(taskElement.dataset.taskIndex),
+        };
+        taskElement.classList.add("dragging");
+        event.dataTransfer.effectAllowed = "move";
+        event.dataTransfer.setData(
+          "text/plain",
+          JSON.stringify({ type: "template-task", ...draggedTemplateTask })
+        );
+      });
+
+      taskElement.addEventListener("dragend", () => {
+        draggedTemplateTask = null;
+        taskElement.classList.remove("dragging");
+        templateEditor
+          .querySelectorAll(
+            ".template-drop-before, .template-drop-after, .template-task-list-drop-target"
+          )
+          .forEach((item) => {
+            item.classList.remove(
+              "template-drop-before",
+              "template-drop-after",
+              "template-task-list-drop-target"
+            );
+          });
+      });
+    });
+
+  templateEditor
+    .querySelectorAll("[data-template-task-list]")
+    .forEach((taskList) => {
+      taskList.addEventListener("dragover", (event) => {
+        if (!draggedTemplateTask) return;
+
         event.preventDefault();
-        return;
-      }
+        event.stopPropagation();
 
-      draggedTemplateTask = {
-        sectionIndex: Number(taskElement.dataset.sectionIndex),
-        taskIndex: Number(taskElement.dataset.taskIndex)
-      };
-      taskElement.classList.add("dragging");
-      event.dataTransfer.effectAllowed = "move";
-      event.dataTransfer.setData("text/plain", JSON.stringify({ type: "template-task", ...draggedTemplateTask }));
-    });
+        const targetTask = event.target.closest("[data-template-task]");
+        templateEditor
+          .querySelectorAll(".template-drop-before, .template-drop-after")
+          .forEach((item) => {
+            item.classList.remove(
+              "template-drop-before",
+              "template-drop-after"
+            );
+          });
 
-    taskElement.addEventListener("dragend", () => {
-      draggedTemplateTask = null;
-      taskElement.classList.remove("dragging");
-      templateEditor.querySelectorAll(".template-drop-before, .template-drop-after, .template-task-list-drop-target").forEach(item => {
-        item.classList.remove("template-drop-before", "template-drop-after", "template-task-list-drop-target");
-      });
-    });
-  });
+        if (!targetTask || !taskList.contains(targetTask)) {
+          taskList.classList.add("template-task-list-drop-target");
+          return;
+        }
 
-  templateEditor.querySelectorAll("[data-template-task-list]").forEach(taskList => {
-    taskList.addEventListener("dragover", event => {
-      if (!draggedTemplateTask) return;
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      const targetTask = event.target.closest("[data-template-task]");
-      templateEditor.querySelectorAll(".template-drop-before, .template-drop-after").forEach(item => {
-        item.classList.remove("template-drop-before", "template-drop-after");
-      });
-
-      if (!targetTask || !taskList.contains(targetTask)) {
-        taskList.classList.add("template-task-list-drop-target");
-        return;
-      }
-
-      taskList.classList.remove("template-task-list-drop-target");
-      const rect = targetTask.getBoundingClientRect();
-      const placeAfter = event.clientY > rect.top + rect.height / 2;
-      targetTask.classList.add(placeAfter ? "template-drop-after" : "template-drop-before");
-    });
-
-    taskList.addEventListener("dragenter", event => {
-      if (!draggedTemplateTask) return;
-      event.preventDefault();
-      taskList.classList.add("template-task-list-drop-target");
-    });
-
-    taskList.addEventListener("dragleave", event => {
-      if (!taskList.contains(event.relatedTarget)) {
         taskList.classList.remove("template-task-list-drop-target");
-      }
-    });
-
-    taskList.addEventListener("drop", event => {
-      if (!draggedTemplateTask) return;
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      const targetSectionIndex = Number(taskList.dataset.templateTaskList);
-      const targetTask = event.target.closest("[data-template-task]");
-      let targetIndex = template.sections[targetSectionIndex].tasks.length;
-
-      if (targetTask && taskList.contains(targetTask)) {
         const rect = targetTask.getBoundingClientRect();
         const placeAfter = event.clientY > rect.top + rect.height / 2;
-        targetIndex = Number(targetTask.dataset.taskIndex) + (placeAfter ? 1 : 0);
-      }
+        targetTask.classList.add(
+          placeAfter ? "template-drop-after" : "template-drop-before"
+        );
+      });
 
-      moveTemplateTask(template, draggedTemplateTask.sectionIndex, draggedTemplateTask.taskIndex, targetSectionIndex, targetIndex);
-    });
-  });
+      taskList.addEventListener("dragenter", (event) => {
+        if (!draggedTemplateTask) return;
+        event.preventDefault();
+        taskList.classList.add("template-task-list-drop-target");
+      });
 
-  templateEditor.querySelectorAll("[data-template-section-drag]").forEach(handle => {
-    const sectionElement = handle.closest("[data-template-section-index]");
-    const sectionIndex = Number(handle.dataset.templateSectionDrag);
+      taskList.addEventListener("dragleave", (event) => {
+        if (!taskList.contains(event.relatedTarget)) {
+          taskList.classList.remove("template-task-list-drop-target");
+        }
+      });
 
-    handle.addEventListener("dragstart", event => {
-      draggedTemplateSectionIndex = sectionIndex;
-      sectionElement.classList.add("section-dragging");
-      event.dataTransfer.effectAllowed = "move";
-      event.dataTransfer.setData("text/plain", JSON.stringify({ type: "template-section", sectionIndex }));
-    });
+      taskList.addEventListener("drop", (event) => {
+        if (!draggedTemplateTask) return;
 
-    handle.addEventListener("dragend", () => {
-      draggedTemplateSectionIndex = null;
-      sectionElement.classList.remove("section-dragging");
-      templateEditor.querySelectorAll(".section-drop-before, .section-drop-after").forEach(item => {
-        item.classList.remove("section-drop-before", "section-drop-after");
+        event.preventDefault();
+        event.stopPropagation();
+
+        const targetSectionIndex = Number(taskList.dataset.templateTaskList);
+        const targetTask = event.target.closest("[data-template-task]");
+        let targetIndex = template.sections[targetSectionIndex].tasks.length;
+
+        if (targetTask && taskList.contains(targetTask)) {
+          const rect = targetTask.getBoundingClientRect();
+          const placeAfter = event.clientY > rect.top + rect.height / 2;
+          targetIndex =
+            Number(targetTask.dataset.taskIndex) + (placeAfter ? 1 : 0);
+        }
+
+        moveTemplateTask(
+          template,
+          draggedTemplateTask.sectionIndex,
+          draggedTemplateTask.taskIndex,
+          targetSectionIndex,
+          targetIndex
+        );
       });
     });
 
-    sectionElement.addEventListener("dragover", event => {
-      if (draggedTemplateSectionIndex === null || draggedTemplateSectionIndex === sectionIndex) return;
-      event.preventDefault();
+  templateEditor
+    .querySelectorAll("[data-template-section-drag]")
+    .forEach((handle) => {
+      const sectionElement = handle.closest("[data-template-section-index]");
+      const sectionIndex = Number(handle.dataset.templateSectionDrag);
 
-      const rect = sectionElement.getBoundingClientRect();
-      const placeAfter = event.clientY > rect.top + rect.height / 2;
-      templateEditor.querySelectorAll(".section-drop-before, .section-drop-after").forEach(item => {
-        item.classList.remove("section-drop-before", "section-drop-after");
+      handle.addEventListener("dragstart", (event) => {
+        draggedTemplateSectionIndex = sectionIndex;
+        sectionElement.classList.add("section-dragging");
+        event.dataTransfer.effectAllowed = "move";
+        event.dataTransfer.setData(
+          "text/plain",
+          JSON.stringify({ type: "template-section", sectionIndex })
+        );
       });
-      sectionElement.classList.add(placeAfter ? "section-drop-after" : "section-drop-before");
-    });
 
-    sectionElement.addEventListener("drop", event => {
-      if (draggedTemplateSectionIndex === null || draggedTemplateSectionIndex === sectionIndex) return;
-      event.preventDefault();
+      handle.addEventListener("dragend", () => {
+        draggedTemplateSectionIndex = null;
+        sectionElement.classList.remove("section-dragging");
+        templateEditor
+          .querySelectorAll(".section-drop-before, .section-drop-after")
+          .forEach((item) => {
+            item.classList.remove("section-drop-before", "section-drop-after");
+          });
+      });
 
-      const rect = sectionElement.getBoundingClientRect();
-      const placeAfter = event.clientY > rect.top + rect.height / 2;
-      moveTemplateSection(template, draggedTemplateSectionIndex, sectionIndex + (placeAfter ? 1 : 0));
+      sectionElement.addEventListener("dragover", (event) => {
+        if (
+          draggedTemplateSectionIndex === null ||
+          draggedTemplateSectionIndex === sectionIndex
+        )
+          return;
+        event.preventDefault();
+
+        const rect = sectionElement.getBoundingClientRect();
+        const placeAfter = event.clientY > rect.top + rect.height / 2;
+        templateEditor
+          .querySelectorAll(".section-drop-before, .section-drop-after")
+          .forEach((item) => {
+            item.classList.remove("section-drop-before", "section-drop-after");
+          });
+        sectionElement.classList.add(
+          placeAfter ? "section-drop-after" : "section-drop-before"
+        );
+      });
+
+      sectionElement.addEventListener("drop", (event) => {
+        if (
+          draggedTemplateSectionIndex === null ||
+          draggedTemplateSectionIndex === sectionIndex
+        )
+          return;
+        event.preventDefault();
+
+        const rect = sectionElement.getBoundingClientRect();
+        const placeAfter = event.clientY > rect.top + rect.height / 2;
+        moveTemplateSection(
+          template,
+          draggedTemplateSectionIndex,
+          sectionIndex + (placeAfter ? 1 : 0)
+        );
+      });
     });
-  });
 }
 
-function moveTemplateTask(template, fromSectionIndex, fromTaskIndex, toSectionIndex, targetIndex) {
+function moveTemplateTask(
+  template,
+  fromSectionIndex,
+  fromTaskIndex,
+  toSectionIndex,
+  targetIndex
+) {
   const fromSection = template.sections[fromSectionIndex];
   const toSection = template.sections[toSectionIndex];
 
@@ -1138,7 +1343,9 @@ function renderTemplateSection(section, sectionIndex, template) {
         <button class="section-drag-handle template-section-drag-handle" type="button" draggable="true" data-template-section-drag="${sectionIndex}" title="Flyt sektion" aria-label="Flyt sektion">⋮⋮</button>
         <label>
           Sektion navn
-          <input data-section-title="${sectionIndex}" value="${escapeHTML(section.title)}" placeholder="T.d. Fyrireiking" />
+          <input data-section-title="${sectionIndex}" value="${escapeHTML(
+    section.title
+  )}" placeholder="T.d. Fyrireiking" />
         </label>
         <button class="delete-small template-delete-icon" data-delete-section data-section-index="${sectionIndex}" type="button" title="Strika sektion">×</button>
       </div>
@@ -1149,15 +1356,25 @@ function renderTemplateSection(section, sectionIndex, template) {
         <span></span>
       </div>
 
-      <div class="template-task-list ${section.tasks.length === 0 ? "template-task-list-empty" : ""}" data-template-task-list="${sectionIndex}">
-        ${section.tasks.map((task, taskIndex) => `
+      <div class="template-task-list ${
+        section.tasks.length === 0 ? "template-task-list-empty" : ""
+      }" data-template-task-list="${sectionIndex}">
+        ${section.tasks
+          .map(
+            (task, taskIndex) => `
           <div class="template-task template-task-simple" draggable="true" data-template-task data-section-index="${sectionIndex}" data-task-index="${taskIndex}">
             <span class="template-task-drag-handle" title="Flyt uppgávu">⋮⋮</span>
-            <input data-task-field="title" data-section-index="${sectionIndex}" data-task-index="${taskIndex}" value="${escapeHTML(task.title)}" placeholder="Navn á uppgávu" />
-            <input data-task-field="note" data-section-index="${sectionIndex}" data-task-index="${taskIndex}" value="${escapeHTML(task.note || "")}" placeholder="Viðmerking" />
+            <input data-task-field="title" data-section-index="${sectionIndex}" data-task-index="${taskIndex}" value="${escapeHTML(
+              task.title
+            )}" placeholder="Navn á uppgávu" />
+            <input data-task-field="note" data-section-index="${sectionIndex}" data-task-index="${taskIndex}" value="${escapeHTML(
+              task.note || ""
+            )}" placeholder="Viðmerking" />
             <button class="delete-small" data-delete-task data-section-index="${sectionIndex}" data-task-index="${taskIndex}" type="button">×</button>
           </div>
-        `).join("")}
+        `
+          )
+          .join("")}
       </div>
       <button class="secondary-btn" data-add-task data-section-index="${sectionIndex}" type="button">+ Legg uppgávu afturat</button>
     </section>
@@ -1178,7 +1395,7 @@ function renderCompetitionSelect() {
     return;
   }
 
-  state.templates.forEach(template => {
+  state.templates.forEach((template) => {
     const option = document.createElement("option");
     option.value = template.id;
     option.textContent = template.name;
@@ -1230,7 +1447,13 @@ function renderEditPeopleDraft() {
     pill.querySelector("[data-rename-person]").addEventListener("click", () => {
       const newName = formatName(window.prompt("Nýtt navn:", person) || "");
       if (!newName || newName === person) return;
-      if (editDraftPeople.some((item, itemIndex) => itemIndex !== index && item.toLocaleLowerCase("fo") === newName.toLocaleLowerCase("fo"))) {
+      if (
+        editDraftPeople.some(
+          (item, itemIndex) =>
+            itemIndex !== index &&
+            item.toLocaleLowerCase("fo") === newName.toLocaleLowerCase("fo")
+        )
+      ) {
         window.alert(`"${newName}" er longu á listanum.`);
         return;
       }
@@ -1248,7 +1471,9 @@ function renderEditPeopleDraft() {
 }
 
 function openCompetitionEditor(competitionId) {
-  const competition = state.competitions.find(item => item.id === competitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === competitionId
+  );
   if (!competition) return;
 
   editingCompetitionId = competitionId;
@@ -1269,13 +1494,19 @@ function openCompetitionEditor(competitionId) {
 }
 
 function deleteCompetitionWithConfirmation(competitionId) {
-  const competition = state.competitions.find(item => item.id === competitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === competitionId
+  );
   if (!competition) return;
 
-  const confirmed = window.confirm(`Vilt tú strika kappingina "${competition.name}"?`);
+  const confirmed = window.confirm(
+    `Vilt tú strika kappingina "${competition.name}"?`
+  );
   if (!confirmed) return;
 
-  state.competitions = state.competitions.filter(item => item.id !== competitionId);
+  state.competitions = state.competitions.filter(
+    (item) => item.id !== competitionId
+  );
 
   if (activeCompetitionId === competitionId) {
     activeCompetitionId = null;
@@ -1287,19 +1518,20 @@ function deleteCompetitionWithConfirmation(competitionId) {
 }
 
 function deleteTemplateWithConfirmation(templateId) {
-  const template = state.templates.find(item => item.id === templateId);
+  const template = state.templates.find((item) => item.id === templateId);
   if (!template) return;
 
-  const confirmed = window.confirm(`Vilt tú strika template "${template.name}"?`);
+  const confirmed = window.confirm(
+    `Vilt tú strika skapilónina "${template.name}"?`
+  );
   if (!confirmed) return;
 
-  state.templates = state.templates.filter(item => item.id !== templateId);
+  state.templates = state.templates.filter((item) => item.id !== templateId);
   activeTemplateId = state.templates[0]?.id || null;
 
   saveState();
   render();
 }
-
 
 function pdfEncodeText(value) {
   const text = String(value ?? "").replace(/\r/g, "");
@@ -1319,8 +1551,9 @@ function pdfEncodeText(value) {
 
 function pdfEscapeText(value) {
   return pdfEncodeText(value)
-    .map(byte => {
-      if (byte === 40 || byte === 41 || byte === 92) return `\\${String.fromCharCode(byte)}`;
+    .map((byte) => {
+      if (byte === 40 || byte === 41 || byte === 92)
+        return `\\${String.fromCharCode(byte)}`;
       if (byte === 10) return "\\n";
       return String.fromCharCode(byte);
     })
@@ -1332,20 +1565,25 @@ function pdfTextLine(text, x, y, size = 10, font = "F1") {
 }
 
 function pdfSlug(value) {
-  return String(value || "checklist")
-    .trim()
-    .toLowerCase()
-    .replace(/[^\w\u00C0-\u00FF]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    || "checklist";
+  return (
+    String(value || "checklist")
+      .trim()
+      .toLowerCase()
+      .replace(/[^\w\u00C0-\u00FF]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "checklist"
+  );
 }
 
 function wrapPdfText(text, maxChars) {
-  const words = String(text || "").replace(/\s+/g, " ").trim().split(" ").filter(Boolean);
+  const words = String(text || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean);
   const lines = [];
   let current = "";
 
-  words.forEach(word => {
+  words.forEach((word) => {
     const candidate = current ? `${current} ${word}` : word;
     if (candidate.length > maxChars && current) {
       lines.push(current);
@@ -1361,16 +1599,15 @@ function wrapPdfText(text, maxChars) {
 
 function getVisibleChecklistSectionsForPdf(competition) {
   const filteringTasks =
-    showIncompleteOnly ||
-    activeResponsibleFilters.length > 0;
+    showIncompleteOnly || activeResponsibleFilters.length > 0;
 
   return (competition.sections || [])
     .filter(sectionMatchesFilter)
-    .map(section => ({
+    .map((section) => ({
       ...section,
-      tasks: (section.tasks || []).filter(taskMatchesFilters)
+      tasks: (section.tasks || []).filter(taskMatchesFilters),
     }))
-    .filter(section => !(filteringTasks && section.tasks.length === 0));
+    .filter((section) => !(filteringTasks && section.tasks.length === 0));
 }
 
 function buildChecklistPdfContent(competition) {
@@ -1407,11 +1644,14 @@ function buildChecklistPdfContent(competition) {
     y -= height;
   };
 
-  const wrappedLines = (text, maxChars) => wrapPdfText(text, maxChars).filter(line => line.trim() !== "");
+  const wrappedLines = (text, maxChars) =>
+    wrapPdfText(text, maxChars).filter((line) => line.trim() !== "");
 
   const addSectionHeading = (title) => {
     ensureSpace(54);
-    content += `q 0.92 0.95 0.98 rg ${margin} ${y - 20} ${usableWidth} 27 re f Q\n`;
+    content += `q 0.92 0.95 0.98 rg ${margin} ${
+      y - 20
+    } ${usableWidth} 27 re f Q\n`;
     content += `q 0.18 0.37 0.62 rg ${margin} ${y - 20} 4 27 re f Q\n`;
     addText(title || "Ónevnd sektion", margin + 13, y - 7, 13, "F2");
     y -= 43;
@@ -1419,7 +1659,8 @@ function buildChecklistPdfContent(competition) {
 
   const addTaskBlock = (task) => {
     const responsibles = sortNames(taskResponsibles(task)).join(", ") || "-";
-    const deadline = task.hasDeadline && task.deadlineDate ? formatDeadline(task) : "-";
+    const deadline =
+      task.hasDeadline && task.deadlineDate ? formatDeadline(task) : "-";
     const note = task.note ? task.note : "-";
     const title = task.title || "Ónevnd uppgáva";
 
@@ -1429,13 +1670,18 @@ function buildChecklistPdfContent(competition) {
     const noteLines = wrappedLines(`Viðmerking: ${note}`, 80);
 
     const titleHeight = titleLines.length * 14;
-    const detailHeight = (responsibleLines.length + deadlineLines.length + noteLines.length) * 12;
+    const detailHeight =
+      (responsibleLines.length + deadlineLines.length + noteLines.length) * 12;
     const blockHeight = Math.max(64, 23 + titleHeight + 5 + detailHeight + 11);
 
     ensureSpace(blockHeight + 12);
 
-    content += `q 1 1 1 rg ${margin} ${y - blockHeight} ${usableWidth} ${blockHeight} re f Q\n`;
-    content += `q 0.90 0.90 0.90 RG ${margin} ${y - blockHeight} ${usableWidth} ${blockHeight} re S Q\n`;
+    content += `q 1 1 1 rg ${margin} ${
+      y - blockHeight
+    } ${usableWidth} ${blockHeight} re f Q\n`;
+    content += `q 0.90 0.90 0.90 RG ${margin} ${
+      y - blockHeight
+    } ${usableWidth} ${blockHeight} re S Q\n`;
 
     let textY = y - 20;
 
@@ -1466,12 +1712,28 @@ function buildChecklistPdfContent(competition) {
 
   const addHeader = () => {
     content += "q 0.97 0.98 0.99 rg 0 0 595.28 841.89 re f Q\n";
-    addLine(competition.name || "Ónevnd kapping", { size: 26, font: "F2", height: 42 });
+    addLine(competition.name || "Ónevnd kapping", {
+      size: 26,
+      font: "F2",
+      height: 42,
+    });
     y -= 4;
     addLine(`Dato: ${formatDate(competition.date)}`, { size: 10, height: 14 });
-    addLine(`Stað: ${competition.venue || "Einki stað ásett"}`, { size: 10, height: 14 });
-    addLine(`PDF gjørd: ${new Intl.DateTimeFormat("fo-FO", { day: "numeric", month: "short", year: "numeric" }).format(new Date())}`, { size: 9, height: 18 });
-    content += `q 0.18 0.37 0.62 rg ${margin} ${y + 4} ${usableWidth} 1.2 re f Q\n`;
+    addLine(`Stað: ${competition.venue || "Einki stað ásett"}`, {
+      size: 10,
+      height: 14,
+    });
+    addLine(
+      `PDF gjørd: ${new Intl.DateTimeFormat("fo-FO", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      }).format(new Date())}`,
+      { size: 9, height: 18 }
+    );
+    content += `q 0.18 0.37 0.62 rg ${margin} ${
+      y + 4
+    } ${usableWidth} 1.2 re f Q\n`;
     y -= 24;
   };
 
@@ -1480,7 +1742,11 @@ function buildChecklistPdfContent(competition) {
   const visibleSections = getVisibleChecklistSectionsForPdf(competition);
 
   if (visibleSections.length === 0) {
-    addLine("Eingin uppgáva er sjónlig við valdu filtrunum.", { size: 11, font: "F2", height: 20 });
+    addLine("Eingin uppgáva er sjónlig við valdu filtrunum.", {
+      size: 11,
+      font: "F2",
+      height: 20,
+    });
   }
 
   visibleSections.forEach((section, sectionIndex) => {
@@ -1488,7 +1754,11 @@ function buildChecklistPdfContent(competition) {
     addSectionHeading(section.title || "Ónevnd sektion");
 
     if (!section.tasks || section.tasks.length === 0) {
-      addLine("Eingin uppgáva í hesi sektion.", { size: 9, indent: 14, height: 20 });
+      addLine("Eingin uppgáva í hesari sektionini.", {
+        size: 9,
+        indent: 14,
+        height: 20,
+      });
       y -= 5;
       return;
     }
@@ -1511,20 +1781,38 @@ function createPdfStringFromPages(pages, pageWidth, pageHeight) {
 
   const catalogId = addObject("<< /Type /Catalog /Pages 2 0 R >>");
   const pagesId = addObject("");
-  const fontRegularId = addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>");
-  const fontBoldId = addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>");
+  const fontRegularId = addObject(
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>"
+  );
+  const fontBoldId = addObject(
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>"
+  );
 
   const pageIds = [];
   pages.forEach((pageContent, index) => {
     const pageNumber = index + 1;
-    const footer = pdfTextLine(`Síða ${pageNumber} av ${pages.length}`, pageWidth - 104, 28, 8, "F1");
-    const fullPageContent = `${pageContent}q 0.72 0.72 0.72 rg 44 42 ${pageWidth - 88} 0.8 re f Q\n${footer}`;
-    const streamId = addObject(`<< /Length ${fullPageContent.length} >>\nstream\n${fullPageContent}endstream`);
-    const pageId = addObject(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${pageWidth} ${pageHeight}] /Resources << /Font << /F1 ${fontRegularId} 0 R /F2 ${fontBoldId} 0 R >> >> /Contents ${streamId} 0 R >>`);
+    const footer = pdfTextLine(
+      `Síða ${pageNumber} av ${pages.length}`,
+      pageWidth - 104,
+      28,
+      8,
+      "F1"
+    );
+    const fullPageContent = `${pageContent}q 0.72 0.72 0.72 rg 44 42 ${
+      pageWidth - 88
+    } 0.8 re f Q\n${footer}`;
+    const streamId = addObject(
+      `<< /Length ${fullPageContent.length} >>\nstream\n${fullPageContent}endstream`
+    );
+    const pageId = addObject(
+      `<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${pageWidth} ${pageHeight}] /Resources << /Font << /F1 ${fontRegularId} 0 R /F2 ${fontBoldId} 0 R >> >> /Contents ${streamId} 0 R >>`
+    );
     pageIds.push(pageId);
   });
 
-  objects[pagesId - 1] = `<< /Type /Pages /Kids [${pageIds.map(id => `${id} 0 R`).join(" ")}] /Count ${pageIds.length} >>`;
+  objects[pagesId - 1] = `<< /Type /Pages /Kids [${pageIds
+    .map((id) => `${id} 0 R`)
+    .join(" ")}] /Count ${pageIds.length} >>`;
 
   let pdf = "%PDF-1.4\n";
   const offsets = [0];
@@ -1537,10 +1825,12 @@ function createPdfStringFromPages(pages, pageWidth, pageHeight) {
   const xrefOffset = pdf.length;
   pdf += `xref\n0 ${objects.length + 1}\n`;
   pdf += "0000000000 65535 f \n";
-  offsets.slice(1).forEach(offset => {
+  offsets.slice(1).forEach((offset) => {
     pdf += `${String(offset).padStart(10, "0")} 00000 n \n`;
   });
-  pdf += `trailer\n<< /Size ${objects.length + 1} /Root ${catalogId} 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
+  pdf += `trailer\n<< /Size ${
+    objects.length + 1
+  } /Root ${catalogId} 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
 
   return pdf;
 }
@@ -1549,10 +1839,13 @@ function downloadChecklistPdf(event) {
   event?.preventDefault();
   event?.stopPropagation();
 
-  const competition = state.competitions.find(item => item.id === activeCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === activeCompetitionId
+  );
   if (!competition) return;
 
-  const { pages, pageWidth, pageHeight } = buildChecklistPdfContent(competition);
+  const { pages, pageWidth, pageHeight } =
+    buildChecklistPdfContent(competition);
   const pdf = createPdfStringFromPages(pages, pageWidth, pageHeight);
   const filename = `kappingarklart-${pdfSlug(competition.name)}.pdf`;
   const link = document.createElement("a");
@@ -1580,13 +1873,19 @@ function downloadChecklistPdf(event) {
 function renderChecklist() {
   if (activeView !== "checklist") return;
 
-  const competition = state.competitions.find(item => item.id === activeCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === activeCompetitionId
+  );
   if (!competition) return;
 
   $("#checklistTitle").textContent = competition.name;
   $("#checklistMeta").textContent = isPublicCompetitionMode
-    ? `${formatDate(competition.date)} · ${competition.venue || "Einki stað ásett"}`
-    : `${formatDate(competition.date)} · ${competition.venue || "Einki stað ásett"} · Lykilorð: ${competition.password || "einki"}`;
+    ? `${formatDate(competition.date)} · ${
+        competition.venue || "Einki stað ásett"
+      }`
+    : `${formatDate(competition.date)} · ${
+        competition.venue || "Einki stað ásett"
+      } · Lykilorð: ${competition.password || "einki"}`;
 
   renderRolesSummary(competition);
   renderSectionFilters(competition);
@@ -1606,12 +1905,10 @@ function renderRolesSummary(competition) {
     return;
   }
 
-  const filledRoles = ROLE_DEFINITIONS
-    .map(role => ({
-      ...role,
-      names: (competition.roles?.[role.key] || []).filter(name => name.trim())
-    }))
-    .filter(role => role.names.length > 0);
+  const filledRoles = ROLE_DEFINITIONS.map((role) => ({
+    ...role,
+    names: (competition.roles?.[role.key] || []).filter((name) => name.trim()),
+  })).filter((role) => role.names.length > 0);
 
   rolesSummary.classList.add("compact");
 
@@ -1620,40 +1917,62 @@ function renderRolesSummary(competition) {
     return;
   }
 
-  rolesSummary.innerHTML = filledRoles.map(role => `
+  rolesSummary.innerHTML = filledRoles
+    .map(
+      (role) => `
     <div class="role-compact-chip">
       <span class="role-compact-label">${role.label}:</span>
-      <span class="role-compact-names">${role.names.map(escapeHTML).join(", ")}</span>
+      <span class="role-compact-names">${role.names
+        .map(escapeHTML)
+        .join(", ")}</span>
     </div>
-  `).join("");
+  `
+    )
+    .join("");
 }
 
 function renderSectionFilters(competition) {
   const container = $("#sectionFilterRow");
-  const validSectionIds = new Set((competition.sections || []).map(section => section.id));
-  activeSectionFilters = activeSectionFilters.filter(sectionId => validSectionIds.has(sectionId));
+  const validSectionIds = new Set(
+    (competition.sections || []).map((section) => section.id)
+  );
+  activeSectionFilters = activeSectionFilters.filter((sectionId) =>
+    validSectionIds.has(sectionId)
+  );
 
   container.innerHTML = `
-    <button class="filter-btn ${showIncompleteOnly ? "active" : ""}" data-status-filter="todo">Ikki liðugt</button>
-    ${competition.sections.map(section => `
+    <button class="filter-btn ${
+      showIncompleteOnly ? "active" : ""
+    }" data-status-filter="todo">Ikki liðugt</button>
+    ${competition.sections
+      .map(
+        (section) => `
       <button
-        class="filter-btn section-filter-btn ${activeSectionFilters.includes(section.id) ? "active" : ""}"
+        class="filter-btn section-filter-btn ${
+          activeSectionFilters.includes(section.id) ? "active" : ""
+        }"
         data-section-filter="${section.id}"
       >${escapeHTML(section.title)}</button>
-    `).join("")}
+    `
+      )
+      .join("")}
   `;
 
-  container.querySelector("[data-status-filter='todo']")?.addEventListener("click", () => {
-    showIncompleteOnly = !showIncompleteOnly;
-    renderChecklist();
-  });
+  container
+    .querySelector("[data-status-filter='todo']")
+    ?.addEventListener("click", () => {
+      showIncompleteOnly = !showIncompleteOnly;
+      renderChecklist();
+    });
 
-  container.querySelectorAll("[data-section-filter]").forEach(button => {
+  container.querySelectorAll("[data-section-filter]").forEach((button) => {
     button.addEventListener("click", () => {
       const sectionId = button.dataset.sectionFilter;
 
       if (activeSectionFilters.includes(sectionId)) {
-        activeSectionFilters = activeSectionFilters.filter(item => item !== sectionId);
+        activeSectionFilters = activeSectionFilters.filter(
+          (item) => item !== sectionId
+        );
       } else {
         activeSectionFilters.push(sectionId);
       }
@@ -1668,7 +1987,9 @@ function renderResponsibleFilter(competition) {
   const people = sortNames(competition.people || []);
   const validPeople = new Set(people);
 
-  activeResponsibleFilters = activeResponsibleFilters.filter(person => validPeople.has(person));
+  activeResponsibleFilters = activeResponsibleFilters.filter((person) =>
+    validPeople.has(person)
+  );
 
   if (people.length === 0) {
     container.innerHTML = "";
@@ -1676,21 +1997,29 @@ function renderResponsibleFilter(competition) {
     return;
   }
 
-  container.innerHTML = people.map(person => `
+  container.innerHTML = people
+    .map(
+      (person) => `
     <button
       type="button"
-      class="responsible-filter-pill ${activeResponsibleFilters.includes(person) ? "active" : ""}"
+      class="responsible-filter-pill ${
+        activeResponsibleFilters.includes(person) ? "active" : ""
+      }"
       style="${colorStyle(competition, person)}"
       data-person="${escapeHTML(person)}"
     >${escapeHTML(person)}</button>
-  `).join("");
+  `
+    )
+    .join("");
 
-  container.querySelectorAll("[data-person]").forEach(button => {
+  container.querySelectorAll("[data-person]").forEach((button) => {
     button.addEventListener("click", () => {
       const person = button.dataset.person;
 
       if (activeResponsibleFilters.includes(person)) {
-        activeResponsibleFilters = activeResponsibleFilters.filter(item => item !== person);
+        activeResponsibleFilters = activeResponsibleFilters.filter(
+          (item) => item !== person
+        );
       } else {
         activeResponsibleFilters.push(person);
       }
@@ -1701,7 +2030,10 @@ function renderResponsibleFilter(competition) {
 }
 
 function sectionMatchesFilter(section) {
-  return activeSectionFilters.length === 0 || activeSectionFilters.includes(section.id);
+  return (
+    activeSectionFilters.length === 0 ||
+    activeSectionFilters.includes(section.id)
+  );
 }
 
 function taskMatchesFilters(task) {
@@ -1709,7 +2041,7 @@ function taskMatchesFilters(task) {
   const taskPeople = taskResponsibles(task);
   const matchesResponsible =
     activeResponsibleFilters.length === 0 ||
-    activeResponsibleFilters.some(person => taskPeople.includes(person));
+    activeResponsibleFilters.some((person) => taskPeople.includes(person));
 
   return matchesStatus && matchesResponsible;
 }
@@ -1719,75 +2051,94 @@ function renderChecklistSections(competition) {
   container.innerHTML = "";
 
   const filteringTasks =
-    showIncompleteOnly ||
-    activeResponsibleFilters.length > 0;
+    showIncompleteOnly || activeResponsibleFilters.length > 0;
 
-  competition.sections
-    .filter(sectionMatchesFilter)
-    .forEach(section => {
-      const visibleTasks = section.tasks.filter(taskMatchesFilters);
+  competition.sections.filter(sectionMatchesFilter).forEach((section) => {
+    const visibleTasks = section.tasks.filter(taskMatchesFilters);
 
-      if (filteringTasks && visibleTasks.length === 0) {
-        return;
-      }
+    if (filteringTasks && visibleTasks.length === 0) {
+      return;
+    }
 
-      const sectionElement = document.createElement("section");
-      sectionElement.className = "phase-column";
-      sectionElement.dataset.sectionId = section.id;
+    const sectionElement = document.createElement("section");
+    sectionElement.className = "phase-column";
+    sectionElement.dataset.sectionId = section.id;
 
-      sectionElement.innerHTML = `
-        <div class="phase-heading competition-section-heading" data-section-drop-target="${section.id}">
-          <button class="section-drag-handle" type="button" draggable="true" data-section-drag="${section.id}" title="Flyt sektion" aria-label="Flyt sektion">⋮⋮</button>
-          <input class="section-title-input" data-section-title="${section.id}" value="${escapeHTML(section.title)}" aria-label="Sektion navn" />
-          <button class="delete-section-btn" data-delete-section="${section.id}" type="button" title="Strika sektion">×</button>
+    sectionElement.innerHTML = `
+        <div class="phase-heading competition-section-heading" data-section-drop-target="${
+          section.id
+        }">
+          <button class="section-drag-handle" type="button" draggable="true" data-section-drag="${
+            section.id
+          }" title="Flyt sektion" aria-label="Flyt sektion">⋮⋮</button>
+          <input class="section-title-input" data-section-title="${
+            section.id
+          }" value="${escapeHTML(section.title)}" aria-label="Sektion navn" />
+          <button class="delete-section-btn" data-delete-section="${
+            section.id
+          }" type="button" title="Strika sektion">×</button>
         </div>
         <div class="task-list" data-task-drop-section="${section.id}"></div>
-        <button class="add-phase-task secondary-btn" data-add-competition-task="${section.id}" type="button">+ Legg uppgávu afturat</button>
+        <button class="add-phase-task secondary-btn" data-add-competition-task="${
+          section.id
+        }" type="button">+ Legg uppgávu afturat</button>
       `;
 
-      const taskList = sectionElement.querySelector(".task-list");
+    const taskList = sectionElement.querySelector(".task-list");
 
-      if (visibleTasks.length === 0) {
-        taskList.classList.add("task-list-empty");
-      }
+    if (visibleTasks.length === 0) {
+      taskList.classList.add("task-list-empty");
+    }
 
-      visibleTasks.forEach(task => {
-        taskList.appendChild(renderTaskCard(competition, section.id, task));
-      });
+    visibleTasks.forEach((task) => {
+      taskList.appendChild(renderTaskCard(competition, section.id, task));
+    });
 
-      setupTaskDropZone(taskList, section.id);
-      setupSectionDragHandlers(sectionElement, section.id);
+    setupTaskDropZone(taskList, section.id);
+    setupSectionDragHandlers(sectionElement, section.id);
 
-      sectionElement.querySelector("[data-section-title]").addEventListener("input", event => {
+    sectionElement
+      .querySelector("[data-section-title]")
+      .addEventListener("input", (event) => {
         section.title = event.target.value;
         saveState();
         renderSectionFilters(competition);
       });
 
-      sectionElement.querySelector("[data-section-title]").addEventListener("dragover", event => {
+    sectionElement
+      .querySelector("[data-section-title]")
+      .addEventListener("dragover", (event) => {
         event.preventDefault();
         event.stopPropagation();
       });
 
-      sectionElement.querySelector("[data-section-title]").addEventListener("drop", event => {
+    sectionElement
+      .querySelector("[data-section-title]")
+      .addEventListener("drop", (event) => {
         event.preventDefault();
         event.stopPropagation();
       });
 
-      sectionElement.querySelector("[data-delete-section]").addEventListener("click", () => {
+    sectionElement
+      .querySelector("[data-delete-section]")
+      .addEventListener("click", () => {
         deleteCompetitionSection(section.id);
       });
 
-      container.appendChild(sectionElement);
-    });
+    container.appendChild(sectionElement);
+  });
 
   const addSectionCard = document.createElement("section");
   addSectionCard.className = "phase-column add-section-panel";
   addSectionCard.innerHTML = `
     <button id="addCompetitionSectionBtn" class="primary-btn full-width" type="button">+ Nýggj sektion</button>
-    ${competition.sections.length === 0 ? `<p class="empty-section-hint">Hendan kappingin hevur ongar sektionir enn. Legg eina sektion afturat fyri at byrja.</p>` : ""}
+    ${
+      competition.sections.length === 0
+        ? `<p class="empty-section-hint">Hendan kappingin hevur ongar sektionir enn. Legg eina sektion afturat fyri at byrja.</p>`
+        : ""
+    }
   `;
-  addSectionCard.addEventListener("dragover", event => {
+  addSectionCard.addEventListener("dragover", (event) => {
     if (!draggedSectionId) return;
     updateDragAutoScroll(event);
     event.preventDefault();
@@ -1798,7 +2149,7 @@ function renderChecklistSections(competition) {
     addSectionCard.classList.remove("section-drop-target");
   });
 
-  addSectionCard.addEventListener("drop", event => {
+  addSectionCard.addEventListener("drop", (event) => {
     if (!draggedSectionId) return;
     event.preventDefault();
     stopDragAutoScroll();
@@ -1806,18 +2157,22 @@ function renderChecklistSections(competition) {
     moveSection(draggedSectionId, competition.sections.length);
   });
 
-  addSectionCard.querySelector("#addCompetitionSectionBtn").addEventListener("click", addCompetitionSection);
+  addSectionCard
+    .querySelector("#addCompetitionSectionBtn")
+    .addEventListener("click", addCompetitionSection);
   container.appendChild(addSectionCard);
 }
 
 function addCompetitionSection() {
-  const competition = state.competitions.find(item => item.id === activeCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === activeCompetitionId
+  );
   if (!competition) return;
 
   const section = {
     id: makeId(),
-    title: "Nýggj sektion",
-    tasks: []
+    title: "Stovna sektion",
+    tasks: [],
   };
 
   competition.sections.push(section);
@@ -1828,10 +2183,12 @@ function addCompetitionSection() {
 }
 
 function deleteCompetitionSection(sectionId) {
-  const competition = state.competitions.find(item => item.id === activeCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === activeCompetitionId
+  );
   if (!competition) return;
 
-  const section = competition.sections.find(item => item.id === sectionId);
+  const section = competition.sections.find((item) => item.id === sectionId);
   if (!section) return;
 
   const hasTasks = (section.tasks || []).length > 0;
@@ -1842,15 +2199,18 @@ function deleteCompetitionSection(sectionId) {
   const confirmed = window.confirm(message);
   if (!confirmed) return;
 
-  competition.sections = competition.sections.filter(item => item.id !== sectionId);
+  competition.sections = competition.sections.filter(
+    (item) => item.id !== sectionId
+  );
 
-  activeSectionFilters = activeSectionFilters.filter(item => item !== sectionId);
+  activeSectionFilters = activeSectionFilters.filter(
+    (item) => item !== sectionId
+  );
 
   saveState();
   renderDashboard();
   renderChecklist();
 }
-
 
 function updateDragAutoScroll(event) {
   // Auto-scroll while dragging was intentionally disabled in v4.6.
@@ -1870,11 +2230,11 @@ function stopDragAutoScroll() {
 }
 
 function findSection(competition, sectionId) {
-  return competition.sections.find(section => section.id === sectionId);
+  return competition.sections.find((section) => section.id === sectionId);
 }
 
 function setupTaskDropZone(taskList, targetSectionId) {
-  taskList.addEventListener("dragover", event => {
+  taskList.addEventListener("dragover", (event) => {
     if (!draggedTask) return;
 
     updateDragAutoScroll(event);
@@ -1883,7 +2243,9 @@ function setupTaskDropZone(taskList, targetSectionId) {
     event.dataTransfer.dropEffect = "move";
 
     const targetCard = event.target.closest(".task-card");
-    $$(".task-drop-before, .task-drop-after").forEach(item => item.classList.remove("task-drop-before", "task-drop-after"));
+    $$(".task-drop-before, .task-drop-after").forEach((item) =>
+      item.classList.remove("task-drop-before", "task-drop-after")
+    );
 
     if (!targetCard || !taskList.contains(targetCard)) {
       taskList.classList.add("task-list-drop-target");
@@ -1893,10 +2255,12 @@ function setupTaskDropZone(taskList, targetSectionId) {
     taskList.classList.remove("task-list-drop-target");
     const rect = targetCard.getBoundingClientRect();
     const placeAfter = event.clientY > rect.top + rect.height / 2;
-    targetCard.classList.add(placeAfter ? "task-drop-after" : "task-drop-before");
+    targetCard.classList.add(
+      placeAfter ? "task-drop-after" : "task-drop-before"
+    );
   });
 
-  taskList.addEventListener("dragenter", event => {
+  taskList.addEventListener("dragenter", (event) => {
     if (!draggedTask) return;
 
     event.preventDefault();
@@ -1904,14 +2268,16 @@ function setupTaskDropZone(taskList, targetSectionId) {
     taskList.classList.add("task-list-drop-target");
   });
 
-  taskList.addEventListener("dragleave", event => {
+  taskList.addEventListener("dragleave", (event) => {
     if (!taskList.contains(event.relatedTarget)) {
       taskList.classList.remove("task-list-drop-target");
-      $$(".task-drop-before, .task-drop-after").forEach(item => item.classList.remove("task-drop-before", "task-drop-after"));
+      $$(".task-drop-before, .task-drop-after").forEach((item) =>
+        item.classList.remove("task-drop-before", "task-drop-after")
+      );
     }
   });
 
-  taskList.addEventListener("drop", event => {
+  taskList.addEventListener("drop", (event) => {
     if (!draggedTask) return;
 
     event.preventDefault();
@@ -1919,7 +2285,9 @@ function setupTaskDropZone(taskList, targetSectionId) {
     stopDragAutoScroll();
     taskList.classList.remove("task-list-drop-target");
 
-    const competition = state.competitions.find(item => item.id === activeCompetitionId);
+    const competition = state.competitions.find(
+      (item) => item.id === activeCompetitionId
+    );
     if (!competition) return;
 
     const targetSection = findSection(competition, targetSectionId);
@@ -1932,34 +2300,54 @@ function setupTaskDropZone(taskList, targetSectionId) {
       const targetTaskId = targetCard.dataset.taskId;
       const rect = targetCard.getBoundingClientRect();
       const placeAfter = event.clientY > rect.top + rect.height / 2;
-      const foundIndex = targetSection.tasks.findIndex(task => task.id === targetTaskId);
+      const foundIndex = targetSection.tasks.findIndex(
+        (task) => task.id === targetTaskId
+      );
       targetIndex = foundIndex + (placeAfter ? 1 : 0);
     }
 
-    moveTask(draggedTask.sectionId, draggedTask.taskId, targetSectionId, targetIndex);
+    moveTask(
+      draggedTask.sectionId,
+      draggedTask.taskId,
+      targetSectionId,
+      targetIndex
+    );
   });
 }
 
 function restoreTaskOrder(section, orderedTaskIds) {
-  if (!section || !Array.isArray(section.tasks) || !Array.isArray(orderedTaskIds)) return;
+  if (
+    !section ||
+    !Array.isArray(section.tasks) ||
+    !Array.isArray(orderedTaskIds)
+  )
+    return;
 
   const orderMap = new Map(orderedTaskIds.map((id, index) => [id, index]));
   section.tasks.sort((a, b) => {
-    const aIndex = orderMap.has(a.id) ? orderMap.get(a.id) : Number.MAX_SAFE_INTEGER;
-    const bIndex = orderMap.has(b.id) ? orderMap.get(b.id) : Number.MAX_SAFE_INTEGER;
+    const aIndex = orderMap.has(a.id)
+      ? orderMap.get(a.id)
+      : Number.MAX_SAFE_INTEGER;
+    const bIndex = orderMap.has(b.id)
+      ? orderMap.get(b.id)
+      : Number.MAX_SAFE_INTEGER;
     return aIndex - bIndex;
   });
 }
 
 function moveTask(fromSectionId, taskId, toSectionId, targetIndex) {
-  const competition = state.competitions.find(item => item.id === activeCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === activeCompetitionId
+  );
   if (!competition) return;
 
   const fromSection = findSection(competition, fromSectionId);
   const toSection = findSection(competition, toSectionId);
   if (!fromSection || !toSection) return;
 
-  const currentIndex = fromSection.tasks.findIndex(task => task.id === taskId);
+  const currentIndex = fromSection.tasks.findIndex(
+    (task) => task.id === taskId
+  );
   if (currentIndex === -1) return;
 
   const [task] = fromSection.tasks.splice(currentIndex, 1);
@@ -1979,23 +2367,32 @@ function moveTask(fromSectionId, taskId, toSectionId, targetIndex) {
 function setupSectionDragHandlers(sectionElement, sectionId) {
   const handle = sectionElement.querySelector("[data-section-drag]");
 
-  handle.addEventListener("dragstart", event => {
+  handle.addEventListener("dragstart", (event) => {
     draggedSectionId = sectionId;
     sectionElement.classList.add("section-dragging");
     event.dataTransfer.effectAllowed = "move";
-    event.dataTransfer.setData("text/plain", JSON.stringify({ type: "section", sectionId }));
+    event.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({ type: "section", sectionId })
+    );
   });
 
   handle.addEventListener("dragend", () => {
     stopDragAutoScroll();
     draggedSectionId = null;
     sectionElement.classList.remove("section-dragging");
-    $$(".section-drop-before, .section-drop-after, .section-drop-target").forEach(item => {
-      item.classList.remove("section-drop-before", "section-drop-after", "section-drop-target");
+    $$(
+      ".section-drop-before, .section-drop-after, .section-drop-target"
+    ).forEach((item) => {
+      item.classList.remove(
+        "section-drop-before",
+        "section-drop-after",
+        "section-drop-target"
+      );
     });
   });
 
-  sectionElement.addEventListener("dragover", event => {
+  sectionElement.addEventListener("dragover", (event) => {
     if (!draggedSectionId || draggedSectionId === sectionId) return;
 
     updateDragAutoScroll(event);
@@ -2003,31 +2400,43 @@ function setupSectionDragHandlers(sectionElement, sectionId) {
     const rect = sectionElement.getBoundingClientRect();
     const placeAfter = event.clientY > rect.top + rect.height / 2;
 
-    $$(".section-drop-before, .section-drop-after").forEach(item => item.classList.remove("section-drop-before", "section-drop-after"));
-    sectionElement.classList.add(placeAfter ? "section-drop-after" : "section-drop-before");
+    $$(".section-drop-before, .section-drop-after").forEach((item) =>
+      item.classList.remove("section-drop-before", "section-drop-after")
+    );
+    sectionElement.classList.add(
+      placeAfter ? "section-drop-after" : "section-drop-before"
+    );
   });
 
-  sectionElement.addEventListener("drop", event => {
+  sectionElement.addEventListener("drop", (event) => {
     if (!draggedSectionId || draggedSectionId === sectionId) return;
 
     event.preventDefault();
     stopDragAutoScroll();
-    const competition = state.competitions.find(item => item.id === activeCompetitionId);
+    const competition = state.competitions.find(
+      (item) => item.id === activeCompetitionId
+    );
     if (!competition) return;
 
     const rect = sectionElement.getBoundingClientRect();
     const placeAfter = event.clientY > rect.top + rect.height / 2;
-    const targetIndex = competition.sections.findIndex(section => section.id === sectionId) + (placeAfter ? 1 : 0);
+    const targetIndex =
+      competition.sections.findIndex((section) => section.id === sectionId) +
+      (placeAfter ? 1 : 0);
 
     moveSection(draggedSectionId, targetIndex);
   });
 }
 
 function moveSection(sectionId, targetIndex) {
-  const competition = state.competitions.find(item => item.id === activeCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === activeCompetitionId
+  );
   if (!competition) return;
 
-  const currentIndex = competition.sections.findIndex(section => section.id === sectionId);
+  const currentIndex = competition.sections.findIndex(
+    (section) => section.id === sectionId
+  );
   if (currentIndex === -1) return;
 
   const [section] = competition.sections.splice(currentIndex, 1);
@@ -2045,7 +2454,7 @@ function moveSection(sectionId, targetIndex) {
 
 function renderTaskCard(competition, sectionId, task) {
   const responsiblePills = sortNames(taskResponsibles(task))
-    .map(person => personPillHTML(competition, person))
+    .map((person) => personPillHTML(competition, person))
     .join("");
 
   const card = document.createElement("article");
@@ -2067,17 +2476,29 @@ function renderTaskCard(competition, sectionId, task) {
 
       <div class="task-people-cell">
         <span class="task-cell-label">Ábyrgd</span>
-        <div class="task-meta">${responsiblePills || `<span class="task-empty-cell">—</span>`}</div>
+        <div class="task-meta">${
+          responsiblePills || `<span class="task-empty-cell">—</span>`
+        }</div>
       </div>
 
       <div class="task-deadline-cell">
         <span class="task-cell-label">Freist</span>
-        ${task.hasDeadline && task.deadlineDate ? `<span class="pill deadline">Freist: ${formatDeadline(task)}</span>` : `<span class="task-empty-cell">—</span>`}
+        ${
+          task.hasDeadline && task.deadlineDate
+            ? `<span class="pill deadline">Freist: ${formatDeadline(
+                task
+              )}</span>`
+            : `<span class="task-empty-cell">—</span>`
+        }
       </div>
 
       <div class="task-comment-cell">
         <span class="task-cell-label">Viðmerking</span>
-        ${task.note ? `<p class="task-note">${escapeHTML(task.note)}</p>` : `<span class="task-empty-cell">—</span>`}
+        ${
+          task.note
+            ? `<p class="task-note">${escapeHTML(task.note)}</p>`
+            : `<span class="task-empty-cell">—</span>`
+        }
       </div>
     </div>
 
@@ -2086,7 +2507,7 @@ function renderTaskCard(competition, sectionId, task) {
     </div>
   `;
 
-  card.addEventListener("click", event => {
+  card.addEventListener("click", (event) => {
     if (event.target.closest("button, input, select, textarea, label")) {
       return;
     }
@@ -2099,36 +2520,45 @@ function renderTaskCard(competition, sectionId, task) {
     openTaskEditor(competition.id, sectionId, task.id);
   });
 
-  card.addEventListener("dragstart", event => {
+  card.addEventListener("dragstart", (event) => {
     draggedTask = { competitionId: competition.id, sectionId, taskId: task.id };
     suppressTaskClick = true;
     card.classList.add("dragging");
     event.dataTransfer.effectAllowed = "move";
-    event.dataTransfer.setData("text/plain", JSON.stringify({ type: "task", taskId: task.id, sectionId }));
+    event.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({ type: "task", taskId: task.id, sectionId })
+    );
   });
 
   card.addEventListener("dragend", () => {
     stopDragAutoScroll();
     draggedTask = null;
     card.classList.remove("dragging");
-    $$(".task-drop-before, .task-drop-after").forEach(item => item.classList.remove("task-drop-before", "task-drop-after"));
+    $$(".task-drop-before, .task-drop-after").forEach((item) =>
+      item.classList.remove("task-drop-before", "task-drop-after")
+    );
     setTimeout(() => {
       suppressTaskClick = false;
     }, 0);
   });
 
-  card.querySelector("input[type='checkbox']").addEventListener("click", event => {
-    event.stopPropagation();
-  });
+  card
+    .querySelector("input[type='checkbox']")
+    .addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
 
-  card.querySelector("input[type='checkbox']").addEventListener("change", event => {
-    task.done = event.target.checked;
-    saveState();
-    renderDashboard();
-    renderChecklist();
-  });
+  card
+    .querySelector("input[type='checkbox']")
+    .addEventListener("change", (event) => {
+      task.done = event.target.checked;
+      saveState();
+      renderDashboard();
+      renderChecklist();
+    });
 
-  card.querySelector(".delete-task-btn").addEventListener("click", event => {
+  card.querySelector(".delete-task-btn").addEventListener("click", (event) => {
     event.stopPropagation();
     deleteTaskWithConfirmation(competition.id, sectionId, task.id);
   });
@@ -2137,33 +2567,35 @@ function renderTaskCard(competition, sectionId, task) {
 }
 
 function deleteTaskWithConfirmation(competitionId, sectionId, taskId) {
-  const competition = state.competitions.find(item => item.id === competitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === competitionId
+  );
   if (!competition) return;
 
-  const section = competition.sections.find(item => item.id === sectionId);
+  const section = competition.sections.find((item) => item.id === sectionId);
   if (!section) return;
 
-  const task = section.tasks.find(item => item.id === taskId);
+  const task = section.tasks.find((item) => item.id === taskId);
   if (!task) return;
 
   const confirmed = window.confirm(`Vilt tú strika uppgávuna "${task.title}"?`);
   if (!confirmed) return;
 
-  section.tasks = section.tasks.filter(item => item.id !== taskId);
+  section.tasks = section.tasks.filter((item) => item.id !== taskId);
   saveState();
   renderDashboard();
   renderChecklist();
 }
-
 
 function replaceResponsibleNameInCompetition(competition, oldName, newName) {
   const oldFormatted = formatName(oldName);
   const newFormatted = formatName(newName);
   if (!competition || !oldFormatted || !newFormatted) return false;
 
-  const exists = (competition.people || []).some(person =>
-    person.toLocaleLowerCase("fo") === newFormatted.toLocaleLowerCase("fo") &&
-    person.toLocaleLowerCase("fo") !== oldFormatted.toLocaleLowerCase("fo")
+  const exists = (competition.people || []).some(
+    (person) =>
+      person.toLocaleLowerCase("fo") === newFormatted.toLocaleLowerCase("fo") &&
+      person.toLocaleLowerCase("fo") !== oldFormatted.toLocaleLowerCase("fo")
   );
 
   if (exists) {
@@ -2171,26 +2603,40 @@ function replaceResponsibleNameInCompetition(competition, oldName, newName) {
     return false;
   }
 
-  competition.people = uniqueNames((competition.people || []).map(person =>
-    person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo") ? newFormatted : person
-  ));
+  competition.people = uniqueNames(
+    (competition.people || []).map((person) =>
+      person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo")
+        ? newFormatted
+        : person
+    )
+  );
 
-  getAllTasks(competition).forEach(task => {
-    task.responsibles = uniqueNames(taskResponsibles(task).map(person =>
-      person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo") ? newFormatted : person
-    ));
+  getAllTasks(competition).forEach((task) => {
+    task.responsibles = uniqueNames(
+      taskResponsibles(task).map((person) =>
+        person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo")
+          ? newFormatted
+          : person
+      )
+    );
     task.responsible = task.responsibles[0] || "";
   });
 
-  ROLE_DEFINITIONS.forEach(role => {
+  ROLE_DEFINITIONS.forEach((role) => {
     if (!Array.isArray(competition.roles?.[role.key])) return;
-    competition.roles[role.key] = uniqueNames(competition.roles[role.key].map(person =>
-      person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo") ? newFormatted : person
-    )).slice(0, role.max);
+    competition.roles[role.key] = uniqueNames(
+      competition.roles[role.key].map((person) =>
+        person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo")
+          ? newFormatted
+          : person
+      )
+    ).slice(0, role.max);
   });
 
-  activeResponsibleFilters = activeResponsibleFilters.map(person =>
-    person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo") ? newFormatted : person
+  activeResponsibleFilters = activeResponsibleFilters.map((person) =>
+    person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo")
+      ? newFormatted
+      : person
   );
 
   return true;
@@ -2200,26 +2646,30 @@ function removeResponsibleNameFromCompetition(competition, name) {
   const formatted = formatName(name);
   if (!competition || !formatted) return false;
 
-  competition.people = (competition.people || []).filter(person =>
-    person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
+  competition.people = (competition.people || []).filter(
+    (person) =>
+      person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
   );
 
-  getAllTasks(competition).forEach(task => {
-    task.responsibles = taskResponsibles(task).filter(person =>
-      person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
+  getAllTasks(competition).forEach((task) => {
+    task.responsibles = taskResponsibles(task).filter(
+      (person) =>
+        person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
     );
     task.responsible = task.responsibles[0] || "";
   });
 
-  ROLE_DEFINITIONS.forEach(role => {
+  ROLE_DEFINITIONS.forEach((role) => {
     if (!Array.isArray(competition.roles?.[role.key])) return;
-    competition.roles[role.key] = competition.roles[role.key].filter(person =>
-      person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
+    competition.roles[role.key] = competition.roles[role.key].filter(
+      (person) =>
+        person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
     );
   });
 
-  activeResponsibleFilters = activeResponsibleFilters.filter(person =>
-    person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
+  activeResponsibleFilters = activeResponsibleFilters.filter(
+    (person) =>
+      person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
   );
 
   return true;
@@ -2229,7 +2679,11 @@ function renameResponsiblePerson(competition, oldName, task = null) {
   const newName = formatName(window.prompt("Nýtt navn:", oldName) || "");
   if (!newName || newName === oldName) return;
 
-  const changed = replaceResponsibleNameInCompetition(competition, oldName, newName);
+  const changed = replaceResponsibleNameInCompetition(
+    competition,
+    oldName,
+    newName
+  );
   if (!changed) return;
 
   saveState();
@@ -2240,7 +2694,9 @@ function renameResponsiblePerson(competition, oldName, task = null) {
 }
 
 function deleteResponsiblePerson(competition, name, task = null) {
-  const confirmed = window.confirm(`Vilt tú strika "${name}" sum ábyrgdarpersón? Navnið verður eisini tikið av øllum uppgávum og leiklutum.`);
+  const confirmed = window.confirm(
+    `Vilt tú strika "${name}" sum ábyrgdarpersón? Navnið verður eisini tikið av øllum uppgávum og leiklutum.`
+  );
   if (!confirmed) return;
 
   const changed = removeResponsibleNameFromCompetition(competition, name);
@@ -2262,47 +2718,68 @@ function renderResponsibleChoices(competition, task) {
     return;
   }
 
-  container.innerHTML = sortNames(competition.people).map(person => {
-    const checked = selected.has(person) ? "checked" : "";
-    return `
-      <div class="responsible-choice-row" style="${colorStyle(competition, person)}">
+  container.innerHTML = sortNames(competition.people)
+    .map((person) => {
+      const checked = selected.has(person) ? "checked" : "";
+      return `
+      <div class="responsible-choice-row" style="${colorStyle(
+        competition,
+        person
+      )}">
         <label class="responsible-choice">
           <input type="checkbox" value="${escapeHTML(person)}" ${checked} />
           <span>${escapeHTML(person)}</span>
         </label>
         <div class="responsible-choice-actions">
-          <button type="button" class="tiny-icon-btn" data-rename-responsible="${escapeHTML(person)}" title="Broyt navn">✎</button>
-          <button type="button" class="tiny-icon-btn danger" data-delete-responsible="${escapeHTML(person)}" title="Strika persón">×</button>
+          <button type="button" class="tiny-icon-btn" data-rename-responsible="${escapeHTML(
+            person
+          )}" title="Broyt navn">✎</button>
+          <button type="button" class="tiny-icon-btn danger" data-delete-responsible="${escapeHTML(
+            person
+          )}" title="Strika persón">×</button>
         </div>
       </div>
     `;
-  }).join("");
+    })
+    .join("");
 
-  container.querySelectorAll("[data-rename-responsible]").forEach(button => {
-    button.addEventListener("click", event => {
+  container.querySelectorAll("[data-rename-responsible]").forEach((button) => {
+    button.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
-      renameResponsiblePerson(competition, button.dataset.renameResponsible, task);
+      renameResponsiblePerson(
+        competition,
+        button.dataset.renameResponsible,
+        task
+      );
     });
   });
 
-  container.querySelectorAll("[data-delete-responsible]").forEach(button => {
-    button.addEventListener("click", event => {
+  container.querySelectorAll("[data-delete-responsible]").forEach((button) => {
+    button.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
-      deleteResponsiblePerson(competition, button.dataset.deleteResponsible, task);
+      deleteResponsiblePerson(
+        competition,
+        button.dataset.deleteResponsible,
+        task
+      );
     });
   });
 }
 
 function openTaskEditor(competitionId, sectionId, taskId) {
-  const competition = state.competitions.find(item => item.id === competitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === competitionId
+  );
   if (!competition) return;
 
-  const section = (competition.sections || []).find(item => item.id === sectionId);
+  const section = (competition.sections || []).find(
+    (item) => item.id === sectionId
+  );
   if (!section) return;
 
-  const task = (section.tasks || []).find(item => item.id === taskId);
+  const task = (section.tasks || []).find((item) => item.id === taskId);
   if (!task) return;
 
   editingTask = {
@@ -2311,7 +2788,7 @@ function openTaskEditor(competitionId, sectionId, taskId) {
     sectionId,
     taskId,
     taskDraft: null,
-    competitionSnapshot: structuredClone(competition)
+    competitionSnapshot: structuredClone(competition),
   };
 
   fillTaskEditor(task);
@@ -2328,28 +2805,39 @@ function fillTaskEditor(task) {
   $("#editTaskNote").value = task.note || "";
   $("#editTaskHasDeadline").checked = Boolean(task.hasDeadline);
   $("#editTaskDeadlineDate").value = task.deadlineDate || "";
-  $("#editTaskDeadlineTime").value = normalizeTimeValue(task.deadlineTime) || "";
-  $("#deadlineFields").classList.toggle("hidden", !$("#editTaskHasDeadline").checked);
+  $("#editTaskDeadlineTime").value =
+    normalizeTimeValue(task.deadlineTime) || "";
+  $("#deadlineFields").classList.toggle(
+    "hidden",
+    !$("#editTaskHasDeadline").checked
+  );
 
   $("#taskPersonAddRow").classList.add("hidden");
   $("#taskPersonAddRow").hidden = true;
   $("#taskPersonNameInput").value = "";
 
-  const competition = state.competitions.find(item => item.id === editingTask?.competitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === editingTask?.competitionId
+  );
   if (competition) renderResponsibleChoices(competition, task);
 
   taskModal.showModal();
 }
 
 function openNewTaskEditor(sectionId) {
-  const competition = state.competitions.find(item => item.id === activeCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === activeCompetitionId
+  );
   if (!competition) return;
 
-  const section = (competition.sections || []).find(item => item.id === sectionId);
+  const section = (competition.sections || []).find(
+    (item) => item.id === sectionId
+  );
   if (!section) return;
 
-  const preselectedResponsibles = uniqueNames(activeResponsibleFilters)
-    .filter(person => (competition.people || []).includes(person));
+  const preselectedResponsibles = uniqueNames(activeResponsibleFilters).filter(
+    (person) => (competition.people || []).includes(person)
+  );
 
   const taskDraft = {
     id: makeId(),
@@ -2360,7 +2848,7 @@ function openNewTaskEditor(sectionId) {
     deadlineDate: "",
     deadlineTime: "",
     note: "",
-    done: false
+    done: false,
   };
 
   editingTask = {
@@ -2369,7 +2857,7 @@ function openNewTaskEditor(sectionId) {
     sectionId: section.id,
     taskId: null,
     taskDraft,
-    competitionSnapshot: structuredClone(competition)
+    competitionSnapshot: structuredClone(competition),
   };
 
   fillTaskEditor(taskDraft);
@@ -2378,17 +2866,23 @@ function openNewTaskEditor(sectionId) {
 function getEditingTask() {
   if (!editingTask) return null;
 
-  const competition = state.competitions.find(item => item.id === editingTask.competitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === editingTask.competitionId
+  );
   if (!competition) return null;
 
-  const section = (competition.sections || []).find(item => item.id === editingTask.sectionId);
+  const section = (competition.sections || []).find(
+    (item) => item.id === editingTask.sectionId
+  );
   if (!section) return null;
 
   if (editingTask.mode === "create") {
     return { competition, section, task: editingTask.taskDraft, isNew: true };
   }
 
-  const task = (section.tasks || []).find(item => item.id === editingTask.taskId);
+  const task = (section.tasks || []).find(
+    (item) => item.id === editingTask.taskId
+  );
   if (!task) return null;
 
   return { competition, section, task, isNew: false };
@@ -2399,12 +2893,16 @@ function addTaskToCompetition(sectionId) {
 }
 
 function openRolesEditor() {
-  const competition = state.competitions.find(item => item.id === activeCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === activeCompetitionId
+  );
   if (!competition) return;
 
   roleInputCounts = {};
-  ROLE_DEFINITIONS.forEach(role => {
-    const filled = (competition.roles[role.key] || []).filter(name => name.trim()).length;
+  ROLE_DEFINITIONS.forEach((role) => {
+    const filled = (competition.roles[role.key] || []).filter((name) =>
+      name.trim()
+    ).length;
     roleInputCounts[role.key] = filled;
   });
 
@@ -2413,11 +2911,13 @@ function openRolesEditor() {
 }
 
 function renderRolesEditor() {
-  const competition = state.competitions.find(item => item.id === activeCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === activeCompetitionId
+  );
   if (!competition) return;
 
   const rolesEditor = $("#rolesEditor");
-  rolesEditor.innerHTML = ROLE_DEFINITIONS.map(role => {
+  rolesEditor.innerHTML = ROLE_DEFINITIONS.map((role) => {
     const values = uniqueNames(competition.roles[role.key] || []);
     const visibleCount = Math.min(role.max, roleInputCounts[role.key] || 0);
     const canAdd = visibleCount < role.max;
@@ -2429,10 +2929,16 @@ function renderRolesEditor() {
             <strong>${role.label}</strong>
             <span>Max ${role.max}</span>
           </div>
-          ${canAdd ? `<button class="role-add-btn" type="button" data-add-role-field="${role.key}" title="Legg persón afturat">+</button>` : ""}
+          ${
+            canAdd
+              ? `<button class="role-add-btn" type="button" data-add-role-field="${role.key}" title="Legg persón afturat">+</button>`
+              : ""
+          }
         </div>
         <div class="role-inputs">
-          ${Array.from({ length: visibleCount }).map((_, index) => `
+          ${Array.from({ length: visibleCount })
+            .map(
+              (_, index) => `
             <div class="role-input-row">
               <input
                 data-role-key="${role.key}"
@@ -2440,32 +2946,43 @@ function renderRolesEditor() {
                 value="${escapeHTML(values[index] || "")}"
                 placeholder="Navn ${index + 1}"
               />
-              <button class="remove-role-field-btn" type="button" data-remove-role-field="${role.key}" data-role-index="${index}" title="Strika teig">×</button>
+              <button class="remove-role-field-btn" type="button" data-remove-role-field="${
+                role.key
+              }" data-role-index="${index}" title="Strika teig">×</button>
             </div>
-          `).join("")}
+          `
+            )
+            .join("")}
         </div>
       </section>
     `;
   }).join("");
 
-  rolesEditor.querySelectorAll("[data-add-role-field]").forEach(button => {
+  rolesEditor.querySelectorAll("[data-add-role-field]").forEach((button) => {
     button.addEventListener("click", () => {
       const key = button.dataset.addRoleField;
-      const role = ROLE_DEFINITIONS.find(item => item.key === key);
-      roleInputCounts[key] = Math.min(role.max, (roleInputCounts[key] || 0) + 1);
+      const role = ROLE_DEFINITIONS.find((item) => item.key === key);
+      roleInputCounts[key] = Math.min(
+        role.max,
+        (roleInputCounts[key] || 0) + 1
+      );
       renderRolesEditor();
     });
   });
 
-  rolesEditor.querySelectorAll("[data-remove-role-field]").forEach(button => {
+  rolesEditor.querySelectorAll("[data-remove-role-field]").forEach((button) => {
     button.addEventListener("click", () => {
       const key = button.dataset.removeRoleField;
       const index = Number(button.dataset.roleIndex);
-      const inputs = Array.from(rolesEditor.querySelectorAll(`[data-role-key="${key}"]`));
-      const values = inputs.map(input => input.value);
+      const inputs = Array.from(
+        rolesEditor.querySelectorAll(`[data-role-key="${key}"]`)
+      );
+      const values = inputs.map((input) => input.value);
       values.splice(index, 1);
 
-      const competition = state.competitions.find(item => item.id === activeCompetitionId);
+      const competition = state.competitions.find(
+        (item) => item.id === activeCompetitionId
+      );
       if (competition) {
         competition.roles[key] = uniqueNames(values);
       }
@@ -2477,23 +2994,29 @@ function renderRolesEditor() {
 }
 
 function saveRolesFromEditor() {
-  const competition = state.competitions.find(item => item.id === activeCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === activeCompetitionId
+  );
   if (!competition) return;
 
-  ROLE_DEFINITIONS.forEach(role => {
+  ROLE_DEFINITIONS.forEach((role) => {
     competition.roles[role.key] = [];
   });
 
-  $("#rolesEditor").querySelectorAll("[data-role-key]").forEach(input => {
-    const key = input.dataset.roleKey;
-    const value = formatName(input.value);
-    if (value) {
-      competition.roles[key].push(value);
-    }
-  });
+  $("#rolesEditor")
+    .querySelectorAll("[data-role-key]")
+    .forEach((input) => {
+      const key = input.dataset.roleKey;
+      const value = formatName(input.value);
+      if (value) {
+        competition.roles[key].push(value);
+      }
+    });
 
-  ROLE_DEFINITIONS.forEach(role => {
-    competition.roles[role.key] = uniqueNames(competition.roles[role.key]).slice(0, role.max);
+  ROLE_DEFINITIONS.forEach((role) => {
+    competition.roles[role.key] = uniqueNames(
+      competition.roles[role.key]
+    ).slice(0, role.max);
   });
 
   rolesVisible = true;
@@ -2501,12 +3024,12 @@ function saveRolesFromEditor() {
   renderChecklist();
 }
 
-document.addEventListener("dragenter", event => {
+document.addEventListener("dragenter", (event) => {
   if (!draggedTask && !draggedSectionId) return;
   updateDragAutoScroll(event);
 });
 
-document.addEventListener("dragover", event => {
+document.addEventListener("dragover", (event) => {
   if (!draggedTask && !draggedSectionId) return;
 
   updateDragAutoScroll(event);
@@ -2516,20 +3039,26 @@ document.addEventListener("dragover", event => {
     event.preventDefault();
   }
 
-  const blockedTarget = event.target.closest("input, textarea, select, [contenteditable='true']");
+  const blockedTarget = event.target.closest(
+    "input, textarea, select, [contenteditable='true']"
+  );
   if (blockedTarget) {
     event.preventDefault();
     event.stopPropagation();
   }
 });
 
-document.addEventListener("drop", event => {
+document.addEventListener("drop", (event) => {
   if (!draggedTask && !draggedSectionId) return;
 
   stopDragAutoScroll();
 
-  const validDropTarget = event.target.closest("[data-task-drop-section], .phase-column, .add-section-panel");
-  const blockedTarget = event.target.closest("input, textarea, select, [contenteditable='true']");
+  const validDropTarget = event.target.closest(
+    "[data-task-drop-section], .phase-column, .add-section-panel"
+  );
+  const blockedTarget = event.target.closest(
+    "input, textarea, select, [contenteditable='true']"
+  );
 
   if (blockedTarget || !validDropTarget) {
     event.preventDefault();
@@ -2539,7 +3068,7 @@ document.addEventListener("drop", event => {
 
 document.addEventListener("dragend", stopDragAutoScroll);
 
-document.addEventListener("keydown", event => {
+document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     stopDragAutoScroll();
   }
@@ -2556,12 +3085,16 @@ $("#mobileMenuToggle")?.addEventListener("click", () => {
   applySidebarState();
 });
 
-navLinks.forEach(link => {
+navLinks.forEach((link) => {
   link.addEventListener("click", () => setView(link.dataset.view));
 });
 
-$("#openTemplatesFromDashboard").addEventListener("click", () => setView("templates"));
-$("#backFromTemplatesBtn")?.addEventListener("click", () => setView("dashboard"));
+$("#openTemplatesFromDashboard").addEventListener("click", () =>
+  setView("templates")
+);
+$("#backFromTemplatesBtn")?.addEventListener("click", () =>
+  setView("dashboard")
+);
 
 $("#openCreateCompetition").addEventListener("click", () => {
   draftPeople = [];
@@ -2570,10 +3103,12 @@ $("#openCreateCompetition").addEventListener("click", () => {
   $("#createCompetitionModal").showModal();
 });
 
-$("#closeCompetitionModal").addEventListener("click", () => $("#createCompetitionModal").close());
+$("#closeCompetitionModal").addEventListener("click", () =>
+  $("#createCompetitionModal").close()
+);
 $("#backToDashboard").addEventListener("click", () => setView("dashboard"));
 $("#downloadChecklistPdfBtn")?.addEventListener("click", downloadChecklistPdf);
-$("#editCurrentCompetitionBtn")?.addEventListener("click", event => {
+$("#editCurrentCompetitionBtn")?.addEventListener("click", (event) => {
   event.preventDefault();
   event.stopPropagation();
 
@@ -2583,8 +3118,7 @@ $("#editCurrentCompetitionBtn")?.addEventListener("click", event => {
   openCompetitionEditor(competitionId);
 });
 
-
-$("#checklistColumns").addEventListener("click", event => {
+$("#checklistColumns").addEventListener("click", (event) => {
   const addTaskButton = event.target.closest("[data-add-competition-task]");
   if (!addTaskButton || !$("#checklistColumns").contains(addTaskButton)) return;
 
@@ -2596,56 +3130,82 @@ $("#checklistColumns").addEventListener("click", event => {
 $("#addPersonBtn").addEventListener("click", () => {
   const input = $("#personNameInput");
   const name = formatName(input.value);
-  if (!name || draftPeople.some(person => person.toLocaleLowerCase("fo") === name.toLocaleLowerCase("fo"))) return;
+  if (
+    !name ||
+    draftPeople.some(
+      (person) =>
+        person.toLocaleLowerCase("fo") === name.toLocaleLowerCase("fo")
+    )
+  )
+    return;
 
   draftPeople.push(name);
   input.value = "";
   renderPeopleDraft();
 });
 
-$("#personNameInput").addEventListener("keydown", event => {
+$("#personNameInput").addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
     $("#addPersonBtn").click();
   }
 });
 
-$("#closeEditCompetitionModal").addEventListener("click", () => $("#editCompetitionModal").close());
-$("#editCompetitionPassword")?.addEventListener("input", updateEditCompetitionShareLink);
+$("#closeEditCompetitionModal").addEventListener("click", () =>
+  $("#editCompetitionModal").close()
+);
+$("#editCompetitionPassword")?.addEventListener(
+  "input",
+  updateEditCompetitionShareLink
+);
 
-$("#copyEditCompetitionShareLinkBtn")?.addEventListener("click", async event => {
-  event.preventDefault();
-  event.stopPropagation();
-  const link = updateEditCompetitionShareLink();
-  if (!link) return;
-  const didCopy = await copyTextToClipboard(link);
-  $("#copyEditCompetitionShareLinkBtn").textContent = didCopy ? "Kopierað" : "Kopiera leinkju";
-  setTimeout(() => {
-    $("#copyEditCompetitionShareLinkBtn").textContent = "Kopiera leinkju";
-  }, 1400);
-});
+$("#copyEditCompetitionShareLinkBtn")?.addEventListener(
+  "click",
+  async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const link = updateEditCompetitionShareLink();
+    if (!link) return;
+    const didCopy = await copyTextToClipboard(link);
+    $("#copyEditCompetitionShareLinkBtn").textContent = didCopy
+      ? "Kopierað"
+      : "Kopiera leinkju";
+    setTimeout(() => {
+      $("#copyEditCompetitionShareLinkBtn").textContent = "Kopiera leinkju";
+    }, 1400);
+  }
+);
 
 $("#editAddPersonBtn").addEventListener("click", () => {
   const input = $("#editPersonNameInput");
   const name = formatName(input.value);
-  if (!name || editDraftPeople.some(person => person.toLocaleLowerCase("fo") === name.toLocaleLowerCase("fo"))) return;
+  if (
+    !name ||
+    editDraftPeople.some(
+      (person) =>
+        person.toLocaleLowerCase("fo") === name.toLocaleLowerCase("fo")
+    )
+  )
+    return;
 
   editDraftPeople.push(name);
   input.value = "";
   renderEditPeopleDraft();
 });
 
-$("#editPersonNameInput").addEventListener("keydown", event => {
+$("#editPersonNameInput").addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
     $("#editAddPersonBtn").click();
   }
 });
 
-$("#editCompetitionForm").addEventListener("submit", event => {
+$("#editCompetitionForm").addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const competition = state.competitions.find(item => item.id === editingCompetitionId);
+  const competition = state.competitions.find(
+    (item) => item.id === editingCompetitionId
+  );
   if (!competition) return;
 
   const previousPeople = [...(competition.people || [])];
@@ -2666,16 +3226,20 @@ $("#editCompetitionForm").addEventListener("submit", event => {
 
   activeResponsibleFilters = activeResponsibleFilters
     .map(formatName)
-    .filter(person => competition.people.includes(person));
+    .filter((person) => competition.people.includes(person));
 
-  getAllTasks(competition).forEach(task => {
-    task.responsibles = uniqueNames(taskResponsibles(task)).filter(person => competition.people.includes(person));
+  getAllTasks(competition).forEach((task) => {
+    task.responsibles = uniqueNames(taskResponsibles(task)).filter((person) =>
+      competition.people.includes(person)
+    );
     task.responsible = task.responsibles[0] || "";
   });
 
-  ROLE_DEFINITIONS.forEach(role => {
+  ROLE_DEFINITIONS.forEach((role) => {
     if (!Array.isArray(competition.roles?.[role.key])) return;
-    competition.roles[role.key] = competition.roles[role.key].filter(person => competition.people.includes(person));
+    competition.roles[role.key] = competition.roles[role.key].filter((person) =>
+      competition.people.includes(person)
+    );
   });
 
   saveState();
@@ -2684,12 +3248,12 @@ $("#editCompetitionForm").addEventListener("submit", event => {
   renderChecklist();
 });
 
-$("#competitionForm").addEventListener("submit", event => {
+$("#competitionForm").addEventListener("submit", (event) => {
   event.preventDefault();
 
   const selectedTemplateId = $("#competitionTemplate").value;
   const selectedTemplate = selectedTemplateId
-    ? state.templates.find(template => template.id === selectedTemplateId)
+    ? state.templates.find((template) => template.id === selectedTemplateId)
     : null;
 
   const competition = {
@@ -2700,7 +3264,7 @@ $("#competitionForm").addEventListener("submit", event => {
     password: $("#competitionPassword").value,
     people: [],
     roles: makeEmptyRoles(),
-    sections: selectedTemplate ? cloneSections(selectedTemplate.sections) : []
+    sections: selectedTemplate ? cloneSections(selectedTemplate.sections) : [],
   };
 
   state.competitions.push(competition);
@@ -2722,14 +3286,14 @@ $("#competitionForm").addEventListener("submit", event => {
 $("#createTemplateBtn").addEventListener("click", () => {
   const template = {
     id: makeId(),
-    name: "Nýggjur template",
+    name: "Stovna skapilón",
     sections: [
       {
         id: makeId(),
-        title: "Nýggj sektion",
-        tasks: []
-      }
-    ]
+        title: "Stovna sektion",
+        tasks: [],
+      },
+    ],
   };
 
   state.templates.push(template);
@@ -2738,11 +3302,14 @@ $("#createTemplateBtn").addEventListener("click", () => {
   render();
 });
 
-
 function restoreCompetitionFromTaskSnapshot() {
   if (!editingTask?.competitionSnapshot) return false;
-  const index = state.competitions.findIndex(item => item.id === editingTask.competitionId);
+
+  const index = state.competitions.findIndex(
+    (item) => item.id === editingTask.competitionId
+  );
   if (index === -1) return false;
+
   state.competitions[index] = structuredClone(editingTask.competitionSnapshot);
   return true;
 }
@@ -2775,7 +3342,7 @@ function addPersonFromTaskEditor() {
   if (!result) return;
 
   const { competition, section, task } = result;
-  const originalOrder = section.tasks.map(item => item.id);
+  const originalOrder = section.tasks.map((item) => item.id);
   const input = $("#taskPersonNameInput");
   const name = formatName(input.value);
 
@@ -2796,7 +3363,7 @@ function addPersonFromTaskEditor() {
 
 $("#addTaskPersonBtn").addEventListener("click", addPersonFromTaskEditor);
 
-$("#taskPersonNameInput").addEventListener("keydown", event => {
+$("#taskPersonNameInput").addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
     addPersonFromTaskEditor();
@@ -2804,33 +3371,40 @@ $("#taskPersonNameInput").addEventListener("keydown", event => {
 });
 
 $("#editTaskHasDeadline").addEventListener("change", () => {
-  $("#deadlineFields").classList.toggle("hidden", !$("#editTaskHasDeadline").checked);
+  $("#deadlineFields").classList.toggle(
+    "hidden",
+    !$("#editTaskHasDeadline").checked
+  );
 });
 
-$("#editTaskDeadlineTime").addEventListener("input", event => {
+$("#editTaskDeadlineTime").addEventListener("input", (event) => {
   keepTimeInputReadable(event.target);
 });
 
-$("#editTaskDeadlineTime").addEventListener("blur", event => {
+$("#editTaskDeadlineTime").addEventListener("blur", (event) => {
   event.target.value = normalizeTimeValue(event.target.value);
 });
 
-$("#taskEditForm").addEventListener("submit", event => {
+$("#taskEditForm").addEventListener("submit", (event) => {
   event.preventDefault();
 
   const result = getEditingTask();
   if (!result) return;
 
   const { section, task, isNew } = result;
-  const originalOrder = section.tasks.map(item => item.id);
-  const selectedResponsibles = uniqueNames($$("#editTaskResponsibleList input:checked").map(input => input.value));
+  const originalOrder = section.tasks.map((item) => item.id);
+  const selectedResponsibles = uniqueNames(
+    $$("#editTaskResponsibleList input:checked").map((input) => input.value)
+  );
 
   task.title = $("#editTaskTitle").value;
   task.responsibles = selectedResponsibles;
   task.responsible = selectedResponsibles[0] || "";
   task.hasDeadline = $("#editTaskHasDeadline").checked;
   task.deadlineDate = task.hasDeadline ? $("#editTaskDeadlineDate").value : "";
-  task.deadlineTime = task.hasDeadline ? normalizeTimeValue($("#editTaskDeadlineTime").value) : "";
+  task.deadlineTime = task.hasDeadline
+    ? normalizeTimeValue($("#editTaskDeadlineTime").value)
+    : "";
   task.note = $("#editTaskNote").value;
 
   if (isNew) {
@@ -2855,7 +3429,11 @@ $("#deleteTaskBtn").addEventListener("click", () => {
     return;
   }
 
-  deleteTaskWithConfirmation(result.competition.id, editingTask.sectionId, editingTask.taskId);
+  deleteTaskWithConfirmation(
+    result.competition.id,
+    editingTask.sectionId,
+    editingTask.taskId
+  );
   $("#taskEditModal").close();
   editingTask = null;
 });
@@ -2868,12 +3446,11 @@ $("#toggleRolesBtn").addEventListener("click", () => {
 $("#editRolesBtn").addEventListener("click", openRolesEditor);
 $("#closeRolesModal").addEventListener("click", () => $("#rolesModal").close());
 
-$("#rolesForm").addEventListener("submit", event => {
+$("#rolesForm").addEventListener("submit", (event) => {
   event.preventDefault();
   saveRolesFromEditor();
   $("#rolesModal").close();
 });
-
 
 $("#sidebarSettingsButton")?.addEventListener("click", () => {
   const panel = $("#sidebarSettingsPanel");
@@ -2885,14 +3462,16 @@ $("#sidebarSettingsButton")?.addEventListener("click", () => {
   button.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
 });
 
-$("#copyChecklistShareLinkBtn")?.addEventListener("click", async event => {
+$("#copyChecklistShareLinkBtn")?.addEventListener("click", async (event) => {
   event.preventDefault();
   event.stopPropagation();
 
   const competitionId = activeCompetitionId || publicCompetitionId;
   if (!competitionId) return;
 
-  const didCopy = await copyTextToClipboard(getCompetitionShareUrl(competitionId));
+  const didCopy = await copyTextToClipboard(
+    getCompetitionShareUrl(competitionId)
+  );
   event.currentTarget.classList.toggle("copied", didCopy);
   setTimeout(() => {
     event.currentTarget.classList.remove("copied");
@@ -2912,11 +3491,10 @@ function syncRevenueHeaderSummary() {
   const resizeFrame = (doc) => {
     if (!doc?.body) return;
 
-    const visibleElements = Array.from(doc.body.children)
-      .filter(element => {
-        const style = doc.defaultView.getComputedStyle(element);
-        return style.display !== "none" && style.position !== "fixed";
-      });
+    const visibleElements = Array.from(doc.body.children).filter((element) => {
+      const style = doc.defaultView.getComputedStyle(element);
+      return style.display !== "none" && style.position !== "fixed";
+    });
 
     const contentBottom = visibleElements.reduce((bottom, element) => {
       const rect = element.getBoundingClientRect();
@@ -2930,8 +3508,12 @@ function syncRevenueHeaderSummary() {
   const update = () => {
     try {
       const doc = frame.contentDocument || frame.contentWindow?.document;
-      const income = doc?.querySelector("#heroTotalIncome")?.textContent?.trim();
-      const members = doc?.querySelector("#heroTotalMembers")?.textContent?.trim();
+      const income = doc
+        ?.querySelector("#heroTotalIncome")
+        ?.textContent?.trim();
+      const members = doc
+        ?.querySelector("#heroTotalMembers")
+        ?.textContent?.trim();
       if (income) incomeTarget.textContent = income;
       if (members) membersTarget.textContent = members;
       resizeFrame(doc);
@@ -2967,44 +3549,53 @@ function syncRevenueHeaderSummary() {
 
 syncRevenueHeaderSummary();
 
+document.addEventListener(
+  "click",
+  async (event) => {
+    const copyButton = event.target.closest(
+      "#copyEditCompetitionShareLinkBtn, [data-copy-share-link]"
+    );
+    if (!copyButton) return;
 
-document.addEventListener("click", async event => {
-  const copyButton = event.target.closest("#copyEditCompetitionShareLinkBtn, [data-copy-share-link]");
-  if (!copyButton) return;
+    event.preventDefault();
+    event.stopPropagation();
 
-  event.preventDefault();
-  event.stopPropagation();
+    let link = "";
 
-  let link = "";
+    if (copyButton.matches("[data-copy-share-link]")) {
+      link = copyButton.dataset.copyShareLink
+        ? getCompetitionShareUrl(copyButton.dataset.copyShareLink)
+        : "";
+    } else {
+      link = updateEditCompetitionShareLink();
+    }
 
-  if (copyButton.matches("[data-copy-share-link]")) {
-    link = copyButton.dataset.copyShareLink ? getCompetitionShareUrl(copyButton.dataset.copyShareLink) : "";
-  } else {
-    link = updateEditCompetitionShareLink();
-  }
+    if (!link) return;
 
-  if (!link) return;
+    const didCopy = await copyTextToClipboard(link);
+    const originalText = copyButton.textContent;
+    const isIconShareButton = copyButton.matches(
+      "[data-copy-share-link], #copyChecklistShareLinkBtn"
+    );
+    if (isIconShareButton) {
+      copyButton.classList.toggle("copied", didCopy);
+      setTimeout(() => copyButton.classList.remove("copied"), 1400);
+    } else {
+      copyButton.textContent = didCopy ? "Kopierað" : originalText;
+      setTimeout(() => {
+        copyButton.textContent = originalText;
+      }, 1400);
+    }
+  },
+  true
+);
 
-  const didCopy = await copyTextToClipboard(link);
-  const originalText = copyButton.textContent;
-  const isIconShareButton = copyButton.matches("[data-copy-share-link], #copyChecklistShareLinkBtn");
-  if (isIconShareButton) {
-    copyButton.classList.toggle("copied", didCopy);
-    setTimeout(() => copyButton.classList.remove("copied"), 1400);
-  } else {
-    copyButton.textContent = didCopy ? "Kopierað" : originalText;
-    setTimeout(() => {
-      copyButton.textContent = originalText;
-    }, 1400);
-  }
-}, true);
-
-$("#editCompetitionShareLink")?.addEventListener("focus", event => {
+$("#editCompetitionShareLink")?.addEventListener("focus", (event) => {
   updateEditCompetitionShareLink();
   event.target.select();
 });
 
-$("#editCompetitionShareLink")?.addEventListener("click", event => {
+$("#editCompetitionShareLink")?.addEventListener("click", (event) => {
   updateEditCompetitionShareLink();
   event.target.select();
 });
