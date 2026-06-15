@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.5.5";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.5.4", "stoyt-portal-v5.5.3", "stoyt-portal-v5.5.2", "stoyt-portal-v5.5.1", "stoyt-portal-v5.5.0", "stoyt-portal-v5.4.8", "stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.5.6";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.5.5", "stoyt-portal-v5.5.4", "stoyt-portal-v5.5.3", "stoyt-portal-v5.5.2", "stoyt-portal-v5.5.1", "stoyt-portal-v5.5.0", "stoyt-portal-v5.4.8", "stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -2295,7 +2295,7 @@ function renderResponsibleChoices(competition, task) {
   });
 }
 
-function openTaskEditor(competitionId, sectionId, taskId, options = {}) {
+function openTaskEditor(competitionId, sectionId, taskId) {
   const competition = state.competitions.find(item => item.id === competitionId);
   if (!competition) return;
 
@@ -2306,20 +2306,23 @@ function openTaskEditor(competitionId, sectionId, taskId, options = {}) {
   if (!task) return;
 
   editingTask = {
+    mode: "edit",
     competitionId,
     sectionId,
     taskId,
-    isNew: Boolean(options.isNew),
+    taskDraft: null,
     competitionSnapshot: structuredClone(competition)
   };
 
+  fillTaskEditor(task);
+}
+
+function fillTaskEditor(task) {
   const taskForm = $("#taskEditForm");
   taskForm.reset();
 
   const taskModal = $("#taskEditModal");
-  if (taskModal.open) {
-    taskModal.close();
-  }
+  if (taskModal.open) taskModal.close();
 
   $("#editTaskTitle").value = task.title;
   $("#editTaskNote").value = task.note || "";
@@ -2331,26 +2334,14 @@ function openTaskEditor(competitionId, sectionId, taskId, options = {}) {
   $("#taskPersonAddRow").classList.add("hidden");
   $("#taskPersonAddRow").hidden = true;
   $("#taskPersonNameInput").value = "";
-  renderResponsibleChoices(competition, task);
+
+  const competition = state.competitions.find(item => item.id === editingTask?.competitionId);
+  if (competition) renderResponsibleChoices(competition, task);
+
   taskModal.showModal();
 }
 
-function getEditingTask() {
-  if (!editingTask) return null;
-
-  const competition = state.competitions.find(item => item.id === editingTask.competitionId);
-  if (!competition) return null;
-
-  const section = (competition.sections || []).find(item => item.id === editingTask.sectionId);
-  if (!section) return null;
-
-  const task = (section.tasks || []).find(item => item.id === editingTask.taskId);
-  if (!task) return null;
-
-  return { competition, section, task };
-}
-
-function addTaskToCompetition(sectionId) {
+function openNewTaskEditor(sectionId) {
   const competition = state.competitions.find(item => item.id === activeCompetitionId);
   if (!competition) return;
 
@@ -2360,7 +2351,7 @@ function addTaskToCompetition(sectionId) {
   const preselectedResponsibles = uniqueNames(activeResponsibleFilters)
     .filter(person => (competition.people || []).includes(person));
 
-  const task = {
+  const taskDraft = {
     id: makeId(),
     title: "Nýggj uppgáva",
     responsible: preselectedResponsibles[0] || "",
@@ -2372,15 +2363,39 @@ function addTaskToCompetition(sectionId) {
     done: false
   };
 
-  // Add the task temporarily so the normal editor can use it.
-  // It is not saved until the user clicks "Goym broytingar".
-  section.tasks.push(task);
-  renderDashboard();
-  renderChecklist();
+  editingTask = {
+    mode: "create",
+    competitionId: competition.id,
+    sectionId: section.id,
+    taskId: null,
+    taskDraft,
+    competitionSnapshot: structuredClone(competition)
+  };
 
-  requestAnimationFrame(() => {
-    openTaskEditor(competition.id, section.id, task.id, { isNew: true });
-  });
+  fillTaskEditor(taskDraft);
+}
+
+function getEditingTask() {
+  if (!editingTask) return null;
+
+  const competition = state.competitions.find(item => item.id === editingTask.competitionId);
+  if (!competition) return null;
+
+  const section = (competition.sections || []).find(item => item.id === editingTask.sectionId);
+  if (!section) return null;
+
+  if (editingTask.mode === "create") {
+    return { competition, section, task: editingTask.taskDraft, isNew: true };
+  }
+
+  const task = (section.tasks || []).find(item => item.id === editingTask.taskId);
+  if (!task) return null;
+
+  return { competition, section, task, isNew: false };
+}
+
+function addTaskToCompetition(sectionId) {
+  openNewTaskEditor(sectionId);
 }
 
 function openRolesEditor() {
@@ -2726,24 +2741,15 @@ $("#createTemplateBtn").addEventListener("click", () => {
 
 function restoreCompetitionFromTaskSnapshot() {
   if (!editingTask?.competitionSnapshot) return false;
-
   const index = state.competitions.findIndex(item => item.id === editingTask.competitionId);
   if (index === -1) return false;
-
   state.competitions[index] = structuredClone(editingTask.competitionSnapshot);
   return true;
 }
 
 function cancelTaskEdit() {
-  const shouldRestore = Boolean(editingTask?.competitionSnapshot);
-
-  if (shouldRestore) {
-    restoreCompetitionFromTaskSnapshot();
-
-    // Only save on cancel if something inside the modal had already changed saved state,
-    // such as adding a new responsible person from the task editor.
-    saveState();
-  }
+  const restored = restoreCompetitionFromTaskSnapshot();
+  if (restored) saveState();
 
   $("#taskEditModal").close();
   editingTask = null;
@@ -2815,7 +2821,7 @@ $("#taskEditForm").addEventListener("submit", event => {
   const result = getEditingTask();
   if (!result) return;
 
-  const { section, task } = result;
+  const { section, task, isNew } = result;
   const originalOrder = section.tasks.map(item => item.id);
   const selectedResponsibles = uniqueNames($$("#editTaskResponsibleList input:checked").map(input => input.value));
 
@@ -2826,7 +2832,12 @@ $("#taskEditForm").addEventListener("submit", event => {
   task.deadlineDate = task.hasDeadline ? $("#editTaskDeadlineDate").value : "";
   task.deadlineTime = task.hasDeadline ? normalizeTimeValue($("#editTaskDeadlineTime").value) : "";
   task.note = $("#editTaskNote").value;
-  restoreTaskOrder(section, originalOrder);
+
+  if (isNew) {
+    section.tasks.push(task);
+  } else {
+    restoreTaskOrder(section, originalOrder);
+  }
 
   saveState();
   $("#taskEditModal").close();
@@ -2838,6 +2849,11 @@ $("#taskEditForm").addEventListener("submit", event => {
 $("#deleteTaskBtn").addEventListener("click", () => {
   const result = getEditingTask();
   if (!result) return;
+
+  if (result.isNew) {
+    cancelTaskEdit();
+    return;
+  }
 
   deleteTaskWithConfirmation(result.competition.id, editingTask.sectionId, editingTask.taskId);
   $("#taskEditModal").close();
