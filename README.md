@@ -1,19 +1,17 @@
-# Stoyt Portal v5.5.8
+# Stoyt Portal v5.5.4
 
-Task modal / login separation bug fix.
-
-Bug fixed:
-- Saving a task caused the app to behave like it logged out and back in
-- This happened because the previous emergency login workaround affected form behavior
-- The real issue was the removed task-modal X button still being referenced in JavaScript
+Small final UI refinements.
 
 Updates:
-- Removed the emergency login form workaround
-- Kept the task-modal X button removed from the HTML
-- Made the old task-modal X listener safe/optional
-- Kept the normal task form submit handler with `event.preventDefault()`
-- Saving a task now only saves the task, closes the modal and updates the competition view
-- Firebase login/logout is not touched by the task modal
+- Settings panel now opens as a floating panel above the cog
+- The cog stays fixed in place when the settings panel opens
+- Collapsed sidebar cog is now only the icon with no circle/border/background
+- Collapsed sidebar navigation icons have more spacing
+- Main competition card icon actions are aligned bottom-right
+- Added an edit competition button inside the competition screen
+- Inside competition action order is now edit, public link, PDF
+- Added an Aftur button on the template page
+- Version/status/logout remain inside the settings panel
 - Firestore saving, public password access, admin login, planner and calculator are kept
 
 Open `index.html` in your browser.
