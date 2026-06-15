@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stoyt Portal v5.5.7</title>
+  <title>Stoyt Portal v5.5.8</title>
   <script>
     if (new URLSearchParams(window.location.search).has("competition")) {
       document.documentElement.classList.add("public-competition-route");
@@ -93,7 +93,7 @@
               <span class="firestore-status-dot"></span>
               <span class="firestore-status-text">Online</span>
             </div>
-            <p class="settings-version">Version 5.5.7</p>
+            <p class="settings-version">Version 5.5.8</p>
             <button id="adminLogoutButton" class="admin-logout" type="button" title="Logga út">
               <span>Logga út</span>
             </button>
@@ -259,18 +259,7 @@
       <button class="primary-btn full-width" type="submit">Goym leiklutir</button>
     </form>
   </dialog>
-
-
-  <script>
-    window.stoytLoginReloadGuard = true;
-    document.addEventListener("submit", function(event) {
-      if (event.target && event.target.id === "adminLoginForm") {
-        event.preventDefault();
-      }
-    }, true);
-  </script>
-
-  <script type="module">
+<script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
     import {
       getAuth,

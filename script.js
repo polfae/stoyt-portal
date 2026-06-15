@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.5.7";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.5.6", "stoyt-portal-v5.5.5", "stoyt-portal-v5.5.4", "stoyt-portal-v5.5.3", "stoyt-portal-v5.5.2", "stoyt-portal-v5.5.1", "stoyt-portal-v5.5.0", "stoyt-portal-v5.4.8", "stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
+const STORAGE_KEY = "stoyt-portal-v5.5.8";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.5.7", "stoyt-portal-v5.5.6", "stoyt-portal-v5.5.5", "stoyt-portal-v5.5.4", "stoyt-portal-v5.5.3", "stoyt-portal-v5.5.2", "stoyt-portal-v5.5.1", "stoyt-portal-v5.5.0", "stoyt-portal-v5.4.8", "stoyt-portal-v5.4.7", "stoyt-portal-v5.4.6", "stoyt-portal-v5.4.5", "stoyt-portal-v5.4.4", "stoyt-portal-v5.4.3", "stoyt-portal-v5.4.2", "stoyt-portal-v5.4.1", "stoyt-portal-v5.4.0", "stoyt-portal-v5.3.0", "stoyt-portal-v5.2.1", "stoyt-portal-v5.2.0", "stoyt-portal-v5.1.4", "stoyt-portal-v5.1.3", "stoyt-portal-v5.1.2", "stoyt-portal-v5.1.1", "stoyt-portal-v5.1.0", "stoyt-portal-v5.0.0", "kappingarklart-v4.9.6", "kappingarklart-v4.9.5", "kappingarklart-v4.9.4", "kappingarklart-v4.9.3", "kappingarklart-v4.9.2", "kappingarklart-v4.9.1", "kappingarklart-v4.9.0", "kappingarklart-v4.8.9", "kappingarklart-v4.8.8", "kappingarklart-v4.8.7", "kappingarklart-v4.8.6", "kappingarklart-v4.8.5", "kappingarklart-v4.8.4", "kappingarklart-v4.8.3", "kappingarklart-v4.8.2", "kappingarklart-v4.8.1", "kappingarklart-v4.8", "kappingarklart-v4.7.1", "kappingarklart-v4.7", "kappingarklart-v4.6", "kappingarklart-v4.5.2", "kappingarklart-v4.5.1", "kappingarklart-v4.5", "kappingarklart-v4.4.2", "kappingarklart-v4.4.1", "kappingarklart-v4.4", "kappingarklart-v4.3", "kappingarklart-v4.2", "kappingarklart-v4.1", "kappingarklart-v4.0", "kappingarklart-v3.9", "kappingarklart-v3.8", "kappingarklart-v3.7.1", "kappingarklart-v3.7", "kappingarklart-v3.6", "kappingarklart-v3.5", "kappingarklart-v3.4"];
 
 const PERSON_COLORS = [
   { border: "#2563eb", bg: "#dbeafe", text: "#1e3a8a" },
@@ -56,7 +56,6 @@ let suppressTemplateClick = false;
 
 const ADMIN_DISPLAY_NAME = "Stoyt-admin";
 let isAdminAuthenticated = false;
-let adminLoginSetupDone = false;
 let currentAdminUser = null;
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -244,9 +243,6 @@ async function setupPublicCompetitionAccess() {
 
 
 function setupAdminLogin() {
-  if (adminLoginSetupDone) return;
-  adminLoginSetupDone = true;
-
   const form = $("#adminLoginForm");
   const error = $("#adminLoginError");
   const logout = $("#adminLogoutButton");
@@ -318,10 +314,6 @@ const views = {
   checklist: $("#checklistView"),
   revenue: $("#revenueView")
 };
-
-// Register login before the rest of the UI event listeners.
-// This makes login resilient if a later optional UI element is missing.
-setupAdminLogin();
 
 function makeId() {
   return crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`;
@@ -2727,7 +2719,7 @@ $("#createTemplateBtn").addEventListener("click", () => {
   render();
 });
 
-$("#closeTaskEditModal").addEventListener("click", () => {
+$("#closeTaskEditModal")?.addEventListener("click", () => {
   $("#taskEditModal").close();
   editingTask = null;
   renderDashboard();
