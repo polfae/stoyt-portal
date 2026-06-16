@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.7.0";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.6.0", 
+const STORAGE_KEY = "stoyt-portal-v5.8.3";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.8.2", "stoyt-portal-v5.8.1", "stoyt-portal-v5.8.0", "stoyt-portal-v5.7.1", "stoyt-portal-v5.7.0", "stoyt-portal-v5.6.0", 
   "stoyt-portal-v5.5.4",
   "stoyt-portal-v5.5.3",
   "stoyt-portal-v5.5.2",
@@ -90,6 +90,17 @@ const LEGACY_ROLE_DEFINITIONS = [
 
 const defaultTemplates = [];
 
+
+const DEFAULT_PROFILE = {
+  fullName: "Styrkifelagið Stoyt",
+  shortName: "Stoyt",
+  logoSrc: "assets/stoyt-logo.png"
+};
+
+let settingsActiveTab = "profile";
+let pendingProfileLogoSrc = null;
+
+
 let state = loadState();
 let activeView = "dashboard";
 let activeTemplateId = state.templates[0]?.id || null;
@@ -123,6 +134,121 @@ const isPublicCompetitionMode = Boolean(publicCompetitionId);
 let isPublicCompetitionUnlocked = false;
 let publicCompetition = null;
 
+
+function makeDefaultProfile() {
+  return typeof structuredClone === "function"
+    ? structuredClone(DEFAULT_PROFILE)
+    : JSON.parse(JSON.stringify(DEFAULT_PROFILE));
+}
+
+function normalizeProfile() {
+  state.profile = {
+    ...makeDefaultProfile(),
+    ...(state.profile || {})
+  };
+
+  state.profile.fullName = (state.profile.fullName || DEFAULT_PROFILE.fullName).trim();
+  state.profile.shortName = (state.profile.shortName || DEFAULT_PROFILE.shortName).trim();
+  state.profile.logoSrc = state.profile.logoSrc || DEFAULT_PROFILE.logoSrc;
+}
+
+function getCurrentProfile() {
+  return state.profile || makeDefaultProfile();
+}
+
+function applyProfile() {
+  const profile = getCurrentProfile();
+  const logoSrc = profile.logoSrc || DEFAULT_PROFILE.logoSrc;
+  const shortName = profile.shortName || DEFAULT_PROFILE.shortName;
+  const fullName = profile.fullName || DEFAULT_PROFILE.fullName;
+
+  $$(".js-profile-logo").forEach((image) => {
+    image.src = logoSrc;
+    image.alt = `${shortName} búmerki`;
+  });
+
+  $$(".js-profile-short").forEach((element) => {
+    element.textContent = shortName;
+  });
+
+  $$(".js-profile-full").forEach((element) => {
+    element.textContent = fullName;
+  });
+
+  const preview = $("#profileLogoPreview");
+  if (preview) preview.src = pendingProfileLogoSrc || logoSrc;
+}
+
+function fillSettingsForm() {
+  normalizeProfile();
+  const profile = getCurrentProfile();
+
+  $("#profileFullName").value = profile.fullName;
+  $("#profileShortName").value = profile.shortName;
+  pendingProfileLogoSrc = profile.logoSrc || DEFAULT_PROFILE.logoSrc;
+  $("#profileLogoPreview").src = pendingProfileLogoSrc;
+
+  const currentEmail = currentAdminUser?.email || window.StoytFirebaseAuth?.getCurrentUser?.()?.email || "";
+  $("#settingsCurrentEmail").value = currentEmail;
+  $("#settingsLoginMessage").textContent = "";
+}
+
+function setSettingsTab(tabName) {
+  settingsActiveTab = tabName;
+  $$(".settings-tab").forEach((button) => {
+    const active = button.dataset.settingsTab === tabName;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", active ? "true" : "false");
+  });
+
+  $$("[data-settings-panel]").forEach((panel) => {
+    const active = panel.dataset.settingsPanel === tabName;
+    panel.classList.toggle("active", active);
+    panel.hidden = !active;
+  });
+}
+
+function openSettingsModal() {
+  fillSettingsForm();
+  setSettingsTab(settingsActiveTab || "profile");
+  $("#sidebarSettingsPanel").hidden = true;
+  $("#sidebarSettingsButton")?.setAttribute("aria-expanded", "false");
+  $("#settingsModal").showModal();
+}
+
+function closeSettingsModal() {
+  pendingProfileLogoSrc = null;
+  $("#profileLogoInput").value = "";
+  $("#settingsModal").close();
+}
+
+function resizeImageFileToDataUrl(file, maxSize = 512, quality = 0.86) {
+  return new Promise((resolve, reject) => {
+    if (!file || !file.type.startsWith("image/")) {
+      reject(new Error("Hetta er ikki ein mynd."));
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("Myndin kundi ikki lesast."));
+    reader.onload = () => {
+      const image = new Image();
+      image.onerror = () => reject(new Error("Myndin kundi ikki brúkast."));
+      image.onload = () => {
+        const scale = Math.min(1, maxSize / Math.max(image.width, image.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+        const context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/png", quality));
+      };
+      image.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 function firebaseErrorToMessage(error) {
   const code = error?.code || "";
   if (
@@ -145,6 +271,7 @@ function firebaseErrorToMessage(error) {
 }
 
 function setAuthUi() {
+  applyProfile();
   const loginGate = $("#adminLoginGate");
   const publicGate = $("#publicCompetitionGate");
   const app = $(".app-shell");
@@ -586,6 +713,7 @@ function cloneSections(sections) {
 function makeEmptyState() {
   return {
     sidebarCollapsed: false,
+    profile: makeDefaultProfile(),
     templates: [],
     competitions: [],
   };
@@ -670,6 +798,7 @@ async function loadStateFromFirestore() {
 
 function normalizeState() {
   state.sidebarCollapsed = Boolean(state.sidebarCollapsed);
+  normalizeProfile();
   state.templates ||= [];
   state.competitions ||= [];
 
@@ -939,6 +1068,7 @@ function render() {
   }
 
   applySidebarState();
+  applyProfile();
   renderDashboard();
   renderTemplateList();
   renderTemplateEditor();
@@ -3619,6 +3749,83 @@ $("#rolesForm").addEventListener("submit", (event) => {
   event.preventDefault();
   saveRolesFromEditor();
   $("#rolesModal").close();
+});
+
+
+$("#openSettingsModalBtn")?.addEventListener("click", () => {
+  openSettingsModal();
+});
+
+$("#closeSettingsModal")?.addEventListener("click", closeSettingsModal);
+$("#cancelSettingsBtn")?.addEventListener("click", closeSettingsModal);
+
+$$("[data-settings-tab]").forEach((button) => {
+  button.addEventListener("click", () => setSettingsTab(button.dataset.settingsTab));
+});
+
+$("#profileLogoInput")?.addEventListener("change", async (event) => {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  try {
+    pendingProfileLogoSrc = await resizeImageFileToDataUrl(file);
+    $("#profileLogoPreview").src = pendingProfileLogoSrc;
+  } catch (error) {
+    window.alert(error.message || "Búmerkið kundi ikki lesast.");
+    event.target.value = "";
+  }
+});
+
+$("#resetProfileLogoBtn")?.addEventListener("click", () => {
+  pendingProfileLogoSrc = DEFAULT_PROFILE.logoSrc;
+  $("#profileLogoPreview").src = pendingProfileLogoSrc;
+  $("#profileLogoInput").value = "";
+});
+
+$("#settingsForm")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  state.profile = {
+    fullName: $("#profileFullName").value.trim() || DEFAULT_PROFILE.fullName,
+    shortName: $("#profileShortName").value.trim() || DEFAULT_PROFILE.shortName,
+    logoSrc: pendingProfileLogoSrc || getCurrentProfile().logoSrc || DEFAULT_PROFILE.logoSrc
+  };
+
+  normalizeProfile();
+  saveState();
+  applyProfile();
+  closeSettingsModal();
+});
+
+$("#sendPasswordResetBtn")?.addEventListener("click", async () => {
+  const message = $("#settingsLoginMessage");
+  const email = $("#settingsCurrentEmail").value.trim();
+
+  if (!email) {
+    message.textContent = "Eingin teldupostur er knýttur at innritanini.";
+    return;
+  }
+
+  if (!window.StoytFirebaseAuth?.sendPasswordReset) {
+    message.textContent = "Firebase er ikki klárt enn. Royn aftur um eina løtu.";
+    return;
+  }
+
+  const button = $("#sendPasswordResetBtn");
+  const originalText = button.textContent;
+  button.disabled = true;
+  button.textContent = "Sendir...";
+
+  try {
+    await window.StoytFirebaseAuth.sendPasswordReset(email);
+    message.textContent = `Leinkja er send til ${email}.`;
+  } catch (error) {
+    console.error("Could not send password reset email", error);
+    message.textContent = "Leinkjan kundi ikki sendast. Royn aftur seinni.";
+  } finally {
+    button.disabled = false;
+    button.textContent = originalText;
+  }
 });
 
 $("#sidebarSettingsButton")?.addEventListener("click", () => {

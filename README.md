@@ -1,24 +1,26 @@
-# Stoyt Portal v5.7.0
+# Stoyt Portal v5.8.3
 
-Dynamic roles update.
+Settings modal tab design improvement.
 
 Updates:
-- Removed the fixed/pre-entered competition roles from the user flow.
-- Competitions now use custom roles created by the user.
-- The roles modal starts empty when no roles have been created.
-- Added “+ Stovna leiklut” in the roles modal.
-- Each competition role has:
-  - role title
-  - one or more person fields
-  - add/remove person controls
-  - delete role control
-- Templates can now include roles.
-- Template roles only store:
-  - role title
-  - number of required people
-- When creating a competition from a template, those template roles are copied into the competition with empty person fields.
-- Existing old role data is migrated into the new dynamic role structure if present.
-- Task handling, public links/passwords, Firebase Auth, Firestore saving, planner and calculator are kept.
+- Improved the tab menu inside the settings modal.
+- The two tabs are now clearer and more visually separated.
+- Each tab now has:
+  - icon
+  - main label
+  - short description
+  - clearer active state
+- Mobile layout stacks the tabs vertically.
 
-Base: user-uploaded Stoyt-Portal.zip.
+Kept:
+- Settings modal with Vangi and Innritan.
+- Profile/logo upload.
+- Password reset email button.
+- Login fix from v5.8.2.
+- Dynamic roles/template roles.
+- Firestore saving.
+- Public links/passwords.
+- Task modal behavior.
+- Calculator.
+
 Open `index.html` in your browser.

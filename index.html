@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stoyt Portal v5.7.0</title>
+    <title>Stoyt Portal v5.8.3</title>
     <script>
       if (new URLSearchParams(window.location.search).has("competition")) {
         document.documentElement.classList.add("public-competition-route");
@@ -19,9 +19,9 @@
     >
       <div class="login-card">
         <div class="login-brand">
-          <img src="assets/stoyt-logo.png" alt="Stoyt logo" />
+          <img class="js-profile-logo" src="assets/stoyt-logo.png" alt="Stoyt logo" />
           <div>
-            <p class="eyebrow">Stoyt Portal</p>
+            <p class="eyebrow"><span class="js-profile-short">Stoyt</span> Portal</p>
             <h1>Rita inn</h1>
           </div>
         </div>
@@ -58,7 +58,7 @@
     >
       <div class="login-card">
         <div class="login-brand">
-          <img src="assets/stoyt-logo.png" alt="Stoyt logo" />
+          <img class="js-profile-logo" src="assets/stoyt-logo.png" alt="Stoyt logo" />
           <div>
             <p class="eyebrow">Kappingaratgongd</p>
             <h1 id="publicCompetitionGateTitle">Kapping</h1>
@@ -90,9 +90,9 @@
 
     <header class="mobile-topbar">
       <div class="mobile-brand">
-        <div class="brand-mark">K</div>
+        <img class="mobile-brand-logo js-profile-logo" src="assets/stoyt-logo.png" alt="Stoyt logo" />
         <div>
-          <p class="eyebrow">Stoyt</p>
+          <p class="eyebrow js-profile-short">Stoyt</p>
           <h1>Kappingarklárt</h1>
         </div>
       </div>
@@ -110,9 +110,9 @@
       <aside class="sidebar">
         <div class="sidebar-top">
           <div class="brand">
-            <img class="brand-logo" src="assets/stoyt-logo.png" alt="Stoyt" />
+            <img class="brand-logo js-profile-logo" src="assets/stoyt-logo.png" alt="Stoyt" />
             <div class="brand-text">
-              <p class="eyebrow">Stoyt</p>
+              <p class="eyebrow js-profile-short">Stoyt</p>
               <h1>Kappingarklárt</h1>
             </div>
           </div>
@@ -155,7 +155,15 @@
                 <span class="firestore-status-dot"></span>
                 <span class="firestore-status-text">Online</span>
               </div>
-              <p class="settings-version">Version 5.7.0</p>
+              <button
+                id="openSettingsModalBtn"
+                class="admin-logout"
+                type="button"
+                title="Lat stillingar upp"
+              >
+                <span>Stillingar</span>
+              </button>
+              <p class="settings-version">Version 5.8.3</p>
               <button
                 id="adminLogoutButton"
                 class="admin-logout"
@@ -596,6 +604,89 @@
       </form>
     </dialog>
 
+
+    <dialog id="settingsModal" class="modal modal-wide">
+      <form id="settingsForm" class="modal-card">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Stillingar</p>
+            <h2>Stillingar</h2>
+            <p class="page-description">
+              Broyt vanga og innritanarstøðu fyri portalin.
+            </p>
+          </div>
+          <button type="button" class="icon-btn" id="closeSettingsModal">×</button>
+        </div>
+
+        <div class="settings-tabs" role="tablist" aria-label="Stillingar">
+          <button id="settingsProfileTab" class="settings-tab active" type="button" data-settings-tab="profile" role="tab" aria-selected="true">
+            <span class="settings-tab-icon">👤</span>
+            <span>
+              <strong>Vangi</strong>
+              <small>Navn og búmerki</small>
+            </span>
+          </button>
+          <button id="settingsLoginTab" class="settings-tab" type="button" data-settings-tab="login" role="tab" aria-selected="false">
+            <span class="settings-tab-icon">🔐</span>
+            <span>
+              <strong>Innritan</strong>
+              <small>Teldupostur og loyniorð</small>
+            </span>
+          </button>
+        </div>
+
+        <section id="settingsProfilePanel" class="settings-panel active" data-settings-panel="profile" role="tabpanel">
+          <div class="form-grid">
+            <label>
+              Fult navn
+              <input id="profileFullName" type="text" placeholder="T.d. Styrkifelagið Stoyt" />
+            </label>
+            <label>
+              Stutt navn
+              <input id="profileShortName" type="text" placeholder="T.d. Stoyt" />
+            </label>
+          </div>
+
+          <div class="profile-logo-settings">
+            <div class="profile-logo-preview-wrap">
+              <img id="profileLogoPreview" class="profile-logo-preview js-profile-logo" src="assets/stoyt-logo.png" alt="Búmerki" />
+            </div>
+            <div class="profile-logo-actions">
+              <label class="file-upload-label">
+                Búmerki
+                <input id="profileLogoInput" type="file" accept="image/*" />
+              </label>
+              <button id="resetProfileLogoBtn" class="secondary-btn" type="button">Brúka standard búmerki</button>
+              <p class="settings-help">
+                Vel eina mynd sum búmerki. Myndin verður minkað og goymd saman við portalinum.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="settingsLoginPanel" class="settings-panel" data-settings-panel="login" role="tabpanel" hidden>
+          <div class="login-settings-card">
+            <label>
+              Núverandi teldupostur
+              <input id="settingsCurrentEmail" type="email" readonly />
+            </label>
+            <p class="settings-help">
+              Fyri at broyta loyniorð verður ein trygg leinkja send til núverandi teldupostin.
+            </p>
+            <button id="sendPasswordResetBtn" class="secondary-btn" type="button">
+              Send leinkju til at broyta loyniorð
+            </button>
+            <p id="settingsLoginMessage" class="settings-message" role="status"></p>
+          </div>
+        </section>
+
+        <div class="modal-actions">
+          <button id="cancelSettingsBtn" class="secondary-btn" type="button">Angra</button>
+          <button class="primary-btn" type="submit">Goym stillingar</button>
+        </div>
+      </form>
+    </dialog>
+
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
       import {
@@ -603,6 +694,9 @@
         onAuthStateChanged,
         signInWithEmailAndPassword,
         signOut,
+        setPersistence,
+        inMemoryPersistence,
+        sendPasswordResetEmail,
       } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
       import {
         getFirestore,
@@ -624,13 +718,25 @@
 
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
+      const authReady = setPersistence(auth, inMemoryPersistence)
+        .then(() => signOut(auth).catch(() => {}))
+        .catch((error) => {
+          console.error("Firebase Auth setup failed", error);
+        });
       const db = getFirestore(app);
       const portalStateRef = doc(db, "portal", "state");
 
       window.StoytFirebaseAuth = {
-        signIn: (email, password) =>
-          signInWithEmailAndPassword(auth, email, password),
+        signIn: async (email, password) => {
+          await authReady;
+          await setPersistence(auth, inMemoryPersistence);
+          return signInWithEmailAndPassword(auth, email, password);
+        },
         signOut: () => signOut(auth),
+        sendPasswordReset: async (email) => {
+          await authReady;
+          return sendPasswordResetEmail(auth, email);
+        },
         getCurrentUser: () => auth.currentUser,
       };
 
