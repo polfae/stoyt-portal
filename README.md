@@ -1,19 +1,24 @@
-# Stoyt Portal v5.5.6
+# Stoyt Portal v5.7.0
 
-New task modal create/cancel fix.
-
-Important:
-- This version is based directly on the user-uploaded v5.5.4 base.
-- The task modal X button is kept.
+Dynamic roles update.
 
 Updates:
-- Clicking “+ Nýggj uppgáva” opens the task modal without creating the task first
-- The task is only created when the user clicks “Goym broytingar”
-- Clicking X while creating a new task closes the modal and creates nothing
-- Clicking X while editing an existing task discards unsaved changes
-- “Strika uppgávu” still deletes an existing task
-- For an unsaved new task, “Strika uppgávu” simply cancels/closes the modal
-- Task modal behavior is separate from login/logout
-- Firestore saving, public password access, admin login, planner and calculator are kept
+- Removed the fixed/pre-entered competition roles from the user flow.
+- Competitions now use custom roles created by the user.
+- The roles modal starts empty when no roles have been created.
+- Added “+ Stovna leiklut” in the roles modal.
+- Each competition role has:
+  - role title
+  - one or more person fields
+  - add/remove person controls
+  - delete role control
+- Templates can now include roles.
+- Template roles only store:
+  - role title
+  - number of required people
+- When creating a competition from a template, those template roles are copied into the competition with empty person fields.
+- Existing old role data is migrated into the new dynamic role structure if present.
+- Task handling, public links/passwords, Firebase Auth, Firestore saving, planner and calculator are kept.
 
+Base: user-uploaded Stoyt-Portal.zip.
 Open `index.html` in your browser.

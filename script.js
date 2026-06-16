@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.5.6";
-const PREVIOUS_STORAGE_KEYS = [
+const STORAGE_KEY = "stoyt-portal-v5.7.0";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.6.0", 
   "stoyt-portal-v5.5.4",
   "stoyt-portal-v5.5.3",
   "stoyt-portal-v5.5.2",
@@ -73,7 +73,7 @@ const PERSON_COLORS = [
   { border: "#4f46e5", bg: "#e0e7ff", text: "#312e81" },
 ];
 
-const ROLE_DEFINITIONS = [
+const LEGACY_ROLE_DEFINITIONS = [
   { key: "competitionLeader", label: "Kappingar leiðari", max: 2 },
   { key: "judges", label: "Dómarar", max: 3 },
   { key: "jury", label: "Jury", max: 5 },
@@ -403,11 +403,89 @@ function makeId() {
 }
 
 function makeEmptyRoles() {
-  const roles = {};
-  ROLE_DEFINITIONS.forEach((role) => {
-    roles[role.key] = [];
-  });
-  return roles;
+  return [];
+}
+
+function makeRole(title = "Nýggjur leiklutur", people = [""]) {
+  return {
+    id: makeId(),
+    title: title || "Nýggjur leiklutur",
+    people: Array.isArray(people) && people.length > 0 ? people : [""]
+  };
+}
+
+function makeTemplateRole(title = "Nýggjur leiklutur", requiredCount = 1) {
+  return {
+    id: makeId(),
+    title: title || "Nýggjur leiklutur",
+    requiredCount: Math.max(1, Number(requiredCount) || 1)
+  };
+}
+
+function normalizeRolePeople(people) {
+  const values = Array.isArray(people) ? people : [];
+  const cleaned = values.map((person) => formatName(person || ""));
+  return cleaned.length > 0 ? cleaned : [""];
+}
+
+function normalizeCompetitionRoles(competition) {
+  if (!competition) return;
+
+  if (Array.isArray(competition.roles)) {
+    competition.roles = competition.roles
+      .map((role) => ({
+        id: role.id || makeId(),
+        title: (role.title || "Nýggjur leiklutur").trim() || "Nýggjur leiklutur",
+        people: normalizeRolePeople(role.people)
+      }))
+      .filter((role) => role.title || role.people.some(Boolean));
+    return;
+  }
+
+  const legacyRoles = competition.roles || {};
+  competition.roles = LEGACY_ROLE_DEFINITIONS
+    .map((legacyRole) => ({
+      id: makeId(),
+      title: legacyRole.label,
+      people: normalizeRolePeople(legacyRoles[legacyRole.key] || [])
+    }))
+    .filter((role) => role.people.some(Boolean));
+}
+
+function normalizeTemplateRoles(template) {
+  if (!template) return;
+
+  if (!Array.isArray(template.roles)) {
+    template.roles = [];
+    return;
+  }
+
+  template.roles = template.roles
+    .map((role) => ({
+      id: role.id || makeId(),
+      title: (role.title || "Nýggjur leiklutur").trim() || "Nýggjur leiklutur",
+      requiredCount: Math.max(1, Number(role.requiredCount) || Number(role.max) || 1)
+    }))
+    .filter((role) => role.title);
+}
+
+function cloneRolesFromTemplate(templateRoles) {
+  return (templateRoles || []).map((role) => ({
+    id: makeId(),
+    title: role.title || "Nýggjur leiklutur",
+    people: Array.from(
+      { length: Math.max(1, Number(role.requiredCount) || 1) },
+      () => ""
+    )
+  }));
+}
+
+function cloneTemplateRoles(templateRoles) {
+  return (templateRoles || []).map((role) => ({
+    id: makeId(),
+    title: role.title || "Nýggjur leiklutur",
+    requiredCount: Math.max(1, Number(role.requiredCount) || 1)
+  }));
 }
 
 function taskResponsibles(task) {
@@ -595,7 +673,11 @@ function normalizeState() {
   state.templates ||= [];
   state.competitions ||= [];
 
-  state.templates.forEach(normalizeTemplateSections);
+  state.templates.forEach((template) => {
+    normalizeTemplateSections(template);
+    normalizeTemplateRoles(template);
+  });
+
   if (
     typeof activeTemplateId !== "undefined" &&
     activeTemplateId &&
@@ -606,17 +688,7 @@ function normalizeState() {
 
   state.competitions.forEach((competition) => {
     competition.people = uniqueNames(competition.people || []);
-    competition.roles ||= makeEmptyRoles();
-
-    ROLE_DEFINITIONS.forEach((role) => {
-      if (!Array.isArray(competition.roles[role.key])) {
-        competition.roles[role.key] = [];
-      }
-      competition.roles[role.key] = uniqueNames(
-        competition.roles[role.key]
-      ).slice(0, role.max);
-    });
-
+    normalizeCompetitionRoles(competition);
     normalizeCompetitionSections(competition);
   });
 }
@@ -994,6 +1066,51 @@ function renderTemplateList() {
   });
 }
 
+function renderTemplateRolesEditor(template) {
+  const roles = template.roles || [];
+
+  return `
+    <section class="template-roles-panel">
+      <div class="template-roles-header">
+        <div>
+          <h3>Leiklutir</h3>
+          <p class="page-description">Her ásetur tú leiklutirnar í skapilónini og hvussu nógv fólk skulu fylla hvønn leiklut. Nøvnini verða sett á sjálvari kappingini.</p>
+        </div>
+        <button id="addTemplateRoleBtn" class="secondary-btn" type="button">+ Stovna leiklut</button>
+      </div>
+
+      <div class="template-role-list">
+        ${
+          roles.length === 0
+            ? `<p class="roles-empty">Ongir leiklutir eru í hesi skapilónini enn.</p>`
+            : roles
+                .map(
+                  (role, roleIndex) => `
+            <div class="template-role-card" data-template-role-index="${roleIndex}">
+              <label>
+                Leiklutur
+                <input data-template-role-title="${roleIndex}" value="${escapeHTML(
+                    role.title
+                  )}" placeholder="T.d. Dómarar" />
+              </label>
+              <label>
+                Tal av persónum
+                <input data-template-role-count="${roleIndex}" type="number" min="1" step="1" value="${Math.max(
+                    1,
+                    Number(role.requiredCount) || 1
+                  )}" />
+              </label>
+              <button class="delete-small" data-delete-template-role="${roleIndex}" type="button" title="Strika leiklut">×</button>
+            </div>
+          `
+                )
+                .join("")
+        }
+      </div>
+    </section>
+  `;
+}
+
 function renderTemplateEditor() {
   const templateEditor = $("#templateEditor");
   const template = state.templates.find((item) => item.id === activeTemplateId);
@@ -1024,6 +1141,8 @@ function renderTemplateEditor() {
       <button id="deleteTemplateBtn" class="danger-btn" type="button">Strika template</button>
     </div>
 
+    ${renderTemplateRolesEditor(template)}
+
     <div class="editor-grid">
       ${template.sections
         .map((section, sectionIndex) =>
@@ -1052,6 +1171,45 @@ function renderTemplateEditor() {
     });
     saveState();
     renderTemplateEditor();
+  });
+
+
+  $("#addTemplateRoleBtn")?.addEventListener("click", () => {
+    template.roles ||= [];
+    template.roles.push(makeTemplateRole());
+    saveState();
+    renderTemplateEditor();
+  });
+
+  templateEditor.querySelectorAll("[data-template-role-title]").forEach((input) => {
+    input.addEventListener("input", () => {
+      const roleIndex = Number(input.dataset.templateRoleTitle);
+      template.roles[roleIndex].title = input.value;
+      saveState();
+      renderCompetitionSelect();
+    });
+  });
+
+  templateEditor.querySelectorAll("[data-template-role-count]").forEach((input) => {
+    input.addEventListener("input", () => {
+      const roleIndex = Number(input.dataset.templateRoleCount);
+      template.roles[roleIndex].requiredCount = Math.max(1, Number(input.value) || 1);
+      saveState();
+    });
+  });
+
+  templateEditor.querySelectorAll("[data-delete-template-role]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const roleIndex = Number(button.dataset.deleteTemplateRole);
+      const role = template.roles[roleIndex];
+      const confirmed = window.confirm(
+        `Vilt tú strika leiklutin "${role?.title || "Ónevndur leiklutur"}" úr skapilónini?`
+      );
+      if (!confirmed) return;
+      template.roles.splice(roleIndex, 1);
+      saveState();
+      renderTemplateEditor();
+    });
   });
 
   setupTemplateDragAndDrop(template, templateEditor);
@@ -1905,29 +2063,27 @@ function renderRolesSummary(competition) {
     return;
   }
 
-  const filledRoles = ROLE_DEFINITIONS.map((role) => ({
-    ...role,
-    names: (competition.roles?.[role.key] || []).filter((name) => name.trim()),
-  })).filter((role) => role.names.length > 0);
+  const roles = Array.isArray(competition.roles) ? competition.roles : [];
 
   rolesSummary.classList.add("compact");
 
-  if (filledRoles.length === 0) {
-    rolesSummary.innerHTML = `<p class="roles-empty">Ongir kappingarleiklutur eru ásettir enn.</p>`;
+  if (roles.length === 0) {
+    rolesSummary.innerHTML = `<p class="roles-empty">Ongir leiklutir eru stovnaðir enn.</p>`;
     return;
   }
 
-  rolesSummary.innerHTML = filledRoles
-    .map(
-      (role) => `
-    <div class="role-compact-chip">
-      <span class="role-compact-label">${role.label}:</span>
-      <span class="role-compact-names">${role.names
-        .map(escapeHTML)
-        .join(", ")}</span>
-    </div>
-  `
-    )
+  rolesSummary.innerHTML = roles
+    .map((role) => {
+      const names = (role.people || []).map((name) => name.trim()).filter(Boolean);
+      return `
+        <div class="role-compact-chip">
+          <span class="role-compact-label">${escapeHTML(role.title)}:</span>
+          <span class="role-compact-names">${
+            names.length > 0 ? names.map(escapeHTML).join(", ") : "Ikki ásett"
+          }</span>
+        </div>
+      `;
+    })
     .join("");
 }
 
@@ -2622,15 +2778,12 @@ function replaceResponsibleNameInCompetition(competition, oldName, newName) {
     task.responsible = task.responsibles[0] || "";
   });
 
-  ROLE_DEFINITIONS.forEach((role) => {
-    if (!Array.isArray(competition.roles?.[role.key])) return;
-    competition.roles[role.key] = uniqueNames(
-      competition.roles[role.key].map((person) =>
-        person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo")
-          ? newFormatted
-          : person
-      )
-    ).slice(0, role.max);
+  (competition.roles || []).forEach((role) => {
+    role.people = normalizeRolePeople(role.people).map((person) =>
+      person.toLocaleLowerCase("fo") === oldFormatted.toLocaleLowerCase("fo")
+        ? newFormatted
+        : person
+    );
   });
 
   activeResponsibleFilters = activeResponsibleFilters.map((person) =>
@@ -2659,11 +2812,11 @@ function removeResponsibleNameFromCompetition(competition, name) {
     task.responsible = task.responsibles[0] || "";
   });
 
-  ROLE_DEFINITIONS.forEach((role) => {
-    if (!Array.isArray(competition.roles?.[role.key])) return;
-    competition.roles[role.key] = competition.roles[role.key].filter(
-      (person) =>
-        person.toLocaleLowerCase("fo") !== formatted.toLocaleLowerCase("fo")
+  (competition.roles || []).forEach((role) => {
+    role.people = normalizeRolePeople(role.people).map((person) =>
+      person.toLocaleLowerCase("fo") === formatted.toLocaleLowerCase("fo")
+        ? ""
+        : person
     );
   });
 
@@ -2898,14 +3051,7 @@ function openRolesEditor() {
   );
   if (!competition) return;
 
-  roleInputCounts = {};
-  ROLE_DEFINITIONS.forEach((role) => {
-    const filled = (competition.roles[role.key] || []).filter((name) =>
-      name.trim()
-    ).length;
-    roleInputCounts[role.key] = filled;
-  });
-
+  normalizeCompetitionRoles(competition);
   renderRolesEditor();
   $("#rolesModal").showModal();
 }
@@ -2916,112 +3062,135 @@ function renderRolesEditor() {
   );
   if (!competition) return;
 
+  normalizeCompetitionRoles(competition);
+
   const rolesEditor = $("#rolesEditor");
-  rolesEditor.innerHTML = ROLE_DEFINITIONS.map((role) => {
-    const values = uniqueNames(competition.roles[role.key] || []);
-    const visibleCount = Math.min(role.max, roleInputCounts[role.key] || 0);
-    const canAdd = visibleCount < role.max;
+  const roles = competition.roles || [];
 
-    return `
-      <section class="role-editor-card">
-        <div class="role-editor-heading">
-          <div>
-            <strong>${role.label}</strong>
-            <span>Max ${role.max}</span>
-          </div>
-          ${
-            canAdd
-              ? `<button class="role-add-btn" type="button" data-add-role-field="${role.key}" title="Legg persón afturat">+</button>`
-              : ""
-          }
-        </div>
-        <div class="role-inputs">
-          ${Array.from({ length: visibleCount })
+  rolesEditor.innerHTML = `
+    <div class="roles-editor-actions">
+      <button id="addCompetitionRoleBtn" class="secondary-btn" type="button">+ Stovna leiklut</button>
+    </div>
+    ${
+      roles.length === 0
+        ? `<p class="roles-empty">Ongir leiklutir eru stovnaðir enn. Trýst á “+ Stovna leiklut” fyri at byrja.</p>`
+        : roles
             .map(
-              (_, index) => `
-            <div class="role-input-row">
-              <input
-                data-role-key="${role.key}"
-                data-role-index="${index}"
-                value="${escapeHTML(values[index] || "")}"
-                placeholder="Navn ${index + 1}"
-              />
-              <button class="remove-role-field-btn" type="button" data-remove-role-field="${
-                role.key
-              }" data-role-index="${index}" title="Strika teig">×</button>
-            </div>
-          `
-            )
-            .join("")}
-        </div>
-      </section>
-    `;
-  }).join("");
+              (role, roleIndex) => `
+        <section class="role-editor-card dynamic-role-card" data-role-index="${roleIndex}">
+          <div class="role-editor-heading">
+            <label class="role-title-field">
+              Leiklutur
+              <input data-role-title="${roleIndex}" value="${escapeHTML(
+                role.title
+              )}" placeholder="T.d. Dómarar" />
+            </label>
+            <button class="delete-small" type="button" data-delete-role="${roleIndex}" title="Strika leiklut">×</button>
+          </div>
 
-  rolesEditor.querySelectorAll("[data-add-role-field]").forEach((button) => {
+          <div class="role-inputs">
+            ${(role.people || [""])
+              .map(
+                (person, personIndex) => `
+              <div class="role-input-row">
+                <input
+                  data-role-person="${roleIndex}"
+                  data-person-index="${personIndex}"
+                  value="${escapeHTML(person || "")}"
+                  placeholder="Navn ${personIndex + 1}"
+                />
+                <button class="remove-role-field-btn" type="button" data-remove-role-person="${roleIndex}" data-person-index="${personIndex}" title="Strika persón">×</button>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+
+          <button class="secondary-btn small-inline-btn" type="button" data-add-role-person="${roleIndex}">+ Legg persón afturat</button>
+        </section>
+      `
+            )
+            .join("")
+    }
+  `;
+
+  $("#addCompetitionRoleBtn")?.addEventListener("click", () => {
+    saveRolesFromEditor(false);
+    competition.roles.push(makeRole());
+    renderRolesEditor();
+  });
+
+  rolesEditor.querySelectorAll("[data-add-role-person]").forEach((button) => {
     button.addEventListener("click", () => {
-      const key = button.dataset.addRoleField;
-      const role = ROLE_DEFINITIONS.find((item) => item.key === key);
-      roleInputCounts[key] = Math.min(
-        role.max,
-        (roleInputCounts[key] || 0) + 1
-      );
+      saveRolesFromEditor(false);
+      const roleIndex = Number(button.dataset.addRolePerson);
+      competition.roles[roleIndex].people.push("");
       renderRolesEditor();
     });
   });
 
-  rolesEditor.querySelectorAll("[data-remove-role-field]").forEach((button) => {
+  rolesEditor.querySelectorAll("[data-remove-role-person]").forEach((button) => {
     button.addEventListener("click", () => {
-      const key = button.dataset.removeRoleField;
-      const index = Number(button.dataset.roleIndex);
-      const inputs = Array.from(
-        rolesEditor.querySelectorAll(`[data-role-key="${key}"]`)
-      );
-      const values = inputs.map((input) => input.value);
-      values.splice(index, 1);
-
-      const competition = state.competitions.find(
-        (item) => item.id === activeCompetitionId
-      );
-      if (competition) {
-        competition.roles[key] = uniqueNames(values);
-      }
-
-      roleInputCounts[key] = Math.max(0, (roleInputCounts[key] || 0) - 1);
+      saveRolesFromEditor(false);
+      const roleIndex = Number(button.dataset.removeRolePerson);
+      const personIndex = Number(button.dataset.personIndex);
+      const role = competition.roles[roleIndex];
+      if (!role) return;
+      role.people.splice(personIndex, 1);
+      if (role.people.length === 0) role.people.push("");
       renderRolesEditor();
+    });
+  });
+
+  rolesEditor.querySelectorAll("[data-delete-role]").forEach((button) => {
+    button.addEventListener("click", () => {
+      saveRolesFromEditor(false);
+      const roleIndex = Number(button.dataset.deleteRole);
+      const role = competition.roles[roleIndex];
+      const confirmed = window.confirm(
+        `Vilt tú strika leiklutin "${role?.title || "Ónevndur leiklutur"}"?`
+      );
+      if (!confirmed) return;
+      competition.roles.splice(roleIndex, 1);
+      saveState();
+      renderRolesEditor();
+      renderChecklist();
     });
   });
 }
 
-function saveRolesFromEditor() {
+function saveRolesFromEditor(shouldClose = true) {
   const competition = state.competitions.find(
     (item) => item.id === activeCompetitionId
   );
   if (!competition) return;
 
-  ROLE_DEFINITIONS.forEach((role) => {
-    competition.roles[role.key] = [];
-  });
+  const cards = Array.from($("#rolesEditor").querySelectorAll("[data-role-index]"));
 
-  $("#rolesEditor")
-    .querySelectorAll("[data-role-key]")
-    .forEach((input) => {
-      const key = input.dataset.roleKey;
-      const value = formatName(input.value);
-      if (value) {
-        competition.roles[key].push(value);
-      }
-    });
+  competition.roles = cards
+    .map((card) => {
+      const roleIndex = Number(card.dataset.roleIndex);
+      const existingRole = competition.roles?.[roleIndex] || makeRole();
+      const title = card.querySelector("[data-role-title]")?.value.trim() || "Nýggjur leiklutur";
+      const people = Array.from(card.querySelectorAll("[data-role-person]")).map((input) =>
+        formatName(input.value || "")
+      );
 
-  ROLE_DEFINITIONS.forEach((role) => {
-    competition.roles[role.key] = uniqueNames(
-      competition.roles[role.key]
-    ).slice(0, role.max);
-  });
+      return {
+        id: existingRole.id || makeId(),
+        title,
+        people: people.length > 0 ? people : [""]
+      };
+    })
+    .filter((role) => role.title || role.people.some(Boolean));
 
   rolesVisible = true;
   saveState();
   renderChecklist();
+
+  if (shouldClose) {
+    $("#rolesModal").close();
+  }
 }
 
 document.addEventListener("dragenter", (event) => {
@@ -3234,13 +3403,12 @@ $("#editCompetitionForm").addEventListener("submit", (event) => {
     );
     task.responsible = task.responsibles[0] || "";
   });
-
-  ROLE_DEFINITIONS.forEach((role) => {
-    if (!Array.isArray(competition.roles?.[role.key])) return;
-    competition.roles[role.key] = competition.roles[role.key].filter((person) =>
-      competition.people.includes(person)
+  (competition.roles || []).forEach((role) => {
+    role.people = normalizeRolePeople(role.people).map((person) =>
+      competition.people.includes(person) ? person : ""
     );
   });
+
 
   saveState();
   $("#editCompetitionModal").close();
@@ -3263,7 +3431,7 @@ $("#competitionForm").addEventListener("submit", (event) => {
     venue: $("#competitionVenue").value,
     password: $("#competitionPassword").value,
     people: [],
-    roles: makeEmptyRoles(),
+    roles: selectedTemplate ? cloneRolesFromTemplate(selectedTemplate.roles) : makeEmptyRoles(),
     sections: selectedTemplate ? cloneSections(selectedTemplate.sections) : [],
   };
 
@@ -3287,6 +3455,7 @@ $("#createTemplateBtn").addEventListener("click", () => {
   const template = {
     id: makeId(),
     name: "Stovna skapilón",
+    roles: [],
     sections: [
       {
         id: makeId(),

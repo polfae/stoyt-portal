@@ -3915,3 +3915,64 @@ html.public-competition-route #checklistView > * {
   }
 }
 
+
+
+/* Dynamic roles */
+.roles-editor-actions,
+.template-roles-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.dynamic-role-card .role-editor-heading {
+  align-items: flex-end;
+}
+
+.role-title-field {
+  flex: 1;
+}
+
+.small-inline-btn {
+  margin-top: 0.75rem;
+  width: fit-content;
+}
+
+.template-roles-panel {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1rem;
+  background: var(--surface);
+  margin-bottom: 1rem;
+}
+
+.template-roles-header h3 {
+  margin: 0 0 0.35rem;
+}
+
+.template-role-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.template-role-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(120px, 180px) auto;
+  gap: 0.75rem;
+  align-items: end;
+  padding: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+}
+
+@media (max-width: 720px) {
+  .roles-editor-actions,
+  .template-roles-header,
+  .template-role-card {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
