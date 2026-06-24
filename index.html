@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stoyt Portal v5.8.3</title>
+    <title>Stoyt Portal v5.8.33</title>
     <script>
       if (new URLSearchParams(window.location.search).has("competition")) {
         document.documentElement.classList.add("public-competition-route");
@@ -163,7 +163,7 @@
               >
                 <span>Stillingar</span>
               </button>
-              <p class="settings-version">Version 5.8.3</p>
+              <p class="settings-version">Version 5.8.20</p>
               <button
                 id="adminLogoutButton"
                 class="admin-logout"
@@ -174,13 +174,7 @@
               </button>
             </div>
           </div>
-          <button
-            id="toggleSidebar"
-            class="collapse-btn"
-            title="Fold menu saman"
-          >
-            <span class="when-open">←</span><span class="when-closed">→</span>
-          </button>
+          
         </div>
       </aside>
 
@@ -207,10 +201,14 @@
             <div class="page-header-copy">
               <button
                 id="backFromTemplatesBtn"
-                class="ghost-btn page-back-btn"
+                class="ghost-btn page-back-btn back-icon-btn"
                 type="button"
+                title="Aftur"
+                aria-label="Aftur"
               >
-                ← Aftur
+                <svg class="back-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M15 18l-6-6 6-6"></path>
+                </svg>
               </button>
               <div>
                 <p class="eyebrow">Skapilónir</p>
@@ -221,7 +219,7 @@
               </div>
             </div>
             <button id="createTemplateBtn" class="primary-btn">
-              + Nýggj skapilón
+              + Stovna skapilón
             </button>
           </header>
           <div class="template-layout">
@@ -241,8 +239,18 @@
         </section>
 
         <section id="checklistView" class="view">
-          <header class="checklist-header">
-            <button id="backToDashboard" class="ghost-btn">← Aftur</button>
+          <header class="checklist-header checklist-header-compact">
+            <button
+              id="backToDashboard"
+              class="ghost-btn back-icon-btn"
+              type="button"
+              title="Aftur"
+              aria-label="Aftur"
+            >
+              <svg class="back-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6"></path>
+              </svg>
+            </button>
             <div class="checklist-title-row">
               <div>
                 <p class="eyebrow">Kapping</p>
@@ -250,81 +258,112 @@
                 <p id="checklistMeta" class="page-description"></p>
               </div>
             </div>
-
-            <section class="roles-overview panel-soft">
-              <div class="roles-overview-top">
-                <div>
-                  <p class="eyebrow">Leiklutir</p>
-                  <h3>Leiklutir á kappingardegi</h3>
-                </div>
-                <div class="roles-actions">
-                  <button
-                    id="toggleRolesBtn"
-                    class="secondary-btn"
-                    type="button"
-                  >
-                    Vís leiklutir
-                  </button>
-                  <button
-                    id="editRolesBtn"
-                    class="icon-action-btn people-icon-btn"
-                    type="button"
-                    title="Broyt leiklutir"
-                    aria-label="Broyt leiklutir"
-                  >
-                    👥
-                  </button>
-                </div>
-              </div>
-              <div id="rolesSummary" class="roles-summary" hidden></div>
-            </section>
-
-            <div id="sectionFilterRow" class="filter-row"></div>
-            <div
-              id="responsibleFilterPills"
-              class="responsible-pill-filter"
-              aria-label="Filtrera eftir ábyrgdarpersóni"
-            ></div>
-            <button
-              id="editCurrentCompetitionBtn"
-              class="download-pdf-btn edit-current-competition-btn"
-              type="button"
-              title="Broyt kapping"
-              aria-label="Broyt kapping"
-            >
-              ✎
-            </button>
-            <button
-              id="copyChecklistShareLinkBtn"
-              class="download-pdf-btn share-checklist-link-btn"
-              type="button"
-              title="Kopiera kappingarleinkju"
-              aria-label="Kopiera kappingarleinkju"
-            >
-              <svg
-                class="button-icon-svg"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
+            <div class="header-icon-actions" aria-label="Kappingar handlingar">
+              <button
+                id="editRolesBtn"
+                class="download-pdf-btn people-icon-btn"
+                type="button"
+                title="Broyt leiklutir"
+                aria-label="Broyt leiklutir"
               >
-                <path d="M9.5 14.5l5-5"></path>
-                <path
-                  d="M13.5 6.5l1.15-1.15a4 4 0 0 1 5.66 5.66l-2.3 2.3a4 4 0 0 1-5.66 0"
-                ></path>
-                <path
-                  d="M10.5 17.5l-1.15 1.15a4 4 0 0 1-5.66-5.66l2.3-2.3a4 4 0 0 1 5.66 0"
-                ></path>
-              </svg>
-            </button>
-            <button
-              id="downloadChecklistPdfBtn"
-              class="download-pdf-btn"
-              type="button"
-              title="Tak niður PDF"
-              aria-label="Tak niður PDF"
-            >
-              ↓
-            </button>
+                <svg
+                  class="button-icon-svg"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M8 11.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+                  <path d="M16 11.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+                  <path d="M3.5 18.5c.65-2.7 2.3-4 4.5-4s3.85 1.3 4.5 4"></path>
+                  <path d="M11.5 18.5c.65-2.7 2.3-4 4.5-4s3.85 1.3 4.5 4"></path>
+                </svg>
+              </button>
+              <button
+                id="editCurrentCompetitionBtn"
+                class="download-pdf-btn edit-current-competition-btn"
+                type="button"
+                title="Broyt kapping"
+                aria-label="Broyt kapping"
+              >
+                ✎
+              </button>
+              <button
+                id="copyChecklistShareLinkBtn"
+                class="download-pdf-btn share-checklist-link-btn"
+                type="button"
+                title="Kopiera kappingarleinkju"
+                aria-label="Kopiera kappingarleinkju"
+              >
+                <svg
+                  class="button-icon-svg"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M9.5 14.5l5-5"></path>
+                  <path
+                    d="M13.5 6.5l1.15-1.15a4 4 0 0 1 5.66 5.66l-2.3 2.3a4 4 0 0 1-5.66 0"
+                  ></path>
+                  <path
+                    d="M10.5 17.5l-1.15 1.15a4 4 0 0 1-5.66-5.66l2.3-2.3a4 4 0 0 1 5.66 0"
+                  ></path>
+                </svg>
+              </button>
+              <button
+                id="downloadChecklistPdfBtn"
+                class="download-pdf-btn"
+                type="button"
+                title="Tak niður PDF"
+                aria-label="Tak niður PDF"
+              >
+                ↓
+              </button>
+            </div>
           </header>
+
+          <section class="competition-utility-panel filter-utility-panel" aria-label="Filtrera uppgávur">
+            <div class="competition-filter-panel">
+              <div class="filter-group section-filter-group">
+                <div class="filter-label-row">
+                  <p class="filter-label filter-label-with-icon">
+                    <span class="filter-symbol filter-symbol-inline" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" class="filter-symbol-svg">
+                        <path d="M4 6h16l-6 7v4.5l-4 2V13L4 6Z"></path>
+                      </svg>
+                    </span>
+                    Sektion
+                  </p>
+                  <button class="filter-reset-btn" id="resetSectionFiltersBtn" type="button" title="Endurstilla sektión" aria-label="Endurstilla sektión">↺</button>
+                </div>
+                <div id="sectionFilterRow" class="filter-row filter-button-grid"></div>
+              </div>
+
+              <div class="filter-group responsible-filter-group">
+                <div class="filter-label-row">
+                  <p class="filter-label">Ábyrgd</p>
+                  <button class="filter-reset-btn" id="resetResponsibleFiltersBtn" type="button" title="Endurstilla ábyrgd" aria-label="Endurstilla ábyrgd">↺</button>
+                </div>
+                <div
+                  id="responsibleFilterPills"
+                  class="responsible-pill-filter"
+                  aria-label="Filtrera eftir ábyrgdarpersóni"
+                ></div>
+              </div>
+
+              <div class="filter-group search-filter-group">
+                <div class="filter-label-row">
+                  <p class="filter-label">Leita</p>
+                  <button class="filter-reset-btn" id="resetTaskSearchBtn" type="button" title="Rudda leit" aria-label="Rudda leit">↺</button>
+                </div>
+                <input
+                  id="taskSearchInput"
+                  class="task-search-input"
+                  type="search"
+                  placeholder="Leita eftir uppgávuheiti"
+                  aria-label="Leita eftir uppgávuheiti"
+                />
+              </div>
+            </div>
+          </section>
+
           <div id="checklistColumns" class="checklist-columns"></div>
         </section>
 
@@ -597,6 +636,27 @@
         </div>
 
         <div id="rolesEditor" class="roles-editor"></div>
+
+        <button class="primary-btn full-width" type="submit">
+          Goym leiklutir
+        </button>
+      </form>
+    </dialog>
+
+    <dialog id="templateRolesModal" class="modal modal-wide">
+      <form id="templateRolesForm" class="modal-card">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Skapilón</p>
+            <h2>Broyt leiklutir</h2>
+            <p class="page-description">
+              Stovna leiklutir fyri hesa skapilón. Nøvnini verða sett inni á sjálvari kappingini.
+            </p>
+          </div>
+          <button type="button" class="icon-btn" id="closeTemplateRolesModal">×</button>
+        </div>
+
+        <div id="templateRolesModalEditor" class="template-role-list template-roles-modal-editor"></div>
 
         <button class="primary-btn full-width" type="submit">
           Goym leiklutir

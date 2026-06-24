@@ -1,5 +1,5 @@
-const STORAGE_KEY = "stoyt-portal-v5.8.3";
-const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.8.2", "stoyt-portal-v5.8.1", "stoyt-portal-v5.8.0", "stoyt-portal-v5.7.1", "stoyt-portal-v5.7.0", "stoyt-portal-v5.6.0", 
+const STORAGE_KEY = "stoyt-portal-v5.8.20";
+const PREVIOUS_STORAGE_KEYS = ["stoyt-portal-v5.8.14", "stoyt-portal-v5.8.12", "stoyt-portal-v5.8.10", "stoyt-portal-v5.8.9", "stoyt-portal-v5.8.8", "stoyt-portal-v5.8.7", "stoyt-portal-v5.8.6", "stoyt-portal-v5.8.5", "stoyt-portal-v5.8.4", "stoyt-portal-v5.8.3", "stoyt-portal-v5.8.2", "stoyt-portal-v5.8.1", "stoyt-portal-v5.8.0", "stoyt-portal-v5.7.1", "stoyt-portal-v5.7.0", "stoyt-portal-v5.6.0", 
   "stoyt-portal-v5.5.4",
   "stoyt-portal-v5.5.3",
   "stoyt-portal-v5.5.2",
@@ -108,6 +108,9 @@ let activeCompetitionId = null;
 let activeSectionFilters = [];
 let showIncompleteOnly = false;
 let activeResponsibleFilters = [];
+let activeTaskSearch = "";
+let sectionFiltersExpanded = false;
+let responsibleFiltersExpanded = false;
 let mobileMenuOpen = false;
 let draftPeople = [];
 let editingTask = null;
@@ -378,6 +381,7 @@ function applyPublicCompetitionView() {
   activeResponsibleFilters = [];
   activeSectionFilters = [];
   showIncompleteOnly = false;
+  activeTaskSearch = "";
   rolesVisible = false;
   activeView = "checklist";
 
@@ -712,7 +716,6 @@ function cloneSections(sections) {
 
 function makeEmptyState() {
   return {
-    sidebarCollapsed: false,
     profile: makeDefaultProfile(),
     templates: [],
     competitions: [],
@@ -797,7 +800,6 @@ async function loadStateFromFirestore() {
 }
 
 function normalizeState() {
-  state.sidebarCollapsed = Boolean(state.sidebarCollapsed);
   normalizeProfile();
   state.templates ||= [];
   state.competitions ||= [];
@@ -968,17 +970,7 @@ function personPillHTML(competition, person) {
 }
 
 function applySidebarState() {
-  appShell.classList.toggle("sidebar-collapsed", state.sidebarCollapsed);
-  appShell.classList.toggle("mobile-menu-open", mobileMenuOpen);
-  appShell.classList.toggle("portal-revenue-active", activeView === "revenue");
-  appShell.classList.toggle(
-    "portal-competition-active",
-    activeView !== "revenue"
-  );
-  $("#mobileMenuToggle")?.setAttribute(
-    "aria-expanded",
-    mobileMenuOpen ? "true" : "false"
-  );
+  appShell?.classList.remove("sidebar-collapsed");
 }
 
 function setView(viewName) {
@@ -1094,9 +1086,7 @@ function renderDashboard() {
       competition.venue || "Einki stað ásett"
     )}</p>
         </div>
-        <span class="status-badge">${
-          progress === 100 ? "Klárt" : "Í gongd"
-        }</span>
+        <button class="card-delete-btn" data-delete-competition title="Strika kapping" aria-label="Strika kapping">×</button>
       </div>
 
       <div class="mini-progress">
@@ -1115,8 +1105,7 @@ function renderDashboard() {
   <path d="M13.5 6.5l1.15-1.15a4 4 0 0 1 5.66 5.66l-2.3 2.3a4 4 0 0 1-5.66 0"></path>
   <path d="M10.5 17.5l-1.15 1.15a4 4 0 0 1-5.66-5.66l2.3-2.3a4 4 0 0 1 5.66 0"></path>
 </svg></button>
-        <button class="icon-action-btn" data-edit-competition title="Redigera kapping">✎</button>
-        <button class="icon-action-btn danger" data-delete-competition title="Strika kapping">×</button>
+        <button class="icon-action-btn" data-edit-competition title="Redigera kapping" aria-label="Redigera kapping">✎</button>
       </div>
     `;
 
@@ -1124,6 +1113,7 @@ function renderDashboard() {
       activeCompetitionId = competition.id;
       activeResponsibleFilters = [];
       activeSectionFilters = [];
+      activeTaskSearch = "";
       showIncompleteOnly = false;
       rolesVisible = false;
       setView("checklist");
@@ -1241,6 +1231,128 @@ function renderTemplateRolesEditor(template) {
   `;
 }
 
+
+function openTemplateRolesEditor(templateId = activeTemplateId) {
+  const template = state.templates.find((item) => item.id === templateId);
+  if (!template) return;
+
+  activeTemplateId = template.id;
+  renderTemplateRolesModalEditor(template);
+  $("#templateRolesModal").showModal();
+}
+
+function renderTemplateRolesModalEditor(template) {
+  const rolesEditor = $("#templateRolesModalEditor");
+  const roles = template.roles || [];
+
+  rolesEditor.innerHTML = `
+    <div class="roles-editor-actions template-modal-actions">
+      <button id="addTemplateRoleBtn" class="secondary-btn" type="button">+ Stovna leiklut</button>
+    </div>
+    ${
+      roles.length === 0
+        ? `<p class="roles-empty">Ongir leiklutir eru í hesi skapilónini enn. Trýst á “+ Stovna leiklut” fyri at byrja.</p>`
+        : roles
+            .map(
+              (role, roleIndex) => `
+          <div class="template-role-card" data-template-role-index="${roleIndex}">
+            <label>
+              Leiklutur
+              <input data-template-role-title="${roleIndex}" value="${escapeHTML(
+                role.title
+              )}" placeholder="T.d. Dómarar" />
+            </label>
+            <label>
+              Tal av persónum
+              <input data-template-role-count="${roleIndex}" type="number" min="1" step="1" value="${Math.max(
+                1,
+                Number(role.requiredCount) || 1
+              )}" />
+            </label>
+            <button class="delete-small" data-delete-template-role="${roleIndex}" type="button" title="Strika leiklut">×</button>
+          </div>
+        `
+            )
+            .join("")
+    }
+  `;
+
+  $("#addTemplateRoleBtn")?.addEventListener("click", () => {
+    saveTemplateRolesFromModal(false);
+    template.roles ||= [];
+    template.roles.push(makeTemplateRole());
+    saveState();
+    renderTemplateRolesModalEditor(template);
+  });
+
+  rolesEditor.querySelectorAll("[data-template-role-title]").forEach((input) => {
+    input.addEventListener("input", () => {
+      const roleIndex = Number(input.dataset.templateRoleTitle);
+      template.roles[roleIndex].title = input.value;
+      saveState();
+      renderCompetitionSelect();
+    });
+  });
+
+  rolesEditor.querySelectorAll("[data-template-role-count]").forEach((input) => {
+    input.addEventListener("input", () => {
+      const roleIndex = Number(input.dataset.templateRoleCount);
+      template.roles[roleIndex].requiredCount = Math.max(1, Number(input.value) || 1);
+      saveState();
+    });
+  });
+
+  rolesEditor.querySelectorAll("[data-delete-template-role]").forEach((button) => {
+    button.addEventListener("click", () => {
+      saveTemplateRolesFromModal(false);
+      const roleIndex = Number(button.dataset.deleteTemplateRole);
+      const role = template.roles[roleIndex];
+      const confirmed = window.confirm(
+        `Vilt tú strika leiklutin "${role?.title || "Ónevndur leiklutur"}" úr skapilónini?`
+      );
+      if (!confirmed) return;
+      template.roles.splice(roleIndex, 1);
+      saveState();
+      renderTemplateRolesModalEditor(template);
+      renderCompetitionSelect();
+    });
+  });
+}
+
+function saveTemplateRolesFromModal(shouldClose = true) {
+  const template = state.templates.find((item) => item.id === activeTemplateId);
+  if (!template) return;
+
+  const rolesEditor = $("#templateRolesModalEditor");
+  const cards = Array.from(rolesEditor.querySelectorAll("[data-template-role-index]"));
+
+  template.roles = cards
+    .map((card) => {
+      const roleIndex = Number(card.dataset.templateRoleIndex);
+      const existingRole = template.roles?.[roleIndex] || makeTemplateRole();
+      const title = card.querySelector("[data-template-role-title]")?.value.trim() || "Nýggjur leiklutur";
+      const requiredCount = Math.max(
+        1,
+        Number(card.querySelector("[data-template-role-count]")?.value) || 1
+      );
+
+      return {
+        id: existingRole.id || makeId(),
+        title,
+        requiredCount,
+      };
+    })
+    .filter((role) => role.title);
+
+  saveState();
+  renderTemplateEditor();
+  renderCompetitionSelect();
+
+  if (shouldClose) {
+    $("#templateRolesModal").close();
+  }
+}
+
 function renderTemplateEditor() {
   const templateEditor = $("#templateEditor");
   const template = state.templates.find((item) => item.id === activeTemplateId);
@@ -1260,18 +1372,16 @@ function renderTemplateEditor() {
   templateEditor.innerHTML = `
     <div class="editor-top">
       <label>
-        Template navn
+        Heiti
         <input id="templateNameInput" value="${escapeHTML(template.name)}" />
       </label>
-      <p class="page-description">Her stovnar tú skapilón sektiónir og uppgávur. Ábyrgd og freistir verða sett inni á sjálvari kappingini.</p>
-    </div>
+      </div>
 
     <div class="template-editor-actions">
-      <button id="addTemplateSectionBtn" class="secondary-btn" type="button">+ Nýggj sektion</button>
-      <button id="deleteTemplateBtn" class="danger-btn" type="button">Strika template</button>
+      <button id="addTemplateSectionBtn" class="secondary-btn" type="button">+ Stovna sektión</button>
+      <button id="editTemplateRolesBtn" class="secondary-btn template-roles-open-btn" type="button">Leiklutir</button>
+      <button id="deleteTemplateBtn" class="secondary-btn subtle-danger-btn" type="button">Strika skapilón</button>
     </div>
-
-    ${renderTemplateRolesEditor(template)}
 
     <div class="editor-grid">
       ${template.sections
@@ -1304,42 +1414,8 @@ function renderTemplateEditor() {
   });
 
 
-  $("#addTemplateRoleBtn")?.addEventListener("click", () => {
-    template.roles ||= [];
-    template.roles.push(makeTemplateRole());
-    saveState();
-    renderTemplateEditor();
-  });
-
-  templateEditor.querySelectorAll("[data-template-role-title]").forEach((input) => {
-    input.addEventListener("input", () => {
-      const roleIndex = Number(input.dataset.templateRoleTitle);
-      template.roles[roleIndex].title = input.value;
-      saveState();
-      renderCompetitionSelect();
-    });
-  });
-
-  templateEditor.querySelectorAll("[data-template-role-count]").forEach((input) => {
-    input.addEventListener("input", () => {
-      const roleIndex = Number(input.dataset.templateRoleCount);
-      template.roles[roleIndex].requiredCount = Math.max(1, Number(input.value) || 1);
-      saveState();
-    });
-  });
-
-  templateEditor.querySelectorAll("[data-delete-template-role]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const roleIndex = Number(button.dataset.deleteTemplateRole);
-      const role = template.roles[roleIndex];
-      const confirmed = window.confirm(
-        `Vilt tú strika leiklutin "${role?.title || "Ónevndur leiklutur"}" úr skapilónini?`
-      );
-      if (!confirmed) return;
-      template.roles.splice(roleIndex, 1);
-      saveState();
-      renderTemplateEditor();
-    });
+  $("#editTemplateRolesBtn")?.addEventListener("click", () => {
+    openTemplateRolesEditor(template.id);
   });
 
   setupTemplateDragAndDrop(template, templateEditor);
@@ -1629,12 +1705,12 @@ function renderTemplateSection(section, sectionIndex, template) {
     <section class="template-section" data-template-section-index="${sectionIndex}">
       <div class="template-section-header" data-template-section-drop="${sectionIndex}">
         <button class="section-drag-handle template-section-drag-handle" type="button" draggable="true" data-template-section-drag="${sectionIndex}" title="Flyt sektion" aria-label="Flyt sektion">⋮⋮</button>
-        <label>
-          Sektion navn
-          <input data-section-title="${sectionIndex}" value="${escapeHTML(
+        <label class="template-section-title-label">
+          <input class="template-section-title-heading" data-section-title="${sectionIndex}" value="${escapeHTML(
     section.title
-  )}" placeholder="T.d. Fyrireiking" />
+  )}" placeholder="T.d. Fyrireiking" aria-label="Sektion navn" />
         </label>
+        <button class="section-add-task-btn template-add-task-icon" data-add-task data-section-index="${sectionIndex}" type="button" title="Legg uppgávu afturat" aria-label="Legg uppgávu afturat">+</button>
         <button class="delete-small template-delete-icon" data-delete-section data-section-index="${sectionIndex}" type="button" title="Strika sektion">×</button>
       </div>
 
@@ -1664,7 +1740,6 @@ function renderTemplateSection(section, sectionIndex, template) {
           )
           .join("")}
       </div>
-      <button class="secondary-btn" data-add-task data-section-index="${sectionIndex}" type="button">+ Legg uppgávu afturat</button>
     </section>
   `;
 }
@@ -1887,7 +1962,7 @@ function wrapPdfText(text, maxChars) {
 
 function getVisibleChecklistSectionsForPdf(competition) {
   const filteringTasks =
-    showIncompleteOnly || activeResponsibleFilters.length > 0;
+    showIncompleteOnly || activeResponsibleFilters.length > 0 || activeTaskSearch.trim() !== "";
 
   return (competition.sections || [])
     .filter(sectionMatchesFilter)
@@ -2167,23 +2242,25 @@ function renderChecklist() {
   if (!competition) return;
 
   $("#checklistTitle").textContent = competition.name;
-  $("#checklistMeta").textContent = isPublicCompetitionMode
-    ? `${formatDate(competition.date)} · ${
-        competition.venue || "Einki stað ásett"
-      }`
-    : `${formatDate(competition.date)} · ${
-        competition.venue || "Einki stað ásett"
-      } · Lykilorð: ${competition.password || "einki"}`;
+  $("#checklistMeta").textContent = `${formatDate(competition.date)} · ${
+    competition.venue || "Einki stað ásett"
+  }`;
 
   renderRolesSummary(competition);
   renderSectionFilters(competition);
   renderResponsibleFilter(competition);
+  renderTaskSearchFilter();
+  bindResetChecklistFilters();
   renderChecklistSections(competition);
 }
 
 function renderRolesSummary(competition) {
   const rolesSummary = $("#rolesSummary");
   const toggleButton = $("#toggleRolesBtn");
+
+  if (!rolesSummary || !toggleButton) {
+    return;
+  }
 
   rolesSummary.hidden = !rolesVisible;
   toggleButton.textContent = rolesVisible ? "Fjal leiklutir" : "Vís leiklutir";
@@ -2219,18 +2296,28 @@ function renderRolesSummary(competition) {
 
 function renderSectionFilters(competition) {
   const container = $("#sectionFilterRow");
-  const validSectionIds = new Set(
-    (competition.sections || []).map((section) => section.id)
-  );
+  const sections = competition.sections || [];
+  const visibleSectionLimit = 4;
+  const validSectionIds = new Set(sections.map((section) => section.id));
+
   activeSectionFilters = activeSectionFilters.filter((sectionId) =>
     validSectionIds.has(sectionId)
   );
+
+  if (sections.length <= visibleSectionLimit) {
+    sectionFiltersExpanded = false;
+  }
+
+  const visibleSections = sectionFiltersExpanded
+    ? sections
+    : sections.slice(0, visibleSectionLimit);
+  const hasHiddenSections = sections.length > visibleSectionLimit;
 
   container.innerHTML = `
     <button class="filter-btn ${
       showIncompleteOnly ? "active" : ""
     }" data-status-filter="todo">Ikki liðugt</button>
-    ${competition.sections
+    ${visibleSections
       .map(
         (section) => `
       <button
@@ -2242,6 +2329,13 @@ function renderSectionFilters(competition) {
     `
       )
       .join("")}
+    ${
+      hasHiddenSections
+        ? `<button class="filter-btn show-more-sections-btn" data-toggle-sections="true">${
+            sectionFiltersExpanded ? "Sí færri" : "Sí fleiri"
+          }</button>`
+        : ""
+    }
   `;
 
   container
@@ -2250,6 +2344,11 @@ function renderSectionFilters(competition) {
       showIncompleteOnly = !showIncompleteOnly;
       renderChecklist();
     });
+
+  container.querySelector("[data-toggle-sections]")?.addEventListener("click", () => {
+    sectionFiltersExpanded = !sectionFiltersExpanded;
+    renderChecklist();
+  });
 
   container.querySelectorAll("[data-section-filter]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -2271,32 +2370,57 @@ function renderSectionFilters(competition) {
 function renderResponsibleFilter(competition) {
   const container = $("#responsibleFilterPills");
   const people = sortNames(competition.people || []);
+  const visiblePeopleLimit = 5;
   const validPeople = new Set(people);
 
   activeResponsibleFilters = activeResponsibleFilters.filter((person) =>
     validPeople.has(person)
   );
 
+  if (people.length <= visiblePeopleLimit) {
+    responsibleFiltersExpanded = false;
+  }
+
   if (people.length === 0) {
     container.innerHTML = "";
     activeResponsibleFilters = [];
+    responsibleFiltersExpanded = false;
     return;
   }
 
-  container.innerHTML = people
-    .map(
-      (person) => `
-    <button
-      type="button"
-      class="responsible-filter-pill ${
-        activeResponsibleFilters.includes(person) ? "active" : ""
-      }"
-      style="${colorStyle(competition, person)}"
-      data-person="${escapeHTML(person)}"
-    >${escapeHTML(person)}</button>
-  `
-    )
-    .join("");
+  const visiblePeople = responsibleFiltersExpanded
+    ? people
+    : people.slice(0, visiblePeopleLimit);
+  const hasHiddenPeople = people.length > visiblePeopleLimit;
+
+  container.innerHTML = `
+    ${visiblePeople
+      .map(
+        (person) => `
+        <button
+          type="button"
+          class="responsible-filter-pill ${
+            activeResponsibleFilters.includes(person) ? "active" : ""
+          }"
+          style="${colorStyle(competition, person)}"
+          data-person="${escapeHTML(person)}"
+        >${escapeHTML(person)}</button>
+      `
+      )
+      .join("")}
+    ${
+      hasHiddenPeople
+        ? `<button class="responsible-filter-pill show-more-responsibles-btn" type="button" data-toggle-responsibles="true">${
+            responsibleFiltersExpanded ? "Sí færri" : "Sí fleiri"
+          }</button>`
+        : ""
+    }
+  `;
+
+  container.querySelector("[data-toggle-responsibles]")?.addEventListener("click", () => {
+    responsibleFiltersExpanded = !responsibleFiltersExpanded;
+    renderChecklist();
+  });
 
   container.querySelectorAll("[data-person]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -2322,14 +2446,77 @@ function sectionMatchesFilter(section) {
   );
 }
 
+function taskMatchesSearchFilter(task) {
+  const query = activeTaskSearch.trim().toLowerCase();
+  if (!query) return true;
+
+  return (task.title || "").toLowerCase().includes(query);
+}
+
+function renderTaskSearchFilter() {
+  const input = $("#taskSearchInput");
+  if (!input) return;
+
+  input.value = activeTaskSearch;
+  input.oninput = () => {
+    activeTaskSearch = input.value || "";
+    renderChecklistSections(
+      state.competitions.find((item) => item.id === activeCompetitionId)
+    );
+  };
+}
+
+function bindResetChecklistFilters() {
+  const resetAllButton = $("#resetChecklistFiltersBtn");
+  if (resetAllButton) {
+    resetAllButton.onclick = () => {
+      activeSectionFilters = [];
+      activeResponsibleFilters = [];
+      showIncompleteOnly = false;
+      activeTaskSearch = "";
+      sectionFiltersExpanded = false;
+      responsibleFiltersExpanded = false;
+      renderChecklist();
+    };
+  }
+
+  const resetSectionButton = $("#resetSectionFiltersBtn");
+  if (resetSectionButton) {
+    resetSectionButton.onclick = () => {
+      activeSectionFilters = [];
+      showIncompleteOnly = false;
+      sectionFiltersExpanded = false;
+      renderChecklist();
+    };
+  }
+
+  const resetResponsibleButton = $("#resetResponsibleFiltersBtn");
+  if (resetResponsibleButton) {
+    resetResponsibleButton.onclick = () => {
+      activeResponsibleFilters = [];
+      responsibleFiltersExpanded = false;
+      renderChecklist();
+    };
+  }
+
+  const resetSearchButton = $("#resetTaskSearchBtn");
+  if (resetSearchButton) {
+    resetSearchButton.onclick = () => {
+      activeTaskSearch = "";
+      renderChecklist();
+    };
+  }
+}
+
 function taskMatchesFilters(task) {
   const matchesStatus = showIncompleteOnly ? !task.done : true;
   const taskPeople = taskResponsibles(task);
   const matchesResponsible =
     activeResponsibleFilters.length === 0 ||
     activeResponsibleFilters.some((person) => taskPeople.includes(person));
+  const matchesSearch = taskMatchesSearchFilter(task);
 
-  return matchesStatus && matchesResponsible;
+  return matchesStatus && matchesResponsible && matchesSearch;
 }
 
 function renderChecklistSections(competition) {
@@ -2337,7 +2524,7 @@ function renderChecklistSections(competition) {
   container.innerHTML = "";
 
   const filteringTasks =
-    showIncompleteOnly || activeResponsibleFilters.length > 0;
+    showIncompleteOnly || activeResponsibleFilters.length > 0 || activeTaskSearch.trim() !== "";
 
   competition.sections.filter(sectionMatchesFilter).forEach((section) => {
     const visibleTasks = section.tasks.filter(taskMatchesFilters);
@@ -2360,14 +2547,14 @@ function renderChecklistSections(competition) {
           <input class="section-title-input" data-section-title="${
             section.id
           }" value="${escapeHTML(section.title)}" aria-label="Sektion navn" />
+          <button class="section-add-task-btn" data-add-competition-task="${
+            section.id
+          }" type="button" title="Legg uppgávu afturat" aria-label="Legg uppgávu afturat">+</button>
           <button class="delete-section-btn" data-delete-section="${
             section.id
           }" type="button" title="Strika sektion">×</button>
         </div>
         <div class="task-list" data-task-drop-section="${section.id}"></div>
-        <button class="add-phase-task secondary-btn" data-add-competition-task="${
-          section.id
-        }" type="button">+ Legg uppgávu afturat</button>
       `;
 
     const taskList = sectionElement.querySelector(".task-list");
@@ -2376,8 +2563,10 @@ function renderChecklistSections(competition) {
       taskList.classList.add("task-list-empty");
     }
 
-    visibleTasks.forEach((task) => {
-      taskList.appendChild(renderTaskCard(competition, section.id, task));
+    visibleTasks.forEach((task, taskIndex) => {
+      taskList.appendChild(
+        renderTaskCard(competition, section.id, task, taskIndex === 0)
+      );
     });
 
     setupTaskDropZone(taskList, section.id);
@@ -2464,6 +2653,7 @@ function addCompetitionSection() {
   competition.sections.push(section);
   activeSectionFilters = [];
   showIncompleteOnly = false;
+  activeTaskSearch = "";
   saveState();
   renderChecklist();
 }
@@ -2738,13 +2928,15 @@ function moveSection(sectionId, targetIndex) {
   renderChecklist();
 }
 
-function renderTaskCard(competition, sectionId, task) {
+function renderTaskCard(competition, sectionId, task, showLabels = true) {
   const responsiblePills = sortNames(taskResponsibles(task))
     .map((person) => personPillHTML(competition, person))
     .join("");
 
+  const labelHTML = (text) => showLabels ? `<span class="task-cell-label">${text}</span>` : "";
+
   const card = document.createElement("article");
-  card.className = `task-card ${task.done ? "done" : ""}`;
+  card.className = `task-card ${task.done ? "done" : ""} ${showLabels ? "task-card-with-labels" : "task-card-no-labels"}`;
   card.draggable = true;
   card.dataset.taskId = task.id;
   card.dataset.sectionId = sectionId;
@@ -2756,22 +2948,22 @@ function renderTaskCard(competition, sectionId, task) {
 
     <div class="task-content task-row-content">
       <div class="task-title-cell">
-        <span class="task-cell-label">Uppgáva</span>
+        ${labelHTML("Uppgáva")}
         <h4>${escapeHTML(task.title)}</h4>
       </div>
 
       <div class="task-people-cell">
-        <span class="task-cell-label">Ábyrgd</span>
+        ${labelHTML("Ábyrgd")}
         <div class="task-meta">${
           responsiblePills || `<span class="task-empty-cell">—</span>`
         }</div>
       </div>
 
       <div class="task-deadline-cell">
-        <span class="task-cell-label">Freist</span>
+        ${labelHTML("Freist")}
         ${
           task.hasDeadline && task.deadlineDate
-            ? `<span class="pill deadline">Freist: ${formatDeadline(
+            ? `<span class="task-deadline-text">${formatDeadline(
                 task
               )}</span>`
             : `<span class="task-empty-cell">—</span>`
@@ -2779,7 +2971,7 @@ function renderTaskCard(competition, sectionId, task) {
       </div>
 
       <div class="task-comment-cell">
-        <span class="task-cell-label">Viðmerking</span>
+        ${labelHTML("Viðmerking")}
         ${
           task.note
             ? `<p class="task-note">${escapeHTML(task.note)}</p>`
@@ -3373,11 +3565,6 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-$("#toggleSidebar").addEventListener("click", () => {
-  state.sidebarCollapsed = !state.sidebarCollapsed;
-  saveState();
-  applySidebarState();
-});
 
 $("#mobileMenuToggle")?.addEventListener("click", () => {
   mobileMenuOpen = !mobileMenuOpen;
@@ -3570,6 +3757,7 @@ $("#competitionForm").addEventListener("submit", (event) => {
   activeResponsibleFilters = [];
   activeSectionFilters = [];
   showIncompleteOnly = false;
+  activeTaskSearch = "";
   rolesVisible = false;
   saveState();
 
@@ -3737,10 +3925,13 @@ $("#deleteTaskBtn").addEventListener("click", () => {
   editingTask = null;
 });
 
-$("#toggleRolesBtn").addEventListener("click", () => {
-  rolesVisible = !rolesVisible;
-  renderChecklist();
-});
+const toggleRolesButton = $("#toggleRolesBtn");
+if (toggleRolesButton) {
+  toggleRolesButton.addEventListener("click", () => {
+    rolesVisible = !rolesVisible;
+    renderChecklist();
+  });
+}
 
 $("#editRolesBtn").addEventListener("click", openRolesEditor);
 $("#closeRolesModal").addEventListener("click", () => $("#rolesModal").close());
@@ -3749,6 +3940,16 @@ $("#rolesForm").addEventListener("submit", (event) => {
   event.preventDefault();
   saveRolesFromEditor();
   $("#rolesModal").close();
+});
+
+$("#closeTemplateRolesModal")?.addEventListener("click", () => {
+  saveTemplateRolesFromModal(false);
+  $("#templateRolesModal").close();
+});
+
+$("#templateRolesForm")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  saveTemplateRolesFromModal();
 });
 
 

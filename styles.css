@@ -4121,3 +4121,4880 @@ html.public-competition-route #checklistView > * {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* v5.8.4 — Competition planner corporate color scheme
+   Only changes colors/surfaces/borders/shadows in the main portal.
+   The inntøku býti calculator files are not changed. */
+:root {
+  --color-navy-950: #08182B;
+  --color-navy-900: #0F1F35;
+  --color-navy-800: #17324F;
+  --color-blue-600: #2563EB;
+
+  --color-bg: #F6F7F9;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F8FAFC;
+
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+
+  --color-text: #111827;
+  --color-text-muted: #6B7280;
+  --color-text-light: #FFFFFF;
+
+  --color-success-bg: #DCFCE7;
+  --color-success-text: #166534;
+  --color-info-bg: #DBEAFE;
+  --color-info-text: #1E40AF;
+  --color-danger: #DC2626;
+  --color-progress: #1E3A5F;
+
+  --bg: var(--color-bg);
+  --surface: var(--color-surface);
+  --surface-muted: var(--color-surface-muted);
+  --text: var(--color-text);
+  --muted: var(--color-text-muted);
+  --border: var(--color-border);
+  --border-strong: var(--color-border-strong);
+  --accent: var(--color-navy-900);
+  --accent-dark: var(--color-navy-800);
+  --accent-soft: var(--color-info-bg);
+  --danger: var(--color-danger);
+  --success: var(--color-success-text);
+  --warning: var(--color-info-text);
+  --shadow-soft: 0 4px 12px rgba(15, 31, 53, 0.06);
+  --shadow-card: 0 4px 12px rgba(15, 31, 53, 0.06);
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Main app shell */
+.app-shell,
+.main {
+  background: var(--color-bg);
+}
+
+/* Login and public access */
+.login-gate,
+.public-competition-gate {
+  background: var(--color-bg);
+  background-image: none;
+}
+
+.login-card,
+.modal-card,
+.panel,
+.competition-card,
+.template-section,
+.template-task,
+.phase-column,
+.add-section-panel,
+.task-card,
+.template-roles-panel,
+.template-role-card,
+.role-editor-card,
+.login-settings-card,
+.profile-logo-settings,
+.people-box,
+.empty-panel,
+.checklist-toolbar,
+.roles-summary,
+.role-compact-chip {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.login-brand .eyebrow,
+.page-description,
+.card-meta,
+.settings-help,
+.settings-message,
+.task-note,
+.task-empty-cell {
+  color: var(--color-text-muted);
+}
+
+/* Sidebar/nav */
+.sidebar,
+.mobile-topbar {
+  background: var(--color-navy-900);
+  background-image: none;
+  color: var(--color-text-light);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.brand,
+.mobile-brand {
+  background: transparent;
+  border-color: transparent;
+}
+
+.brand-text h1,
+.mobile-brand h1 {
+  color: var(--color-text-light);
+}
+
+.sidebar .eyebrow,
+.mobile-topbar .eyebrow {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-light);
+}
+
+.nav-link.active {
+  background: var(--color-navy-800);
+  color: var(--color-text-light);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+.nav-icon {
+  color: currentColor;
+}
+
+.sidebar-settings-button,
+.collapse-btn,
+.mobile-menu-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-light);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-settings-panel {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.firestore-status {
+  background: var(--color-surface-muted);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+/* Headers */
+.page-header {
+  background: var(--color-navy-900);
+  background-image: linear-gradient(135deg, var(--color-navy-900), var(--color-navy-800));
+  color: var(--color-text-light);
+  border-color: var(--color-navy-800);
+}
+
+.page-header h2,
+.page-header .eyebrow,
+.page-header .page-description {
+  color: var(--color-text-light);
+}
+
+.page-header .eyebrow,
+.page-header .page-description {
+  opacity: 0.78;
+}
+
+/* Buttons */
+.primary-btn,
+.btn-primary,
+.login-submit,
+.download-pdf-btn,
+.copy-share-link-btn {
+  background: var(--color-navy-900);
+  color: var(--color-text-light);
+  border-color: var(--color-navy-900);
+}
+
+.primary-btn:hover,
+.btn-primary:hover,
+.login-submit:hover,
+.download-pdf-btn:hover,
+.copy-share-link-btn:hover {
+  background: var(--color-navy-800);
+  border-color: var(--color-navy-800);
+}
+
+.secondary-btn,
+.btn-secondary,
+.ghost-btn,
+.admin-logout,
+.icon-action-btn,
+.icon-btn,
+.role-add-btn,
+.remove-role-field-btn,
+.section-filter-btn,
+.responsible-filter-btn,
+.incomplete-filter-btn,
+.settings-tab {
+  background: var(--color-surface);
+  color: var(--color-navy-900);
+  border-color: var(--color-border-strong);
+}
+
+.secondary-btn:hover,
+.btn-secondary:hover,
+.ghost-btn:hover,
+.admin-logout:hover,
+.icon-action-btn:hover,
+.icon-btn:hover,
+.role-add-btn:hover,
+.remove-role-field-btn:hover,
+.section-filter-btn:hover,
+.responsible-filter-btn:hover,
+.incomplete-filter-btn:hover,
+.settings-tab:hover {
+  background: var(--color-surface-muted);
+}
+
+.danger-btn,
+.icon-action-btn.danger,
+.delete-small,
+.delete-button,
+.icon-danger,
+.delete-section-btn,
+.delete-task-btn {
+  color: var(--color-danger);
+}
+
+.danger-btn {
+  background: var(--color-surface);
+  border-color: var(--color-danger);
+}
+
+/* Forms */
+input,
+textarea,
+select {
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-blue-600);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Status/filter colors */
+.status-badge,
+.filter-btn,
+.section-filter-btn,
+.responsible-filter-btn,
+.incomplete-filter-btn {
+  background: var(--color-info-bg);
+  color: var(--color-info-text);
+  border-color: transparent;
+}
+
+.status-badge.done,
+.status-badge.ready,
+.filter-btn.active,
+.section-filter-btn.active,
+.responsible-filter-btn.active,
+.incomplete-filter-btn.active,
+.settings-tab.active {
+  background: var(--color-navy-900);
+  color: var(--color-text-light);
+  border-color: var(--color-navy-900);
+}
+
+.task-card.done .task-title-cell h4,
+.task-card.done {
+  color: var(--color-text-muted);
+}
+
+/* Progress */
+.progress-track,
+.mini-progress .progress-track {
+  background: #E5E7EB;
+}
+
+.progress-fill,
+.mini-progress .progress-fill {
+  background: var(--color-progress);
+}
+
+/* Task/deadline colors */
+.task-cell-label,
+.task-empty-cell,
+.deadline,
+.task-deadline-text,
+[class*="deadline"] {
+  color: var(--color-text-muted);
+}
+
+.deadline {
+  background: var(--color-surface-muted);
+  border-color: var(--color-border);
+}
+
+/* Settings */
+.settings-tabs {
+  background: var(--color-surface-muted);
+  border-color: var(--color-border);
+}
+
+.settings-tab.active small {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.settings-tab-icon {
+  background: var(--color-surface-muted);
+  color: var(--color-navy-900);
+}
+
+.settings-tab.active .settings-tab-icon {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-text-light);
+}
+
+.profile-logo-preview-wrap {
+  background: var(--color-navy-900);
+  border-color: var(--color-border);
+}
+
+/* Modals */
+.modal::backdrop {
+  background: rgba(15, 31, 53, 0.48);
+}
+
+/* Links/icons */
+a,
+.copy-link,
+.link-icon-btn {
+  color: var(--color-navy-900);
+}
+
+
+/* v5.8.5 — Competition header corporate color fix
+   Updates the top container inside a competition so it no longer uses the old playful/warm colors. */
+#checklistView .page-header {
+  background: var(--color-navy-900);
+  background-image: linear-gradient(135deg, var(--color-navy-900), var(--color-navy-800));
+  color: var(--color-text-light);
+  border-color: var(--color-navy-800);
+}
+
+#checklistView .page-header::before,
+#checklistView .page-header::after {
+  display: none;
+  content: none;
+}
+
+#checklistView .page-header h2,
+#checklistView .page-header .eyebrow,
+#checklistView .page-header .page-description,
+#checklistView #checklistMeta {
+  color: var(--color-text-light);
+}
+
+#checklistView .page-header .eyebrow,
+#checklistView .page-header .page-description,
+#checklistView #checklistMeta {
+  opacity: 0.78;
+}
+
+/* Roles area inside the competition header */
+#checklistView .roles-toolbar {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: var(--color-text-light);
+}
+
+#checklistView .roles-toolbar .eyebrow,
+#checklistView .roles-toolbar h3,
+#checklistView .roles-toolbar p,
+#checklistView .roles-toolbar span {
+  color: var(--color-text-light);
+}
+
+#checklistView .roles-toolbar .eyebrow {
+  opacity: 0.78;
+}
+
+/* Buttons/filters inside the competition header */
+#checklistView .page-header .secondary-btn,
+#checklistView .page-header .ghost-btn,
+#checklistView .page-header .icon-action-btn,
+#checklistView .page-header .icon-btn,
+#checklistView .page-header .filter-btn,
+#checklistView .page-header .section-filter-btn,
+#checklistView .page-header .responsible-filter-btn,
+#checklistView .page-header .incomplete-filter-btn,
+#checklistView .page-header .responsible-filter-pill {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-navy-900);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+#checklistView .page-header .secondary-btn:hover,
+#checklistView .page-header .ghost-btn:hover,
+#checklistView .page-header .icon-action-btn:hover,
+#checklistView .page-header .icon-btn:hover,
+#checklistView .page-header .filter-btn:hover,
+#checklistView .page-header .section-filter-btn:hover,
+#checklistView .page-header .responsible-filter-btn:hover,
+#checklistView .page-header .incomplete-filter-btn:hover {
+  background: #FFFFFF;
+}
+
+#checklistView .page-header .filter-btn.active,
+#checklistView .page-header .section-filter-btn.active,
+#checklistView .page-header .responsible-filter-btn.active,
+#checklistView .page-header .incomplete-filter-btn.active,
+#checklistView .page-header .responsible-filter-pill.active {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--color-text-light);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* Header action icons on the dark header */
+#checklistView .page-header .copy-share-link-btn,
+#checklistView .page-header .download-pdf-btn,
+#checklistView .page-header .link-icon-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-light);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+#checklistView .page-header .copy-share-link-btn:hover,
+#checklistView .page-header .download-pdf-btn:hover,
+#checklistView .page-header .link-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Back button should be readable and corporate */
+#checklistView .page-back-btn {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-navy-900);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+#checklistView .page-back-btn:hover {
+  background: #FFFFFF;
+}
+
+/* Remove old warm deadline/accent color if it appears in the header area */
+#checklistView .page-header .deadline,
+#checklistView .page-header [class*="deadline"] {
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--color-text-light);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+
+/* v5.8.6 — Match competition header with sidebar/nav colors
+   Removes the old blue/gold competition header and uses the same dark navy as the menu. */
+#checklistView .page-header,
+body #checklistView .page-header,
+.app-shell #checklistView .page-header {
+  background: #0F1F35 !important;
+  background-color: #0F1F35 !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 24px rgba(15, 31, 53, 0.12) !important;
+}
+
+#checklistView .page-header::before,
+#checklistView .page-header::after,
+body #checklistView .page-header::before,
+body #checklistView .page-header::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+#checklistView .page-header h2,
+#checklistView .page-header .eyebrow,
+#checklistView .page-header .page-description,
+#checklistView #checklistMeta {
+  color: #FFFFFF !important;
+}
+
+#checklistView .page-header .eyebrow,
+#checklistView .page-header .page-description,
+#checklistView #checklistMeta {
+  opacity: 0.72 !important;
+}
+
+/* Roles box inside header should use subtle navy-on-navy, not blue/gold */
+#checklistView .roles-toolbar,
+body #checklistView .roles-toolbar {
+  background: #17324F !important;
+  background-color: #17324F !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+}
+
+#checklistView .roles-toolbar::before,
+#checklistView .roles-toolbar::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+}
+
+#checklistView .roles-toolbar .eyebrow,
+#checklistView .roles-toolbar h3,
+#checklistView .roles-toolbar p,
+#checklistView .roles-toolbar span {
+  color: #FFFFFF !important;
+}
+
+#checklistView .roles-toolbar .eyebrow {
+  opacity: 0.72 !important;
+}
+
+/* Header buttons/filters should stay neutral and readable on navy */
+#checklistView .page-header .secondary-btn,
+#checklistView .page-header .ghost-btn,
+#checklistView .page-header .filter-btn,
+#checklistView .page-header .section-filter-btn,
+#checklistView .page-header .responsible-filter-btn,
+#checklistView .page-header .incomplete-filter-btn,
+#checklistView .page-header .responsible-filter-pill {
+  background: rgba(255, 255, 255, 0.92) !important;
+  background-image: none !important;
+  color: #0F1F35 !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: none !important;
+}
+
+#checklistView .page-header .filter-btn.active,
+#checklistView .page-header .section-filter-btn.active,
+#checklistView .page-header .responsible-filter-btn.active,
+#checklistView .page-header .incomplete-filter-btn.active,
+#checklistView .page-header .responsible-filter-pill.active {
+  background: #17324F !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+}
+
+/* Action icons should match the sidebar/menu button style */
+#checklistView .page-header .copy-share-link-btn,
+#checklistView .page-header .download-pdf-btn,
+#checklistView .page-header .link-icon-btn,
+#checklistView .page-header .icon-action-btn,
+#checklistView .page-header .icon-btn {
+  background: #08182B !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
+}
+
+#checklistView .page-header .copy-share-link-btn:hover,
+#checklistView .page-header .download-pdf-btn:hover,
+#checklistView .page-header .link-icon-btn:hover,
+#checklistView .page-header .icon-action-btn:hover,
+#checklistView .page-header .icon-btn:hover {
+  background: #17324F !important;
+}
+
+/* Back button should still be light, but not blue/gold */
+#checklistView .page-back-btn {
+  background: rgba(255, 255, 255, 0.95) !important;
+  background-image: none !important;
+  color: #0F1F35 !important;
+  border-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Remove warm accents in competition header */
+#checklistView .page-header * {
+  --accent-warm: #FFFFFF;
+  --accent-warm-soft: rgba(255, 255, 255, 0.10);
+}
+
+
+/* v5.8.7 — Correct competition header selector fix
+   The competition page uses .checklist-header, not .page-header. */
+#checklistView .checklist-header,
+body #checklistView .checklist-header,
+.app-shell #checklistView .checklist-header {
+  background: #0F1F35 !important;
+  background-color: #0F1F35 !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 24px rgba(15, 31, 53, 0.12) !important;
+}
+
+#checklistView .checklist-header::before,
+#checklistView .checklist-header::after,
+body #checklistView .checklist-header::before,
+body #checklistView .checklist-header::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+#checklistView .checklist-header > *,
+#checklistView .checklist-header * {
+  --accent-warm: #FFFFFF !important;
+  --accent-warm-soft: rgba(255, 255, 255, 0.10) !important;
+}
+
+#checklistView .checklist-header h2,
+#checklistView .checklist-header h3,
+#checklistView .checklist-header .eyebrow,
+#checklistView .checklist-header .page-description,
+#checklistView .checklist-header #checklistMeta,
+#checklistView .checklist-header .roles-overview h3,
+#checklistView .checklist-header .roles-overview p,
+#checklistView .checklist-header .roles-overview span {
+  color: #FFFFFF !important;
+}
+
+#checklistView .checklist-header .eyebrow,
+#checklistView .checklist-header .page-description,
+#checklistView .checklist-header #checklistMeta {
+  opacity: 0.72 !important;
+}
+
+/* The roles panel is called .roles-overview in v5.8.3 */
+#checklistView .roles-overview,
+body #checklistView .roles-overview {
+  background: #17324F !important;
+  background-color: #17324F !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+}
+
+#checklistView .roles-overview::before,
+#checklistView .roles-overview::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+#checklistView .roles-summary,
+#checklistView .role-compact-chip {
+  background: rgba(255, 255, 255, 0.08) !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #FFFFFF !important;
+}
+
+/* Buttons and filters inside the real competition header */
+#checklistView .checklist-header .ghost-btn,
+#checklistView .checklist-header .secondary-btn,
+#checklistView .checklist-header .filter-btn,
+#checklistView .checklist-header .section-filter-btn,
+#checklistView .checklist-header .responsible-filter-btn,
+#checklistView .checklist-header .incomplete-filter-btn,
+#checklistView .checklist-header .responsible-filter-pill {
+  background: rgba(255, 255, 255, 0.92) !important;
+  background-image: none !important;
+  color: #0F1F35 !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: none !important;
+}
+
+#checklistView .checklist-header .filter-btn.active,
+#checklistView .checklist-header .section-filter-btn.active,
+#checklistView .checklist-header .responsible-filter-btn.active,
+#checklistView .checklist-header .incomplete-filter-btn.active,
+#checklistView .checklist-header .responsible-filter-pill.active {
+  background: #17324F !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+}
+
+/* Header action buttons */
+#checklistView .checklist-header .download-pdf-btn,
+#checklistView .checklist-header .share-checklist-link-btn,
+#checklistView .checklist-header .edit-current-competition-btn,
+#checklistView .checklist-header .icon-action-btn,
+#checklistView .checklist-header .people-icon-btn {
+  background: #08182B !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
+}
+
+#checklistView .checklist-header .download-pdf-btn:hover,
+#checklistView .checklist-header .share-checklist-link-btn:hover,
+#checklistView .checklist-header .edit-current-competition-btn:hover,
+#checklistView .checklist-header .icon-action-btn:hover,
+#checklistView .checklist-header .people-icon-btn:hover {
+  background: #17324F !important;
+}
+
+/* Back button */
+#checklistView .checklist-header #backToDashboard,
+#checklistView .checklist-header .page-back-btn {
+  background: rgba(255, 255, 255, 0.95) !important;
+  background-image: none !important;
+  color: #0F1F35 !important;
+  border-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Force any remaining old warm/gold header colors away */
+#checklistView .checklist-header [style],
+#checklistView .checklist-header .deadline,
+#checklistView .checklist-header [class*="deadline"] {
+  background-image: none !important;
+}
+
+
+/* v5.8.8 — Fixed expanded navigation
+   Removes the old collapse/expand sidebar behavior. */
+.app-shell,
+.app-shell.sidebar-collapsed {
+  grid-template-columns: 276px minmax(0, 1fr) !important;
+}
+
+.app-shell.sidebar-collapsed .sidebar,
+.sidebar {
+  width: auto !important;
+}
+
+.app-shell.sidebar-collapsed .brand-text,
+.app-shell.sidebar-collapsed .nav-text,
+.app-shell.sidebar-collapsed .settings-version {
+  display: initial !important;
+}
+
+.app-shell.sidebar-collapsed .nav-link {
+  justify-content: flex-start !important;
+}
+
+.app-shell.sidebar-collapsed .nav-icon {
+  margin: 0 !important;
+}
+
+.collapse-btn,
+#toggleSidebar,
+.when-open,
+.when-closed {
+  display: none !important;
+}
+
+.sidebar-bottom {
+  justify-content: flex-start;
+}
+
+.sidebar-settings {
+  width: 100%;
+}
+
+.sidebar-settings-button {
+  width: 44px;
+  height: 44px;
+}
+
+
+/* v5.8.8b — hard remove collapse button */
+#toggleSidebar,
+.collapse-btn,
+.when-open,
+.when-closed {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+
+/* v5.8.9 — login fix after removing sidebar collapse */
+#toggleSidebar,
+.collapse-btn,
+.when-open,
+.when-closed {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.app-shell,
+.app-shell.sidebar-collapsed {
+  grid-template-columns: 276px minmax(0, 1fr) !important;
+}
+
+.app-shell.sidebar-collapsed .brand-text,
+.app-shell.sidebar-collapsed .nav-text,
+.app-shell.sidebar-collapsed .settings-version {
+  display: initial !important;
+}
+
+.app-shell.sidebar-collapsed .nav-link {
+  justify-content: flex-start !important;
+}
+
+
+/* v5.8.10 — Compact fixed navigation width
+   Sidebar stays expanded, but no longer takes up too much horizontal space. */
+:root {
+  --sidebar-width-expanded: 236px;
+}
+
+.app-shell,
+.app-shell.sidebar-collapsed {
+  grid-template-columns: var(--sidebar-width-expanded) minmax(0, 1fr) !important;
+}
+
+.sidebar {
+  width: var(--sidebar-width-expanded) !important;
+  min-width: var(--sidebar-width-expanded) !important;
+  max-width: var(--sidebar-width-expanded) !important;
+}
+
+.app-shell.sidebar-collapsed .sidebar,
+.app-shell.sidebar-collapsed .brand-text,
+.app-shell.sidebar-collapsed .nav-text,
+.app-shell.sidebar-collapsed .settings-version {
+  display: initial !important;
+}
+
+.app-shell.sidebar-collapsed .nav-link {
+  justify-content: flex-start !important;
+}
+
+.sidebar {
+  padding-inline: 1.1rem !important;
+}
+
+.brand {
+  padding-inline: 0.35rem !important;
+}
+
+.brand-logo {
+  max-width: 150px !important;
+}
+
+.nav-link {
+  min-height: 44px;
+  padding-inline: 0.85rem !important;
+}
+
+.sidebar-bottom {
+  padding-inline: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .app-shell,
+  .app-shell.sidebar-collapsed {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sidebar {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+}
+
+/* v3.5.1 professional radius refinement
+   Tighter, more square corners across the competition planner UI. */
+:root {
+  --radius-xl: 18px;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 8px;
+}
+
+/* Main structural containers */
+.page-header,
+.checklist-header {
+  border-radius: var(--radius-xl);
+}
+
+.competition-card,
+.panel,
+.progress-card,
+.phase-column,
+.panel-soft,
+.modal,
+.modal-card {
+  border-radius: var(--radius-lg);
+}
+
+/* Navigation and header controls */
+.nav-link,
+.collapse-btn,
+.mobile-menu-toggle,
+.mobile-brand .brand-mark,
+.brand-mark,
+.sidebar-card,
+.header-actions button,
+.primary-btn,
+.ghost-btn,
+.secondary-btn,
+.filter-btn,
+.danger-btn,
+.icon-btn,
+.icon-action-btn,
+.delete-small {
+  border-radius: var(--radius-md);
+}
+
+/* Forms and editor fields */
+input,
+select,
+textarea,
+.list-item,
+.template-section,
+.people-box,
+.role-editor-card,
+.responsible-filter-row select {
+  border-radius: var(--radius-sm);
+}
+
+/* Cards and task UI */
+.task-card {
+  border-radius: var(--radius-md);
+}
+
+.edit-task-btn,
+.task-check input {
+  border-radius: 7px;
+}
+
+.delete-task-btn {
+  border-radius: 6px;
+}
+
+/* Small badges/chips: still soft, but no longer fully pill-shaped */
+.status-badge,
+.person-pill,
+.pill,
+.role-compact-chip,
+.responsible-choice {
+  border-radius: 8px;
+}
+
+/* Keep genuinely circular/decorative elements round */
+.phase-dot,
+.progress-track,
+.progress-fill,
+.sidebar::after,
+.page-header::after,
+.checklist-header::after,
+.competition-card::after,
+.mobile-menu-toggle span {
+  border-radius: 999px;
+}
+
+@media (max-width: 860px) {
+  .sidebar {
+    border-bottom-left-radius: var(--radius-lg);
+    border-bottom-right-radius: var(--radius-lg);
+  }
+
+  .page-header,
+  .checklist-header {
+    border-radius: var(--radius-xl);
+  }
+}
+
+@media (max-width: 560px) {
+  .page-header,
+  .checklist-header,
+  .competition-card,
+  .panel,
+  .phase-column,
+  .panel-soft {
+    border-radius: var(--radius-lg);
+  }
+}
+
+
+/* v5.8.12 — Professional competition page refinement
+   Goal: a more serious, corporate interface with restrained surfaces,
+   tighter corners, less playful motion, and cleaner hierarchy. */
+:root {
+  --radius-xl: 14px;
+  --radius-lg: 10px;
+  --radius-md: 8px;
+  --radius-sm: 6px;
+  --shadow: 0 2px 8px rgba(15, 31, 53, 0.06);
+  --shadow-md: 0 10px 28px rgba(15, 31, 53, 0.10);
+  --shadow-card: 0 2px 8px rgba(15, 31, 53, 0.06);
+}
+
+body {
+  background: #F5F6F8 !important;
+  background-image: none !important;
+}
+
+button {
+  transition: background-color 0.14s ease, border-color 0.14s ease, color 0.14s ease, box-shadow 0.14s ease !important;
+}
+
+button:hover {
+  transform: none !important;
+}
+
+/* Sidebar: more structured, less glassy/playful */
+.sidebar,
+.mobile-topbar {
+  background: #0F1F35 !important;
+  background-image: none !important;
+  box-shadow: 8px 0 24px rgba(15, 31, 53, 0.10) !important;
+}
+
+.sidebar::after,
+.mobile-topbar::after {
+  display: none !important;
+  content: none !important;
+}
+
+.nav {
+  gap: 0.7rem !important;
+}
+
+.nav-link {
+  min-height: 42px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  box-shadow: none !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: #17324F !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+  box-shadow: none !important;
+}
+
+.nav-link.active::after {
+  display: none !important;
+  content: none !important;
+}
+
+.nav-link.active .nav-icon {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.sidebar-settings-button,
+.admin-logout,
+.firestore-status {
+  border-radius: 8px !important;
+}
+
+/* Competition header: flatter, cleaner and more business-like */
+#checklistView .checklist-header,
+body #checklistView .checklist-header,
+.app-shell #checklistView .checklist-header {
+  border-radius: 14px !important;
+  background: #0F1F35 !important;
+  background-image: none !important;
+  border: 1px solid rgba(15, 31, 53, 0.18) !important;
+  box-shadow: 0 8px 22px rgba(15, 31, 53, 0.10) !important;
+  padding: clamp(1.35rem, 2.6vw, 2rem) !important;
+}
+
+#checklistView .checklist-header h2 {
+  font-size: clamp(2.25rem, 4.6vw, 4rem) !important;
+  letter-spacing: -0.065em !important;
+}
+
+#checklistView .checklist-header .eyebrow {
+  letter-spacing: 0.11em !important;
+  opacity: 0.68 !important;
+}
+
+#checklistView .checklist-header #checklistMeta,
+#checklistView .checklist-header .page-description {
+  opacity: 0.72 !important;
+}
+
+#checklistView .roles-overview,
+body #checklistView .roles-overview {
+  border-radius: 10px !important;
+  background: #17324F !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
+}
+
+/* Header buttons and filters: squared, stable, and calmer */
+#checklistView .checklist-header .ghost-btn,
+#checklistView .checklist-header .secondary-btn,
+#checklistView .checklist-header .filter-btn,
+#checklistView .checklist-header .section-filter-btn,
+#checklistView .checklist-header .responsible-filter-btn,
+#checklistView .checklist-header .incomplete-filter-btn,
+#checklistView .checklist-header .responsible-filter-pill,
+#checklistView .checklist-header #backToDashboard,
+#checklistView .checklist-header .page-back-btn {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+#checklistView .checklist-header .filter-btn,
+#checklistView .checklist-header .section-filter-btn,
+#checklistView .checklist-header .responsible-filter-btn,
+#checklistView .checklist-header .incomplete-filter-btn,
+#checklistView .checklist-header .responsible-filter-pill {
+  background: #F8FAFC !important;
+  color: #0F1F35 !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+#checklistView .checklist-header .filter-btn.active,
+#checklistView .checklist-header .section-filter-btn.active,
+#checklistView .checklist-header .responsible-filter-btn.active,
+#checklistView .checklist-header .incomplete-filter-btn.active,
+#checklistView .checklist-header .responsible-filter-pill.active {
+  background: #17324F !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+  box-shadow: none !important;
+}
+
+#checklistView .checklist-header .download-pdf-btn,
+#checklistView .checklist-header .share-checklist-link-btn,
+#checklistView .checklist-header .edit-current-competition-btn,
+#checklistView .checklist-header .icon-action-btn,
+#checklistView .checklist-header .people-icon-btn {
+  border-radius: 8px !important;
+  background: #08182B !important;
+  box-shadow: none !important;
+}
+
+/* Cards and sections: flatter, tighter, and more operational */
+.competition-card,
+.panel,
+.phase-column,
+.panel-soft,
+.modal,
+.modal-card,
+.revenue-frame-card {
+  border-radius: 10px !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 2px 8px rgba(15, 31, 53, 0.05) !important;
+}
+
+.competition-card::after,
+.page-header::after,
+.checklist-header::after {
+  display: none !important;
+  content: none !important;
+}
+
+.phase-column {
+  background: #FFFFFF !important;
+}
+
+.phase-heading {
+  padding-bottom: 0.85rem !important;
+  margin-bottom: 0.85rem !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+
+.phase-heading h3 {
+  font-size: 1.05rem !important;
+  letter-spacing: -0.015em !important;
+}
+
+.task-card {
+  border-radius: 8px !important;
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: none !important;
+}
+
+.task-card:hover {
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 3px 10px rgba(15, 31, 53, 0.06) !important;
+  transform: none !important;
+}
+
+.task-card.done {
+  background: #F8FAFC !important;
+}
+
+.task-cell-label {
+  color: #64748B !important;
+  letter-spacing: 0.09em !important;
+}
+
+.task-title-cell h4 {
+  font-weight: 850 !important;
+}
+
+/* Inputs, buttons and utility controls */
+.primary-btn,
+.ghost-btn,
+.secondary-btn,
+.filter-btn,
+.danger-btn,
+.icon-btn,
+.icon-action-btn,
+.delete-small,
+.role-add-btn,
+.remove-role-field-btn,
+.list-item,
+.template-section,
+.people-box,
+.role-editor-card,
+.login-card,
+.login-form input,
+.login-submit,
+input,
+select,
+textarea {
+  border-radius: 8px !important;
+}
+
+input,
+select,
+textarea {
+  border-color: #CBD5E1 !important;
+  box-shadow: none !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+}
+
+.person-pill,
+.pill,
+.status-badge,
+.role-compact-chip,
+.responsible-choice,
+.responsible-filter-pill {
+  border-radius: 6px !important;
+}
+
+.task-check input,
+.edit-task-btn,
+.section-drag-handle,
+.template-task-drag-handle,
+.download-pdf-btn {
+  border-radius: 6px !important;
+}
+
+.delete-task-btn,
+.delete-section-btn,
+.template-delete-icon {
+  border-radius: 4px !important;
+}
+
+/* Add-task row should look like an action row, not a toy button */
+.add-phase-task,
+.add-section-panel .primary-btn,
+.template-section [data-add-task] {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 860px) {
+  .sidebar {
+    border-radius: 0 0 10px 10px !important;
+  }
+
+  #checklistView .checklist-header,
+  .page-header,
+  .checklist-header {
+    border-radius: 12px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  #checklistView .checklist-header h2 {
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+  }
+
+  .competition-card,
+  .panel,
+  .phase-column,
+  .panel-soft {
+    border-radius: 10px !important;
+  }
+}
+
+
+/* v5.8.14 — Apply professional corporate UI across the planner
+   Applies the serious, tighter look to dashboard, templates, role/settings modals,
+   and planner controls. The inntøku býti calculator files are untouched. */
+:root {
+  --radius-xl: 14px;
+  --radius-lg: 10px;
+  --radius-md: 8px;
+  --radius-sm: 6px;
+  --professional-border: #E2E8F0;
+  --professional-border-strong: #CBD5E1;
+  --professional-surface: #FFFFFF;
+  --professional-muted: #F8FAFC;
+  --professional-dark: #0F1F35;
+  --professional-dark-2: #17324F;
+}
+
+/* Shared app surface — kept neutral and business-like */
+body,
+.app-shell,
+.main {
+  background: #F5F6F8 !important;
+  background-image: none !important;
+}
+
+/* Apply to dashboard and template headers, but not the inntøku býti wrapper hero */
+.page-header:not(.revenue-page-hero),
+.checklist-header {
+  border-radius: var(--radius-xl) !important;
+  background: var(--professional-dark) !important;
+  background-image: none !important;
+  border: 1px solid rgba(15, 31, 53, 0.18) !important;
+  box-shadow: 0 8px 22px rgba(15, 31, 53, 0.10) !important;
+  color: #FFFFFF !important;
+}
+
+.page-header:not(.revenue-page-hero)::before,
+.page-header:not(.revenue-page-hero)::after,
+.checklist-header::before,
+.checklist-header::after,
+.competition-card::after {
+  display: none !important;
+  content: none !important;
+}
+
+.page-header:not(.revenue-page-hero) h2,
+.page-header:not(.revenue-page-hero) .eyebrow,
+.page-header:not(.revenue-page-hero) .page-description,
+.checklist-header h2,
+.checklist-header .eyebrow,
+.checklist-header .page-description {
+  color: #FFFFFF !important;
+}
+
+.page-header:not(.revenue-page-hero) .eyebrow,
+.page-header:not(.revenue-page-hero) .page-description,
+.checklist-header .eyebrow,
+.checklist-header .page-description {
+  opacity: 0.72 !important;
+}
+
+/* Main content cards */
+.competition-card,
+.panel,
+.phase-column,
+.panel-soft,
+.template-section,
+.template-roles-panel,
+.template-role-card,
+.role-editor-card,
+.people-box,
+.profile-logo-settings,
+.login-settings-card,
+.empty-panel,
+.modal,
+.modal-card,
+.list-item,
+.responsible-choice-row,
+.empty-list-message {
+  border-radius: var(--radius-lg) !important;
+  background: var(--professional-surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--professional-border) !important;
+  box-shadow: 0 2px 8px rgba(15, 31, 53, 0.05) !important;
+}
+
+.competition-card:hover,
+.panel:hover,
+.template-section:hover,
+.phase-column:hover {
+  box-shadow: 0 4px 12px rgba(15, 31, 53, 0.07) !important;
+}
+
+/* Competition cards on the main page */
+.competition-card {
+  gap: 1rem !important;
+}
+
+.competition-card h3,
+.panel h3,
+.phase-heading h3,
+.template-section h3 {
+  letter-spacing: -0.015em !important;
+}
+
+.card-meta,
+.page-description,
+.settings-help,
+.settings-message,
+.task-note,
+.task-empty-cell,
+.empty-list-message {
+  color: #64748B !important;
+}
+
+.status-badge {
+  border-radius: var(--radius-sm) !important;
+  background: #DBEAFE !important;
+  color: #1E40AF !important;
+  border: 1px solid #BFDBFE !important;
+}
+
+/* Template page */
+.template-layout {
+  gap: 1rem !important;
+}
+
+#templateList .list-item,
+.list .list-item,
+button[data-template-id] {
+  border-radius: var(--radius-md) !important;
+  background: #FFFFFF !important;
+  border: 1px solid var(--professional-border) !important;
+  box-shadow: none !important;
+}
+
+#templateList .list-item.active,
+#templateList button.active,
+#templateList [data-template-id].active,
+.list .list-item.active,
+.list button.active,
+button[data-template-id].active {
+  background: var(--professional-dark) !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+  border-color: var(--professional-dark) !important;
+  box-shadow: none !important;
+}
+
+.template-grid-header,
+.template-grid-header-simple,
+.task-cell-label {
+  color: #64748B !important;
+  letter-spacing: 0.09em !important;
+}
+
+.template-task,
+.template-task-simple {
+  border-radius: var(--radius-md) !important;
+}
+
+/* Task cards and rows */
+.task-card {
+  border-radius: var(--radius-md) !important;
+  background: #FFFFFF !important;
+  border: 1px solid var(--professional-border) !important;
+  box-shadow: none !important;
+}
+
+.task-card:hover {
+  border-color: var(--professional-border-strong) !important;
+  box-shadow: 0 3px 10px rgba(15, 31, 53, 0.06) !important;
+  transform: none !important;
+}
+
+.task-card.done {
+  background: var(--professional-muted) !important;
+}
+
+.task-check input {
+  border-radius: 6px !important;
+}
+
+/* Buttons and controls */
+.primary-btn,
+.ghost-btn,
+.secondary-btn,
+.filter-btn,
+.danger-btn,
+.icon-btn,
+.icon-action-btn,
+.delete-small,
+.role-add-btn,
+.remove-role-field-btn,
+.admin-logout,
+.sidebar-settings-button,
+.mobile-menu-toggle,
+.login-submit,
+.add-phase-task,
+.small-inline-btn {
+  border-radius: var(--radius-md) !important;
+  box-shadow: none !important;
+}
+
+.primary-btn,
+.login-submit {
+  background: var(--professional-dark) !important;
+  color: #FFFFFF !important;
+  border-color: var(--professional-dark) !important;
+}
+
+.primary-btn:hover,
+.login-submit:hover {
+  background: var(--professional-dark-2) !important;
+  border-color: var(--professional-dark-2) !important;
+}
+
+.secondary-btn,
+.ghost-btn,
+.filter-btn,
+.icon-btn,
+.icon-action-btn,
+.role-add-btn,
+.remove-role-field-btn,
+.small-inline-btn {
+  background: #FFFFFF !important;
+  color: var(--professional-dark) !important;
+  border: 1px solid var(--professional-border-strong) !important;
+}
+
+.secondary-btn:hover,
+.ghost-btn:hover,
+.filter-btn:hover,
+.icon-btn:hover,
+.icon-action-btn:hover,
+.role-add-btn:hover,
+.remove-role-field-btn:hover,
+.small-inline-btn:hover {
+  background: var(--professional-muted) !important;
+}
+
+.filter-btn.active,
+.section-filter-btn.active,
+.responsible-filter-btn.active,
+.incomplete-filter-btn.active,
+.responsible-filter-pill.active {
+  background: var(--professional-dark) !important;
+  color: #FFFFFF !important;
+  border-color: var(--professional-dark) !important;
+  box-shadow: none !important;
+}
+
+/* Keep dark-header controls readable */
+.page-header:not(.revenue-page-hero) .primary-btn,
+.page-header:not(.revenue-page-hero) .ghost-btn,
+.page-header:not(.revenue-page-hero) .secondary-btn,
+.page-header:not(.revenue-page-hero) .filter-btn,
+.checklist-header .ghost-btn,
+.checklist-header .secondary-btn,
+.checklist-header .filter-btn,
+.checklist-header .section-filter-btn,
+.checklist-header .responsible-filter-btn,
+.checklist-header .incomplete-filter-btn,
+.checklist-header .responsible-filter-pill {
+  background: #F8FAFC !important;
+  color: var(--professional-dark) !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: none !important;
+}
+
+.page-header:not(.revenue-page-hero) .filter-btn.active,
+.checklist-header .filter-btn.active,
+.checklist-header .section-filter-btn.active,
+.checklist-header .responsible-filter-btn.active,
+.checklist-header .incomplete-filter-btn.active,
+.checklist-header .responsible-filter-pill.active {
+  background: var(--professional-dark-2) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+}
+
+/* Forms */
+input,
+select,
+textarea,
+#competitionTemplate,
+#createCompetitionModal select {
+  border-radius: var(--radius-md) !important;
+  border-color: var(--professional-border-strong) !important;
+  box-shadow: none !important;
+  background-color: #FFFFFF !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+}
+
+/* Modals, settings and role editor */
+.modal {
+  border-radius: var(--radius-lg) !important;
+}
+
+.modal-card {
+  border: 0 !important;
+}
+
+.modal-header,
+.modal-actions {
+  border-radius: 0 !important;
+}
+
+.settings-tabs,
+.profile-logo-preview-wrap {
+  border-radius: var(--radius-lg) !important;
+  background: var(--professional-muted) !important;
+  border: 1px solid var(--professional-border) !important;
+}
+
+.settings-tab {
+  border-radius: var(--radius-md) !important;
+  box-shadow: none !important;
+}
+
+.settings-tab-icon {
+  border-radius: var(--radius-md) !important;
+}
+
+.settings-tab.active {
+  background: var(--professional-dark) !important;
+  color: #FFFFFF !important;
+  border-color: var(--professional-dark) !important;
+  box-shadow: none !important;
+}
+
+.role-editor-card,
+.template-role-card,
+.dynamic-role-card {
+  border-radius: var(--radius-lg) !important;
+  background: #FFFFFF !important;
+}
+
+.role-inputs input,
+.template-role-card input,
+.template-role-card select {
+  border-radius: var(--radius-md) !important;
+}
+
+/* Pills/badges: no fully rounded playful pills */
+.person-pill,
+.pill,
+.role-compact-chip,
+.responsible-choice,
+.responsible-filter-pill,
+.editable-person-pill,
+.tiny-icon-btn,
+.firestore-status {
+  border-radius: var(--radius-sm) !important;
+}
+
+/* Delete icons stay plain and sharp */
+.delete-task-btn,
+.delete-section-btn,
+.template-delete-icon {
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+
+/* Sidebar consistency */
+.sidebar,
+.mobile-topbar {
+  background: var(--professional-dark) !important;
+  background-image: none !important;
+}
+
+.nav-link {
+  border-radius: var(--radius-md) !important;
+  box-shadow: none !important;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  background: var(--professional-dark-2) !important;
+  box-shadow: none !important;
+}
+
+/* Do not restyle the embedded revenue calculator surface. */
+#revenueView .revenue-frame-card,
+#revenueView .revenue-frame,
+.app-shell.portal-revenue-active .revenue-frame-card,
+.app-shell.portal-revenue-active .revenue-frame {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* v5.8.14 — Competition card action cleanup */
+.competition-card .card-top {
+  align-items: flex-start !important;
+}
+
+.competition-card .card-delete-btn {
+  flex: 0 0 auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 2rem !important;
+  height: 2rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: var(--radius-sm) !important;
+  background: transparent !important;
+  color: var(--red) !important;
+  box-shadow: none !important;
+  font-size: 1.25rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+.competition-card .card-delete-btn:hover {
+  background: #FEE2E2 !important;
+  color: #991B1B !important;
+}
+
+.competition-card .competition-actions .icon-action-btn {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--professional-dark) !important;
+}
+
+.competition-card .competition-actions .icon-action-btn:hover {
+  background: var(--professional-muted) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.competition-card .competition-actions .icon-action-btn.danger {
+  color: var(--red) !important;
+}
+
+/* v5.8.15 checklist header icon group */
+#checklistView .checklist-header .header-icon-actions {
+  position: absolute;
+  right: clamp(1.15rem, 3vw, 2rem);
+  bottom: clamp(1.15rem, 3vw, 2rem);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+#checklistView .checklist-header .header-icon-actions .download-pdf-btn,
+#checklistView .checklist-header .header-icon-actions .share-checklist-link-btn,
+#checklistView .checklist-header .header-icon-actions .edit-current-competition-btn,
+#checklistView .checklist-header .header-icon-actions .people-icon-btn {
+  position: static !important;
+  inset: auto !important;
+  width: 2.15rem !important;
+  height: 2.15rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  border-color: transparent !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #FFFFFF !important;
+  backdrop-filter: none !important;
+}
+
+#checklistView .checklist-header .header-icon-actions .download-pdf-btn:hover,
+#checklistView .checklist-header .header-icon-actions .share-checklist-link-btn:hover,
+#checklistView .checklist-header .header-icon-actions .edit-current-competition-btn:hover,
+#checklistView .checklist-header .header-icon-actions .people-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border: 0 !important;
+  transform: none !important;
+}
+
+#checklistView .checklist-header .roles-actions .people-icon-btn {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  #checklistView .checklist-header .header-icon-actions {
+    position: static;
+    justify-content: flex-end;
+    margin-top: 0.75rem;
+  }
+}
+
+/* v5.8.16 — Compact competition header and practical utility panel */
+#checklistView .checklist-header.checklist-header-compact,
+body #checklistView .checklist-header.checklist-header-compact,
+.app-shell #checklistView .checklist-header.checklist-header-compact {
+  display: block !important;
+  position: relative !important;
+  margin-bottom: 0.95rem !important;
+  padding: clamp(1.05rem, 2vw, 1.55rem) clamp(1.15rem, 2.5vw, 1.8rem) !important;
+  border-radius: 12px !important;
+  background: #0F1F35 !important;
+  border: 1px solid rgba(15, 31, 53, 0.16) !important;
+  box-shadow: 0 8px 22px rgba(15, 31, 53, 0.08) !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact #backToDashboard {
+  margin-bottom: clamp(0.8rem, 1.5vw, 1.05rem) !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact .checklist-title-row {
+  display: block !important;
+  margin-bottom: 0 !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact h2 {
+  font-size: clamp(2rem, 4.1vw, 3.35rem) !important;
+  line-height: 0.95 !important;
+  margin-bottom: 0.45rem !important;
+  letter-spacing: -0.07em !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact .eyebrow {
+  margin-bottom: 0.45rem !important;
+  opacity: 0.7 !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact #checklistMeta,
+#checklistView .checklist-header.checklist-header-compact .page-description {
+  font-size: 0.94rem !important;
+  opacity: 0.74 !important;
+}
+
+#checklistView .competition-utility-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: clamp(0.85rem, 1.8vw, 1.25rem);
+  margin-bottom: 1rem;
+  padding: clamp(0.85rem, 1.8vw, 1.15rem);
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  background: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(15, 31, 53, 0.045);
+}
+
+#checklistView .competition-utility-main {
+  display: grid;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+#checklistView .competition-utility-panel .roles-overview,
+body #checklistView .competition-utility-panel .roles-overview {
+  background: #F8FAFC !important;
+  background-image: none !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 8px !important;
+  color: #0F1F35 !important;
+  box-shadow: none !important;
+  padding: 0.8rem 0.95rem !important;
+}
+
+#checklistView .competition-utility-panel .roles-overview h3,
+#checklistView .competition-utility-panel .roles-overview p,
+#checklistView .competition-utility-panel .roles-overview span,
+#checklistView .competition-utility-panel .roles-overview .eyebrow {
+  color: #0F1F35 !important;
+}
+
+#checklistView .competition-utility-panel .roles-overview .eyebrow {
+  opacity: 0.62 !important;
+}
+
+#checklistView .competition-utility-panel .roles-overview h3 {
+  margin-bottom: 0 !important;
+  font-size: 1rem !important;
+  letter-spacing: -0.02em !important;
+}
+
+#checklistView .competition-utility-panel .roles-overview-top {
+  align-items: center !important;
+}
+
+#checklistView .competition-utility-panel .roles-summary,
+#checklistView .competition-utility-panel .role-compact-chip {
+  background: #FFFFFF !important;
+  color: #0F1F35 !important;
+  border-color: #E2E8F0 !important;
+}
+
+#checklistView .competition-utility-panel .secondary-btn,
+#checklistView .competition-utility-panel .filter-btn,
+#checklistView .competition-utility-panel .section-filter-btn,
+#checklistView .competition-utility-panel .responsible-filter-pill {
+  border-radius: 7px !important;
+  box-shadow: none !important;
+}
+
+#checklistView .competition-utility-panel .secondary-btn {
+  background: #0F1F35 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #0F1F35 !important;
+}
+
+#checklistView .competition-filter-panel {
+  display: grid;
+  gap: 0.65rem;
+}
+
+#checklistView .competition-filter-panel .filter-row,
+#checklistView .competition-filter-panel .responsible-pill-filter {
+  padding-bottom: 0 !important;
+}
+
+#checklistView .competition-utility-panel .header-icon-actions {
+  position: static !important;
+  inset: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.45rem !important;
+  z-index: 1 !important;
+  padding-top: 0.1rem;
+}
+
+#checklistView .competition-utility-panel .header-icon-actions .download-pdf-btn,
+#checklistView .competition-utility-panel .header-icon-actions .share-checklist-link-btn,
+#checklistView .competition-utility-panel .header-icon-actions .edit-current-competition-btn,
+#checklistView .competition-utility-panel .header-icon-actions .people-icon-btn {
+  position: static !important;
+  inset: auto !important;
+  width: 2.1rem !important;
+  height: 2.1rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #0F1F35 !important;
+  font-size: 1.05rem !important;
+  line-height: 1 !important;
+  backdrop-filter: none !important;
+}
+
+#checklistView .competition-utility-panel .header-icon-actions .download-pdf-btn:hover,
+#checklistView .competition-utility-panel .header-icon-actions .share-checklist-link-btn:hover,
+#checklistView .competition-utility-panel .header-icon-actions .edit-current-competition-btn:hover,
+#checklistView .competition-utility-panel .header-icon-actions .people-icon-btn:hover {
+  background: #F1F5F9 !important;
+  transform: none !important;
+}
+
+#checklistView .competition-utility-panel .people-icon-btn .button-icon-svg {
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+  stroke-width: 1.9 !important;
+}
+
+@media (max-width: 860px) {
+  #checklistView .competition-utility-panel {
+    grid-template-columns: 1fr;
+  }
+
+  #checklistView .competition-utility-panel .header-icon-actions {
+    justify-content: flex-start !important;
+    padding-top: 0 !important;
+  }
+}
+
+@media (max-width: 560px) {
+  #checklistView .checklist-header.checklist-header-compact {
+    padding: 1rem !important;
+  }
+
+  #checklistView .competition-utility-panel {
+    padding: 0.8rem !important;
+  }
+
+  #checklistView .competition-utility-panel .roles-overview-top {
+    display: grid !important;
+    gap: 0.7rem !important;
+  }
+}
+
+/* v5.8.17 — Header actions moved back into the header and utility panel made leaner */
+#checklistView .checklist-header.checklist-header-compact {
+  padding-bottom: clamp(1rem, 2vw, 1.45rem) !important;
+  padding-right: clamp(8.7rem, 17vw, 11.5rem) !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact .header-icon-actions {
+  position: absolute !important;
+  right: clamp(0.95rem, 2vw, 1.35rem) !important;
+  bottom: clamp(0.85rem, 1.7vw, 1.15rem) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.42rem !important;
+  z-index: 2 !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact .header-icon-actions .download-pdf-btn,
+#checklistView .checklist-header.checklist-header-compact .header-icon-actions .share-checklist-link-btn,
+#checklistView .checklist-header.checklist-header-compact .header-icon-actions .edit-current-competition-btn,
+#checklistView .checklist-header.checklist-header-compact .header-icon-actions .people-icon-btn {
+  position: static !important;
+  inset: auto !important;
+  width: 2.05rem !important;
+  height: 2.05rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,0.86) !important;
+  font-size: 1.02rem !important;
+  line-height: 1 !important;
+  backdrop-filter: none !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact .header-icon-actions .download-pdf-btn:hover,
+#checklistView .checklist-header.checklist-header-compact .header-icon-actions .share-checklist-link-btn:hover,
+#checklistView .checklist-header.checklist-header-compact .header-icon-actions .edit-current-competition-btn:hover,
+#checklistView .checklist-header.checklist-header-compact .header-icon-actions .people-icon-btn:hover {
+  background: rgba(255,255,255,0.1) !important;
+  color: #FFFFFF !important;
+  transform: none !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact .header-icon-actions .button-icon-svg {
+  width: 1.05rem !important;
+  height: 1.05rem !important;
+  stroke-width: 2 !important;
+}
+
+#checklistView .competition-utility-panel {
+  display: block !important;
+  margin-bottom: 0.85rem !important;
+  padding: 0.58rem 0.65rem !important;
+  border: 1px solid #E5EAF0 !important;
+  border-radius: 8px !important;
+  background: #FFFFFF !important;
+  box-shadow: none !important;
+}
+
+#checklistView .competition-utility-main {
+  display: grid !important;
+  grid-template-columns: minmax(210px, 0.8fr) minmax(0, 1.2fr) !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+}
+
+#checklistView .competition-utility-panel .roles-overview,
+body #checklistView .competition-utility-panel .roles-overview {
+  padding: 0.48rem 0.55rem !important;
+  border-radius: 7px !important;
+  background: #F8FAFC !important;
+  border: 1px solid #E6ECF2 !important;
+}
+
+#checklistView .competition-utility-panel .roles-overview-top {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.5rem !important;
+}
+
+#checklistView .competition-utility-panel .roles-overview .eyebrow {
+  margin-bottom: 0 !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.08em !important;
+  opacity: 0.65 !important;
+}
+
+#checklistView .competition-utility-panel .roles-overview h3 {
+  display: none !important;
+}
+
+#checklistView .competition-utility-panel .secondary-btn {
+  min-height: 1.95rem !important;
+  padding: 0.36rem 0.6rem !important;
+  border-radius: 6px !important;
+  font-size: 0.78rem !important;
+  line-height: 1 !important;
+}
+
+#checklistView .competition-filter-panel {
+  display: grid !important;
+  gap: 0.42rem !important;
+  min-width: 0 !important;
+}
+
+#checklistView .competition-filter-panel .filter-row,
+#checklistView .competition-filter-panel .responsible-pill-filter {
+  gap: 0.35rem !important;
+  padding-bottom: 0 !important;
+}
+
+#checklistView .competition-utility-panel .filter-btn,
+#checklistView .competition-utility-panel .section-filter-btn,
+#checklistView .competition-utility-panel .responsible-filter-pill {
+  min-height: 1.9rem !important;
+  padding: 0.35rem 0.58rem !important;
+  border-radius: 6px !important;
+  font-size: 0.76rem !important;
+  line-height: 1 !important;
+}
+
+#checklistView .competition-utility-panel .roles-summary {
+  margin-top: 0.5rem !important;
+  padding-top: 0.5rem !important;
+  border-top: 1px solid #E6ECF2 !important;
+}
+
+@media (max-width: 860px) {
+  #checklistView .checklist-header.checklist-header-compact {
+    padding-right: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  #checklistView .checklist-header.checklist-header-compact .header-icon-actions {
+    position: static !important;
+    justify-content: flex-end !important;
+    margin-top: 0.75rem !important;
+  }
+
+  #checklistView .competition-utility-main {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* v5.8.18 — Filter-only utility panel */
+#checklistView .competition-utility-panel.filter-utility-panel {
+  display: grid !important;
+  grid-template-columns: minmax(185px, 0.28fr) minmax(0, 1fr) !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  margin: 0 0 1rem 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid #DDE5EE !important;
+  border-radius: 10px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 8px 22px rgba(15, 31, 53, 0.055) !important;
+}
+
+#checklistView .filter-panel-header {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 0.25rem !important;
+  min-width: 0 !important;
+  padding: 0.78rem 0.95rem !important;
+  border-right: 1px solid #DDE5EE !important;
+  background: #F8FAFC !important;
+}
+
+#checklistView .filter-panel-header .eyebrow {
+  margin: 0 !important;
+  color: #667085 !important;
+  font-size: 0.67rem !important;
+  letter-spacing: 0.09em !important;
+}
+
+#checklistView .filter-panel-header h3 {
+  margin: 0 !important;
+  color: #0F1F35 !important;
+  font-size: 0.98rem !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.03em !important;
+}
+
+#checklistView .filter-panel-hint {
+  margin: 0 !important;
+  color: #667085 !important;
+  font-size: 0.76rem !important;
+  line-height: 1.25 !important;
+}
+
+#checklistView .filter-utility-panel .competition-filter-panel {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 0 !important;
+  min-width: 0 !important;
+}
+
+#checklistView .filter-group {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  min-width: 0 !important;
+  padding: 0.72rem 0.82rem !important;
+}
+
+#checklistView .filter-group + .filter-group {
+  border-left: 1px solid #E6ECF2 !important;
+}
+
+#checklistView .filter-label {
+  color: #475569 !important;
+  font-size: 0.72rem !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  white-space: nowrap !important;
+}
+
+#checklistView .filter-utility-panel .filter-row,
+#checklistView .filter-utility-panel .responsible-pill-filter {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.38rem !important;
+  min-width: 0 !important;
+  overflow-x: auto !important;
+  padding: 0 !important;
+  scrollbar-width: thin !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn,
+#checklistView .filter-utility-panel .section-filter-btn,
+#checklistView .filter-utility-panel .responsible-filter-pill {
+  min-height: 1.9rem !important;
+  padding: 0.36rem 0.62rem !important;
+  border-radius: 7px !important;
+  border: 1px solid #D8E0EA !important;
+  background: #FFFFFF !important;
+  color: #334155 !important;
+  box-shadow: none !important;
+  font-size: 0.76rem !important;
+  font-weight: 850 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn.active,
+#checklistView .filter-utility-panel .section-filter-btn.active,
+#checklistView .filter-utility-panel .responsible-filter-pill.active {
+  background: #0F1F35 !important;
+  border-color: #0F1F35 !important;
+  color: #FFFFFF !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn:hover,
+#checklistView .filter-utility-panel .section-filter-btn:hover,
+#checklistView .filter-utility-panel .responsible-filter-pill:hover {
+  border-color: #AAB7C5 !important;
+  background: #F8FAFC !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn.active:hover,
+#checklistView .filter-utility-panel .section-filter-btn.active:hover,
+#checklistView .filter-utility-panel .responsible-filter-pill.active:hover {
+  background: #0F1F35 !important;
+  border-color: #0F1F35 !important;
+}
+
+@media (max-width: 980px) {
+  #checklistView .competition-utility-panel.filter-utility-panel {
+    grid-template-columns: 1fr !important;
+  }
+
+  #checklistView .filter-panel-header {
+    border-right: 0 !important;
+    border-bottom: 1px solid #DDE5EE !important;
+  }
+}
+
+@media (max-width: 700px) {
+  #checklistView .filter-utility-panel .competition-filter-panel {
+    grid-template-columns: 1fr !important;
+  }
+
+  #checklistView .filter-group {
+    grid-template-columns: 1fr !important;
+    gap: 0.42rem !important;
+  }
+
+  #checklistView .filter-group + .filter-group {
+    border-left: 0 !important;
+    border-top: 1px solid #E6ECF2 !important;
+  }
+}
+
+/* v5.8.19 — Bolder professional filter panel
+   Keeps the filter area functional, but gives it a stronger visual identity that matches the dark Stoyt navigation/header style. */
+#checklistView .competition-utility-panel.filter-utility-panel {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: minmax(210px, 0.32fr) minmax(0, 1fr) !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  margin: 0 0 1.05rem 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 12px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 10px 26px rgba(15, 31, 53, 0.08) !important;
+}
+
+#checklistView .competition-utility-panel.filter-utility-panel::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 auto 0 0 !important;
+  width: 4px !important;
+  background: #0F1F35 !important;
+  z-index: 2 !important;
+}
+
+#checklistView .filter-panel-header {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 0.28rem !important;
+  min-width: 0 !important;
+  padding: 0.92rem 1.05rem 0.92rem 1.15rem !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: #0F1F35 !important;
+  background-image: linear-gradient(135deg, #0F1F35 0%, #17324F 100%) !important;
+  color: #FFFFFF !important;
+}
+
+#checklistView .filter-panel-header::after {
+  content: "" !important;
+  position: absolute !important;
+  right: -1px !important;
+  top: 0.9rem !important;
+  bottom: 0.9rem !important;
+  width: 1px !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+}
+
+#checklistView .filter-panel-header .eyebrow {
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.68) !important;
+  font-size: 0.67rem !important;
+  letter-spacing: 0.12em !important;
+}
+
+#checklistView .filter-panel-header h3 {
+  margin: 0 !important;
+  color: #FFFFFF !important;
+  font-size: 1.02rem !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.035em !important;
+}
+
+#checklistView .filter-panel-hint {
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.68) !important;
+  font-size: 0.75rem !important;
+  line-height: 1.25 !important;
+}
+
+#checklistView .filter-utility-panel .competition-filter-panel {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 0 !important;
+  min-width: 0 !important;
+  background: #F8FAFC !important;
+}
+
+#checklistView .filter-group {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 86px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 0.7rem !important;
+  min-width: 0 !important;
+  padding: 0.82rem 0.9rem !important;
+  background: #FFFFFF !important;
+}
+
+#checklistView .filter-group::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0.72rem auto 0.72rem 0 !important;
+  width: 1px !important;
+  background: #D8E0EA !important;
+}
+
+#checklistView .filter-group + .filter-group {
+  border-left: 1px solid #D8E0EA !important;
+}
+
+#checklistView .filter-label {
+  justify-self: start !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 1.7rem !important;
+  padding: 0.28rem 0.5rem !important;
+  border-radius: 6px !important;
+  background: #EEF2F7 !important;
+  color: #0F1F35 !important;
+  font-size: 0.67rem !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.09em !important;
+  white-space: nowrap !important;
+}
+
+#checklistView .filter-utility-panel .filter-row,
+#checklistView .filter-utility-panel .responsible-pill-filter {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.42rem !important;
+  min-width: 0 !important;
+  overflow-x: auto !important;
+  padding: 0.05rem 0 !important;
+  scrollbar-width: thin !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn,
+#checklistView .filter-utility-panel .section-filter-btn,
+#checklistView .filter-utility-panel .responsible-filter-pill {
+  position: relative !important;
+  min-height: 2.05rem !important;
+  padding: 0.45rem 0.68rem !important;
+  border-radius: 7px !important;
+  border: 1px solid #CBD5E1 !important;
+  background: #F8FAFC !important;
+  color: #334155 !important;
+  box-shadow: inset 0 -1px 0 rgba(15, 31, 53, 0.04) !important;
+  font-size: 0.76rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn:hover,
+#checklistView .filter-utility-panel .section-filter-btn:hover,
+#checklistView .filter-utility-panel .responsible-filter-pill:hover {
+  border-color: #64748B !important;
+  background: #FFFFFF !important;
+  color: #0F1F35 !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn.active,
+#checklistView .filter-utility-panel .section-filter-btn.active,
+#checklistView .filter-utility-panel .responsible-filter-pill.active {
+  background: #0F1F35 !important;
+  border-color: #0F1F35 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(15, 31, 53, 0.18) !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn.active::after,
+#checklistView .filter-utility-panel .section-filter-btn.active::after,
+#checklistView .filter-utility-panel .responsible-filter-pill.active::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 0.48rem !important;
+  right: 0.48rem !important;
+  bottom: -0.28rem !important;
+  height: 2px !important;
+  border-radius: 999px !important;
+  background: #FFFFFF !important;
+  opacity: 0.75 !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn.active:hover,
+#checklistView .filter-utility-panel .section-filter-btn.active:hover,
+#checklistView .filter-utility-panel .responsible-filter-pill.active:hover {
+  background: #17324F !important;
+  border-color: #17324F !important;
+  color: #FFFFFF !important;
+}
+
+@media (max-width: 980px) {
+  #checklistView .competition-utility-panel.filter-utility-panel {
+    grid-template-columns: 1fr !important;
+  }
+
+  #checklistView .filter-panel-header {
+    border-right: 0 !important;
+    border-bottom: 1px solid rgba(15, 31, 53, 0.10) !important;
+    padding-left: 1.05rem !important;
+  }
+
+  #checklistView .filter-panel-header::after {
+    display: none !important;
+  }
+}
+
+@media (max-width: 700px) {
+  #checklistView .filter-utility-panel .competition-filter-panel {
+    grid-template-columns: 1fr !important;
+  }
+
+  #checklistView .filter-group {
+    grid-template-columns: 1fr !important;
+    gap: 0.48rem !important;
+    padding: 0.78rem 0.85rem !important;
+  }
+
+  #checklistView .filter-group::before {
+    display: none !important;
+  }
+
+  #checklistView .filter-group + .filter-group {
+    border-left: 0 !important;
+    border-top: 1px solid #D8E0EA !important;
+  }
+
+  #checklistView .filter-label {
+    width: fit-content !important;
+  }
+}
+
+/* v5.8.20 — Visual filter control panel inspired by the reference design */
+#checklistView .competition-utility-panel.filter-utility-panel {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+  margin: 0 0 1.15rem 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(190, 199, 214, 0.72) !important;
+  border-radius: 10px !important;
+  background:
+    radial-gradient(circle at 94% 6%, rgba(124, 58, 237, 0.18) 0 0, rgba(124, 58, 237, 0.18) 13%, transparent 13.5%),
+    radial-gradient(circle at 92% 92%, rgba(245, 158, 11, 0.18) 0 0, rgba(245, 158, 11, 0.18) 16%, transparent 16.5%),
+    linear-gradient(135deg, #FFFFFF 0%, #FBFAFF 52%, #FFF7ED 100%) !important;
+  box-shadow: 0 14px 38px rgba(15, 31, 53, 0.08) !important;
+}
+
+#checklistView .competition-utility-panel.filter-utility-panel::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: auto !important;
+  background:
+    linear-gradient(90deg, rgba(124,58,237,0.08), transparent 32%),
+    linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.28)) !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+#checklistView .filter-panel-header,
+#checklistView .filter-utility-panel .competition-filter-panel {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+#checklistView .filter-panel-header {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+  padding: 1.15rem 1.35rem 0.9rem 1.35rem !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(203, 213, 225, 0.68) !important;
+  background: transparent !important;
+  color: #0F1F35 !important;
+}
+
+#checklistView .filter-panel-header::after {
+  display: none !important;
+}
+
+#checklistView .filter-title-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.72rem !important;
+  min-width: 0 !important;
+}
+
+#checklistView .filter-symbol {
+  width: 2.35rem !important;
+  height: 2.35rem !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  flex: 0 0 auto !important;
+  border-radius: 9px !important;
+  background: rgba(124, 58, 237, 0.14) !important;
+  color: #6D28D9 !important;
+}
+
+#checklistView .filter-symbol-svg {
+  width: 1.12rem !important;
+  height: 1.12rem !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.2 !important;
+  stroke-linejoin: round !important;
+}
+
+#checklistView .filter-panel-header h3 {
+  margin: 0 !important;
+  color: #0F1F35 !important;
+  font-size: 1.18rem !important;
+  line-height: 1 !important;
+  letter-spacing: -0.04em !important;
+}
+
+#checklistView .filter-panel-hint {
+  margin: 0.18rem 0 0 !important;
+  color: #64748B !important;
+  font-size: 0.78rem !important;
+  line-height: 1.25 !important;
+}
+
+#checklistView .reset-filters-btn {
+  min-height: 2.3rem !important;
+  padding: 0.52rem 0.78rem !important;
+  border-radius: 7px !important;
+  border: 1px solid rgba(124, 58, 237, 0.18) !important;
+  background: rgba(255,255,255,0.84) !important;
+  color: #6D28D9 !important;
+  box-shadow: 0 6px 18px rgba(15, 31, 53, 0.08) !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+}
+
+#checklistView .reset-filters-btn:hover {
+  background: #FFFFFF !important;
+  border-color: rgba(124, 58, 237, 0.38) !important;
+}
+
+#checklistView .filter-utility-panel .competition-filter-panel {
+  display: grid !important;
+  grid-template-columns: minmax(260px, 1.08fr) minmax(210px, 0.82fr) minmax(240px, 0.92fr) !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+#checklistView .filter-group {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  align-content: start !important;
+  gap: 0.58rem !important;
+  min-width: 0 !important;
+  padding: 1rem 1.35rem 1.2rem !important;
+  background: rgba(255,255,255,0.38) !important;
+  border: 0 !important;
+}
+
+#checklistView .filter-group::before {
+  display: none !important;
+}
+
+#checklistView .filter-group + .filter-group {
+  border-left: 1px solid rgba(203, 213, 225, 0.68) !important;
+}
+
+#checklistView .filter-label {
+  display: block !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #64748B !important;
+  font-size: 0.72rem !important;
+  font-weight: 950 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+}
+
+#checklistView .filter-utility-panel .filter-row.filter-button-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.45rem !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+#checklistView .filter-utility-panel .responsible-pill-filter {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.45rem !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn,
+#checklistView .filter-utility-panel .section-filter-btn,
+#checklistView .filter-utility-panel .responsible-filter-pill {
+  min-height: 2.65rem !important;
+  width: 100% !important;
+  justify-content: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  padding: 0.62rem 0.75rem !important;
+  border-radius: 7px !important;
+  border: 1px solid rgba(203, 213, 225, 0.86) !important;
+  background: rgba(255,255,255,0.84) !important;
+  color: #0F1F35 !important;
+  box-shadow: 0 7px 18px rgba(15, 31, 53, 0.055) !important;
+  font-size: 0.82rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn::before,
+#checklistView .filter-utility-panel .section-filter-btn::before,
+#checklistView .filter-utility-panel .responsible-filter-pill::before {
+  content: "" !important;
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+  flex: 0 0 auto !important;
+  border-radius: 5px !important;
+  background: rgba(100, 116, 139, 0.12) !important;
+  box-shadow: inset 0 0 0 1px rgba(100, 116, 139, 0.18) !important;
+}
+
+#checklistView .filter-utility-panel .responsible-filter-pill::before {
+  border-radius: 999px !important;
+  background: var(--person-bg, rgba(37, 99, 235, 0.12)) !important;
+  box-shadow: inset 0 0 0 1px var(--person-color, rgba(37, 99, 235, 0.32)) !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn:hover,
+#checklistView .filter-utility-panel .section-filter-btn:hover,
+#checklistView .filter-utility-panel .responsible-filter-pill:hover {
+  background: #FFFFFF !important;
+  border-color: rgba(124, 58, 237, 0.35) !important;
+  color: #0F1F35 !important;
+  transform: translateY(-1px) !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn.active,
+#checklistView .filter-utility-panel .section-filter-btn.active {
+  background: rgba(255,255,255,0.94) !important;
+  border-color: #8B5CF6 !important;
+  color: #0F1F35 !important;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.12), 0 10px 22px rgba(124, 58, 237, 0.13) !important;
+}
+
+#checklistView .filter-utility-panel .responsible-filter-pill.active {
+  background: rgba(255,255,255,0.94) !important;
+  border-color: var(--person-color, #2563EB) !important;
+  color: #0F1F35 !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--person-color, #2563EB) 14%, transparent), 0 10px 22px rgba(15, 31, 53, 0.08) !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn.active::after,
+#checklistView .filter-utility-panel .section-filter-btn.active::after,
+#checklistView .filter-utility-panel .responsible-filter-pill.active::after {
+  display: none !important;
+}
+
+#checklistView .deadline-filter-select {
+  min-height: 2.65rem !important;
+  border-radius: 7px !important;
+  border: 1px solid rgba(203, 213, 225, 0.86) !important;
+  background: rgba(255,255,255,0.88) !important;
+  color: #64748B !important;
+  box-shadow: 0 7px 18px rgba(15, 31, 53, 0.055) !important;
+  font-size: 0.88rem !important;
+  font-weight: 750 !important;
+}
+
+#checklistView .deadline-filter-select:focus {
+  outline: none !important;
+  border-color: #8B5CF6 !important;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12), 0 7px 18px rgba(15, 31, 53, 0.055) !important;
+}
+
+@media (max-width: 1050px) {
+  #checklistView .filter-utility-panel .competition-filter-panel {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  #checklistView .deadline-filter-group {
+    grid-column: 1 / -1 !important;
+    border-left: 0 !important;
+    border-top: 1px solid rgba(203, 213, 225, 0.68) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  #checklistView .filter-panel-header {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+
+  #checklistView .filter-utility-panel .competition-filter-panel {
+    grid-template-columns: 1fr !important;
+  }
+
+  #checklistView .filter-group + .filter-group,
+  #checklistView .deadline-filter-group {
+    border-left: 0 !important;
+    border-top: 1px solid rgba(203, 213, 225, 0.68) !important;
+  }
+
+  #checklistView .filter-utility-panel .filter-row.filter-button-grid,
+  #checklistView .filter-utility-panel .responsible-pill-filter {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* v5.8.21 compact expandable filter panel */
+#checklistView .filter-utility-panel {
+  margin-top: 1rem !important;
+  margin-bottom: 1.05rem !important;
+  border-radius: 11px !important;
+  overflow: hidden !important;
+}
+
+#checklistView .filter-panel-header {
+  min-height: 0 !important;
+  padding: 0.8rem 1.05rem !important;
+}
+
+#checklistView .filter-symbol {
+  width: 2rem !important;
+  height: 2rem !important;
+  border-radius: 9px !important;
+}
+
+#checklistView .filter-panel-header h3 {
+  font-size: 1.05rem !important;
+}
+
+#checklistView .filter-panel-hint {
+  margin-top: 0.08rem !important;
+  font-size: 0.72rem !important;
+}
+
+#checklistView .reset-filters-btn {
+  min-height: 2rem !important;
+  padding: 0.42rem 0.68rem !important;
+  font-size: 0.74rem !important;
+}
+
+#checklistView .filter-group {
+  gap: 0.42rem !important;
+  padding: 0.75rem 1.05rem 0.88rem !important;
+}
+
+#checklistView .filter-label {
+  font-size: 0.66rem !important;
+  letter-spacing: 0.095em !important;
+}
+
+#checklistView .filter-utility-panel .filter-row.filter-button-grid,
+#checklistView .filter-utility-panel .responsible-pill-filter {
+  gap: 0.36rem !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn,
+#checklistView .filter-utility-panel .section-filter-btn,
+#checklistView .filter-utility-panel .responsible-filter-pill,
+#checklistView .deadline-filter-select {
+  min-height: 2.25rem !important;
+  padding: 0.5rem 0.64rem !important;
+  font-size: 0.78rem !important;
+  border-radius: 7px !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn::before,
+#checklistView .filter-utility-panel .section-filter-btn::before,
+#checklistView .filter-utility-panel .responsible-filter-pill::before {
+  width: 0.95rem !important;
+  height: 0.95rem !important;
+  border-radius: 4px !important;
+}
+
+#checklistView .filter-utility-panel .show-more-sections-btn {
+  border-style: dashed !important;
+  color: #6D28D9 !important;
+  background: rgba(255,255,255,0.62) !important;
+  box-shadow: none !important;
+}
+
+#checklistView .filter-utility-panel .show-more-sections-btn::before {
+  content: "+" !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  color: #6D28D9 !important;
+  font-weight: 950 !important;
+  background: rgba(124, 58, 237, 0.09) !important;
+  box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.18) !important;
+}
+
+#checklistView .filter-utility-panel .show-more-sections-btn:hover {
+  background: #FFFFFF !important;
+  border-color: rgba(124, 58, 237, 0.45) !important;
+}
+
+
+/* v5.8.22 — Filter panel without top title row */
+#checklistView .filter-panel-header {
+  display: none !important;
+}
+
+#checklistView .competition-utility-panel.filter-utility-panel {
+  padding: 0 !important;
+}
+
+#checklistView .filter-utility-panel .competition-filter-panel {
+  border-top: 0 !important;
+}
+
+#checklistView .filter-label-with-icon {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+}
+
+#checklistView .filter-symbol-inline {
+  width: 1.55rem !important;
+  height: 1.55rem !important;
+  border-radius: 7px !important;
+  margin-right: 0.1rem !important;
+}
+
+#checklistView .filter-symbol-inline .filter-symbol-svg {
+  width: 0.82rem !important;
+  height: 0.82rem !important;
+}
+
+#checklistView .section-filter-group {
+  padding-left: 1.05rem !important;
+}
+
+/* v5.8.23 — More compact and minimal filter fields */
+#checklistView .filter-utility-panel .filter-row.filter-button-grid,
+#checklistView .filter-utility-panel .responsible-pill-filter {
+  gap: 0.32rem !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn,
+#checklistView .filter-utility-panel .section-filter-btn,
+#checklistView .filter-utility-panel .responsible-filter-pill {
+  min-height: 1.95rem !important;
+  padding: 0.38rem 0.55rem !important;
+  border-radius: 6px !important;
+  border-color: rgba(203, 213, 225, 0.76) !important;
+  background: rgba(255,255,255,0.68) !important;
+  box-shadow: none !important;
+  font-size: 0.73rem !important;
+  font-weight: 820 !important;
+  gap: 0.34rem !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn::before,
+#checklistView .filter-utility-panel .section-filter-btn::before,
+#checklistView .filter-utility-panel .responsible-filter-pill::before {
+  width: 0.58rem !important;
+  height: 0.58rem !important;
+  border-radius: 999px !important;
+  background: rgba(100, 116, 139, 0.16) !important;
+  box-shadow: none !important;
+}
+
+#checklistView .filter-utility-panel .responsible-filter-pill::before {
+  background: var(--person-color, #2563EB) !important;
+  opacity: 0.75 !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn:hover,
+#checklistView .filter-utility-panel .section-filter-btn:hover,
+#checklistView .filter-utility-panel .responsible-filter-pill:hover {
+  transform: none !important;
+  border-color: rgba(100, 116, 139, 0.44) !important;
+  background: rgba(255,255,255,0.92) !important;
+  box-shadow: none !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn.active,
+#checklistView .filter-utility-panel .section-filter-btn.active {
+  background: #0F1F35 !important;
+  border-color: #0F1F35 !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn.active::before,
+#checklistView .filter-utility-panel .section-filter-btn.active::before {
+  background: #FFFFFF !important;
+  opacity: 0.92 !important;
+}
+
+#checklistView .filter-utility-panel .responsible-filter-pill.active {
+  background: rgba(15, 31, 53, 0.96) !important;
+  border-color: var(--person-color, #2563EB) !important;
+  color: #FFFFFF !important;
+  box-shadow: inset 3px 0 0 var(--person-color, #2563EB) !important;
+}
+
+#checklistView .filter-utility-panel .responsible-filter-pill.active::before {
+  background: var(--person-color, #2563EB) !important;
+  opacity: 1 !important;
+}
+
+#checklistView .deadline-filter-select {
+  min-height: 1.95rem !important;
+  padding: 0.38rem 0.55rem !important;
+  border-radius: 6px !important;
+  border-color: rgba(203, 213, 225, 0.76) !important;
+  background: rgba(255,255,255,0.72) !important;
+  box-shadow: none !important;
+  color: #475569 !important;
+  font-size: 0.76rem !important;
+  font-weight: 760 !important;
+}
+
+#checklistView .deadline-filter-select:hover {
+  background: rgba(255,255,255,0.92) !important;
+  border-color: rgba(100, 116, 139, 0.44) !important;
+}
+
+#checklistView .deadline-filter-select:focus {
+  border-color: #0F1F35 !important;
+  box-shadow: 0 0 0 2px rgba(15, 31, 53, 0.10) !important;
+}
+
+#checklistView .filter-utility-panel .show-more-sections-btn {
+  min-height: 1.95rem !important;
+  border-style: solid !important;
+  background: rgba(255,255,255,0.44) !important;
+  color: #475569 !important;
+  font-weight: 850 !important;
+}
+
+#checklistView .filter-utility-panel .show-more-sections-btn::before {
+  width: 0.58rem !important;
+  height: 0.58rem !important;
+  border-radius: 999px !important;
+  background: rgba(124, 58, 237, 0.42) !important;
+  color: transparent !important;
+  box-shadow: none !important;
+  content: "" !important;
+}
+
+#checklistView .filter-utility-panel .show-more-sections-btn:hover {
+  background: rgba(255,255,255,0.88) !important;
+  border-color: rgba(124, 58, 237, 0.32) !important;
+  color: #0F1F35 !important;
+}
+
+/* v5.8.24 — Filter column refinements */
+#checklistView .filter-label-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.42rem !important;
+}
+
+#checklistView .filter-label-row .filter-label {
+  margin: 0 !important;
+}
+
+#checklistView .filter-reset-btn {
+  width: 1.55rem !important;
+  height: 1.55rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(203, 213, 225, 0.72) !important;
+  border-radius: 6px !important;
+  background: rgba(255,255,255,0.58) !important;
+  color: #64748B !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+#checklistView .filter-reset-btn:hover {
+  background: #FFFFFF !important;
+  color: #0F1F35 !important;
+  border-color: rgba(100, 116, 139, 0.38) !important;
+}
+
+#checklistView .filter-utility-panel .section-filter-btn::before {
+  display: none !important;
+  content: none !important;
+}
+
+#checklistView .filter-utility-panel .section-filter-btn {
+  padding-left: 0.62rem !important;
+}
+
+#checklistView .filter-utility-panel .show-more-responsibles-btn {
+  min-height: 1.95rem !important;
+  border-style: solid !important;
+  background: rgba(255,255,255,0.44) !important;
+  color: #475569 !important;
+  font-weight: 850 !important;
+  box-shadow: none !important;
+}
+
+#checklistView .filter-utility-panel .show-more-responsibles-btn::before {
+  width: 0.58rem !important;
+  height: 0.58rem !important;
+  border-radius: 999px !important;
+  background: rgba(124, 58, 237, 0.42) !important;
+  color: transparent !important;
+  box-shadow: none !important;
+  content: "" !important;
+}
+
+#checklistView .filter-utility-panel .show-more-responsibles-btn:hover {
+  background: rgba(255,255,255,0.88) !important;
+  border-color: rgba(124, 58, 237, 0.32) !important;
+  color: #0F1F35 !important;
+}
+
+/* v5.8.25 — Cleaner filter reset icons and responsible fields */
+#checklistView .filter-reset-btn {
+  width: 1.35rem !important;
+  height: 1.35rem !important;
+  border: 0 !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #64748B !important;
+  box-shadow: none !important;
+}
+
+#checklistView .filter-reset-btn:hover {
+  border: 0 !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  color: #0F1F35 !important;
+  box-shadow: none !important;
+}
+
+#checklistView .filter-utility-panel .responsible-filter-pill::before,
+#checklistView .filter-utility-panel .show-more-responsibles-btn::before {
+  display: none !important;
+  content: none !important;
+}
+
+#checklistView .filter-utility-panel .responsible-filter-pill {
+  padding-left: 0.55rem !important;
+}
+
+#checklistView .filter-utility-panel .responsible-filter-pill.active {
+  border-color: #0F1F35 !important;
+  box-shadow: none !important;
+}
+
+/* v5.8.26 — Search field replaces deadline filter column */
+#checklistView .search-filter-group {
+  min-width: 0 !important;
+}
+
+@media (max-width: 1050px) {
+  #checklistView .search-filter-group {
+    grid-column: 1 / -1 !important;
+    border-left: 0 !important;
+    border-top: 1px solid rgba(203, 213, 225, 0.68) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  #checklistView .filter-group + .filter-group,
+  #checklistView .search-filter-group {
+    border-left: 0 !important;
+    border-top: 1px solid rgba(203, 213, 225, 0.68) !important;
+  }
+}
+
+#checklistView .task-search-input {
+  min-height: 1.95rem !important;
+  padding: 0.38rem 0.55rem !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(203, 213, 225, 0.76) !important;
+  background: rgba(255,255,255,0.72) !important;
+  box-shadow: none !important;
+  color: #0F1F35 !important;
+  font-size: 0.76rem !important;
+  font-weight: 760 !important;
+}
+
+#checklistView .task-search-input::placeholder {
+  color: #94A3B8 !important;
+  font-weight: 720 !important;
+}
+
+#checklistView .task-search-input:hover {
+  background: rgba(255,255,255,0.92) !important;
+  border-color: rgba(100, 116, 139, 0.44) !important;
+}
+
+#checklistView .task-search-input:focus {
+  outline: none !important;
+  border-color: #0F1F35 !important;
+  box-shadow: 0 0 0 2px rgba(15, 31, 53, 0.10) !important;
+}
+
+
+/* v5.8.27 — Cleaner professional filter panel background and search column cleanup */
+#checklistView .competition-utility-panel.filter-utility-panel {
+  border: 1px solid #DCE3EC !important;
+  background: #FFFFFF !important;
+  background-image: linear-gradient(90deg, rgba(15, 31, 53, 0.035) 0%, rgba(15, 31, 53, 0.015) 28%, rgba(255,255,255,0) 62%) !important;
+  box-shadow: 0 8px 22px rgba(15, 31, 53, 0.055) !important;
+}
+
+#checklistView .competition-utility-panel.filter-utility-panel::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+  height: 3px !important;
+  width: auto !important;
+  background: linear-gradient(90deg, #0F1F35 0%, #17324F 54%, rgba(15, 31, 53, 0.18) 100%) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+#checklistView .filter-group {
+  background: rgba(248, 250, 252, 0.62) !important;
+}
+
+#checklistView .filter-group + .filter-group {
+  border-left-color: #E2E8F0 !important;
+}
+
+#checklistView .filter-symbol-inline {
+  background: rgba(15, 31, 53, 0.08) !important;
+  color: #0F1F35 !important;
+}
+
+#checklistView .search-filter-group .filter-label-row {
+  justify-content: flex-start !important;
+}
+
+#checklistView .task-search-input {
+  background: #FFFFFF !important;
+}
+
+#checklistView .task-search-input:hover {
+  background: #FFFFFF !important;
+}
+
+@media (max-width: 700px) {
+  #checklistView .filter-group + .filter-group,
+  #checklistView .search-filter-group {
+    border-top-color: #E2E8F0 !important;
+  }
+}
+
+/* v5.8.28 — Remove indicator dot from incomplete filter */
+#checklistView .filter-utility-panel .filter-btn[data-status-filter="todo"]::before {
+  display: none !important;
+  content: none !important;
+}
+
+#checklistView .filter-utility-panel .filter-btn[data-status-filter="todo"] {
+  padding-left: 0.62rem !important;
+}
+
+
+/* v5.8.29: cleaner icon-only back buttons for competition and template headers */
+#backFromTemplatesBtn.back-icon-btn,
+#checklistView .checklist-header #backToDashboard.back-icon-btn,
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn {
+  display: inline-grid !important;
+  place-items: center !important;
+  width: 2.35rem !important;
+  height: 2.35rem !important;
+  min-width: 2.35rem !important;
+  padding: 0 !important;
+  margin: 0 0 clamp(0.6rem, 1.2vw, 0.85rem) 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: currentColor !important;
+  border-radius: 8px !important;
+}
+
+#backFromTemplatesBtn.back-icon-btn {
+  color: var(--professional-dark, #0F1F35) !important;
+}
+
+#checklistView .checklist-header #backToDashboard.back-icon-btn,
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn {
+  color: #FFFFFF !important;
+}
+
+#backFromTemplatesBtn.back-icon-btn:hover,
+#checklistView .checklist-header #backToDashboard.back-icon-btn:hover,
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn:hover {
+  border: 0 !important;
+  background: rgba(15, 31, 53, 0.06) !important;
+  box-shadow: none !important;
+}
+
+#checklistView .checklist-header #backToDashboard.back-icon-btn:hover,
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.10) !important;
+}
+
+.back-icon-svg {
+  width: 1.35rem !important;
+  height: 1.35rem !important;
+  display: block !important;
+}
+
+.back-icon-svg path {
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.4 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+/* v5.8.30 — Smaller, visible icon-only back arrows */
+#backFromTemplatesBtn.back-icon-btn,
+#checklistView .checklist-header #backToDashboard.back-icon-btn,
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn {
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  min-width: 1.75rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 6px !important;
+  line-height: 1 !important;
+  z-index: 5 !important;
+}
+
+#backFromTemplatesBtn.back-icon-btn {
+  color: #0F1F35 !important;
+  opacity: 1 !important;
+}
+
+#backFromTemplatesBtn.back-icon-btn .back-icon-svg,
+#checklistView .checklist-header #backToDashboard.back-icon-btn .back-icon-svg,
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn .back-icon-svg {
+  width: 1.15rem !important;
+  height: 1.15rem !important;
+}
+
+#backFromTemplatesBtn.back-icon-btn .back-icon-svg path,
+#checklistView .checklist-header #backToDashboard.back-icon-btn .back-icon-svg path,
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn .back-icon-svg path {
+  stroke: currentColor !important;
+  stroke-width: 2.65 !important;
+}
+
+#backFromTemplatesBtn.back-icon-btn:hover,
+#checklistView .checklist-header #backToDashboard.back-icon-btn:hover,
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn:hover {
+  background: transparent !important;
+  transform: translateX(-1px) !important;
+}
+
+/* Keep the template header compact by placing the arrow beside the title block instead of above it. */
+#templatesView .page-header-copy {
+  position: relative !important;
+  display: block !important;
+  padding-left: 2rem !important;
+  gap: 0 !important;
+}
+
+#templatesView #backFromTemplatesBtn.back-icon-btn {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.22rem !important;
+}
+
+/* Keep the competition header compact by preventing the back arrow from creating its own row. */
+#checklistView .checklist-header.checklist-header-compact {
+  padding-left: clamp(3.05rem, 4vw, 3.65rem) !important;
+  padding-top: clamp(0.95rem, 1.8vw, 1.35rem) !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn {
+  position: absolute !important;
+  left: clamp(0.95rem, 2vw, 1.25rem) !important;
+  top: clamp(1rem, 1.8vw, 1.25rem) !important;
+  color: #FFFFFF !important;
+}
+
+@media (max-width: 560px) {
+  #templatesView .page-header-copy {
+    padding-left: 1.85rem !important;
+  }
+
+  #checklistView .checklist-header.checklist-header-compact {
+    padding-left: 2.8rem !important;
+  }
+}
+
+/* v5.8.31 — Back arrow replaces the small header label in competition and template views */
+#checklistView .checklist-header.checklist-header-compact .eyebrow,
+#templatesView .page-header-copy .eyebrow {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Keep the label space, but let the icon visually take that role. */
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn {
+  top: clamp(0.95rem, 1.8vw, 1.2rem) !important;
+}
+
+/* Match the template header back-arrow layout to the competition header. */
+#templatesView .page-header-copy {
+  position: relative !important;
+  display: block !important;
+  padding-left: clamp(3.05rem, 4vw, 3.65rem) !important;
+  gap: 0 !important;
+}
+
+#templatesView #backFromTemplatesBtn.back-icon-btn {
+  position: absolute !important;
+  left: clamp(0.95rem, 2vw, 1.25rem) !important;
+  top: 0.12rem !important;
+  color: #FFFFFF !important;
+}
+
+#templatesView #backFromTemplatesBtn.back-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.10) !important;
+}
+
+@media (max-width: 560px) {
+  #templatesView .page-header-copy {
+    padding-left: 2.8rem !important;
+  }
+}
+
+/* v5.8.32 — Align template header with competition header back-arrow layout */
+#templatesView .page-header-copy {
+  position: relative !important;
+  display: block !important;
+  padding-left: 0 !important;
+  gap: 0 !important;
+}
+
+#templatesView .page-header-copy > div {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+#templatesView .page-header-copy .eyebrow,
+#checklistView .checklist-header.checklist-header-compact .eyebrow {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#templatesView #backFromTemplatesBtn.back-icon-btn {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.12rem !important;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #FFFFFF !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  z-index: 3 !important;
+}
+
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn {
+  top: clamp(0.95rem, 1.8vw, 1.2rem) !important;
+}
+
+@media (max-width: 560px) {
+  #templatesView .page-header-copy {
+    padding-left: 0 !important;
+  }
+}
+
+/* v5.8.33 — Match template back-button hover to competition back-button hover */
+#templatesView #backFromTemplatesBtn.back-icon-btn:hover,
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn:hover,
+#checklistView .checklist-header #backToDashboard.back-icon-btn:hover {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  transform: translateX(-1px) !important;
+}
+
+#templatesView #backFromTemplatesBtn.back-icon-btn:focus-visible,
+#checklistView .checklist-header.checklist-header-compact #backToDashboard.back-icon-btn:focus-visible,
+#checklistView .checklist-header #backToDashboard.back-icon-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.72) !important;
+  outline-offset: 3px !important;
+}
+
+/* v5.8.34 — Sidebar navigation: full-width active row, no borders, no inactive hover field */
+@media (min-width: 861px) {
+  .sidebar .nav {
+    width: calc(100% + 48px);
+    margin-left: -24px;
+    margin-right: -24px;
+    gap: 0.15rem;
+  }
+
+  .sidebar .nav-link {
+    width: 100%;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    padding: 0.9rem 24px !important;
+    color: rgba(255, 255, 255, 0.74);
+  }
+
+  .sidebar .nav-link.active {
+    background: rgba(255, 255, 255, 0.18) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .sidebar .nav-link:not(.active):hover {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.74) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .sidebar .nav-link.active:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .sidebar .nav-link:not(.active):hover .nav-icon,
+  .sidebar .nav-link:not(.active):hover .nav-text {
+    color: rgba(255, 255, 255, 0.74) !important;
+  }
+
+  .sidebar .nav-link.active .nav-icon,
+  .sidebar .nav-link.active .nav-text,
+  .sidebar .nav-link.active:hover .nav-icon,
+  .sidebar .nav-link.active:hover .nav-text {
+    color: #fff !important;
+  }
+}
+
+/* v5.8.35 — Sidebar navigation: subtle inactive hover indication */
+@media (min-width: 861px) {
+  .sidebar .nav-link:not(.active):hover {
+    background: rgba(255, 255, 255, 0.075) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .sidebar .nav-link:not(.active):hover .nav-icon,
+  .sidebar .nav-link:not(.active):hover .nav-text {
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+
+  .sidebar .nav-link.active,
+  .sidebar .nav-link.active:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}
+
+/* v5.8.36 — Compact, minimal task rows matching the finished filter panel */
+.task-list {
+  gap: 0.45rem !important;
+  margin-top: 0.75rem !important;
+}
+
+.task-card {
+  padding: 0.58rem 0.72rem !important;
+  gap: 0.65rem !important;
+  border: 1px solid #DCE3EC !important;
+  border-radius: 10px !important;
+  background: #FFFFFF !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+  transition: border-color 0.14s ease, background 0.14s ease, transform 0.14s ease !important;
+}
+
+.task-card:hover {
+  transform: none !important;
+  border-color: #C9D3E0 !important;
+  background: #FBFCFE !important;
+  box-shadow: none !important;
+}
+
+.task-card.done {
+  opacity: 0.72 !important;
+  background: #F3F6FA !important;
+}
+
+.task-row-content {
+  gap: 0.72rem !important;
+  align-items: center !important;
+}
+
+.task-title-cell,
+.task-people-cell,
+.task-deadline-cell,
+.task-comment-cell {
+  display: grid !important;
+  align-content: center !important;
+}
+
+.task-cell-label {
+  margin-bottom: 0.12rem !important;
+  font-size: 0.58rem !important;
+  letter-spacing: 0.075em !important;
+  font-weight: 900 !important;
+  color: #728095 !important;
+}
+
+.task-title-cell h4 {
+  font-size: 0.92rem !important;
+  line-height: 1.2 !important;
+  font-weight: 850 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.task-comment-cell .task-note {
+  font-size: 0.82rem !important;
+  line-height: 1.25 !important;
+  color: #66758A !important;
+}
+
+.task-people-cell .task-meta {
+  gap: 0.28rem !important;
+}
+
+.task-card .person-pill,
+.task-card .pill {
+  padding: 0.22rem 0.42rem !important;
+  border-radius: 6px !important;
+  font-size: 0.72rem !important;
+  line-height: 1.1 !important;
+  font-weight: 800 !important;
+}
+
+.task-deadline-cell .pill.deadline {
+  padding: 0.28rem 0.5rem !important;
+  border-radius: 7px !important;
+  font-size: 0.72rem !important;
+  line-height: 1.15 !important;
+}
+
+.task-check {
+  align-self: center !important;
+}
+
+.task-check input {
+  width: 1.28rem !important;
+  height: 1.28rem !important;
+}
+
+.task-actions,
+.task-actions-more,
+.delete-task-btn {
+  align-self: center !important;
+}
+
+.delete-task-btn {
+  width: 1.65rem !important;
+  height: 1.65rem !important;
+  font-size: 1rem !important;
+}
+
+.add-phase-task {
+  margin-top: 0.65rem !important;
+  padding-top: 0.58rem !important;
+  padding-bottom: 0.58rem !important;
+  border-radius: 8px !important;
+}
+
+@media (max-width: 760px) {
+  .task-card {
+    padding: 0.68rem !important;
+  }
+
+  .task-row-content {
+    gap: 0 !important;
+  }
+
+  .task-title-cell,
+  .task-people-cell,
+  .task-deadline-cell,
+  .task-comment-cell {
+    margin-bottom: 0.48rem !important;
+  }
+
+  .task-comment-cell {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* v5.8.37 — Borderless task rows with subtle separation */
+.task-list {
+  gap: 0.38rem !important;
+}
+
+.task-card {
+  border: 0 !important;
+  background: #F9FBFD !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.055) !important;
+  border-radius: 9px !important;
+  padding: 0.56rem 0.72rem !important;
+  transition: background 0.14s ease, box-shadow 0.14s ease, transform 0.14s ease !important;
+}
+
+.task-card:hover {
+  border: 0 !important;
+  background: #F4F7FB !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.075) !important;
+  transform: none !important;
+}
+
+.task-card.done {
+  border: 0 !important;
+  background: #F1F4F8 !important;
+  box-shadow: none !important;
+  opacity: 0.72 !important;
+}
+
+.task-card.done:hover {
+  background: #EEF2F6 !important;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.045) !important;
+}
+
+.task-card + .task-card {
+  margin-top: 0 !important;
+}
+
+.task-card .task-cell-label {
+  color: #7A8798 !important;
+}
+
+@media (max-width: 760px) {
+  .task-card {
+    padding: 0.64rem 0.66rem !important;
+    border-radius: 9px !important;
+  }
+}
+
+/* v5.8.38 — move add-task action into section headers */
+.competition-section-heading {
+  grid-template-columns: auto minmax(0, 1fr) auto auto !important;
+  align-items: center !important;
+}
+
+.section-add-task-btn {
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #334155 !important;
+  font-size: 1.2rem !important;
+  font-weight: 850 !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+
+.section-add-task-btn:hover {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+.section-add-task-btn:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.45) !important;
+  outline-offset: 2px !important;
+}
+
+.phase-column .add-phase-task,
+.template-section > [data-add-task].secondary-btn {
+  display: none !important;
+}
+
+.template-section-header {
+  grid-template-columns: auto minmax(0, 1fr) auto auto !important;
+  align-items: end !important;
+  padding-right: 0 !important;
+}
+
+.template-section-header .template-delete-icon {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+}
+
+.template-section-header .template-add-task-icon {
+  align-self: end !important;
+  margin-bottom: 0.35rem !important;
+}
+
+.template-section-header .template-delete-icon {
+  align-self: end !important;
+  margin-bottom: 0.15rem !important;
+}
+
+/* v5.8.39 — vertically center task titles inside compact task rows */
+.task-row-content {
+  align-items: stretch !important;
+}
+
+.task-title-cell {
+  display: grid !important;
+  grid-template-rows: auto 1fr !important;
+  align-self: stretch !important;
+  min-height: 100% !important;
+}
+
+.task-title-cell h4 {
+  align-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 100% !important;
+}
+
+@media (max-width: 760px) {
+  .task-title-cell {
+    min-height: auto !important;
+  }
+
+  .task-title-cell h4 {
+    min-height: auto !important;
+  }
+}
+
+/* v5.8.40 — professional compact checkbox alignment */
+.task-check {
+  align-self: stretch !important;
+  display: grid !important;
+  place-items: center !important;
+  min-height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.task-check input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 1.05rem !important;
+  height: 1.05rem !important;
+  margin: 0 !important;
+  display: grid !important;
+  place-content: center !important;
+  border: 1.5px solid #A8B3C3 !important;
+  border-radius: 4px !important;
+  background: #FFFFFF !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease !important;
+}
+
+.task-check input[type="checkbox"]::before {
+  content: "" !important;
+  width: 0.52rem !important;
+  height: 0.52rem !important;
+  transform: scale(0) !important;
+  transition: transform 0.12s ease !important;
+  clip-path: polygon(14% 44%, 0 59%, 40% 100%, 100% 19%, 84% 5%, 38% 68%) !important;
+  background: #FFFFFF !important;
+}
+
+.task-check input[type="checkbox"]:checked {
+  background: #0F172A !important;
+  border-color: #0F172A !important;
+}
+
+.task-check input[type="checkbox"]:checked::before {
+  transform: scale(1) !important;
+}
+
+.task-check input[type="checkbox"]:hover {
+  border-color: #64748B !important;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.06) !important;
+}
+
+.task-check input[type="checkbox"]:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.45) !important;
+  outline-offset: 2px !important;
+}
+
+
+/* v5.8.41 deadline text refinement */
+.task-deadline-cell .task-deadline-text {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 850;
+  line-height: 1.35;
+  box-shadow: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.task-card.done .task-deadline-cell .task-deadline-text {
+  color: var(--muted);
+}
+
+/* v5.8.42 — task title top alignment and softer responsible colours */
+.task-title-cell {
+  display: block !important;
+  align-self: start !important;
+  min-height: auto !important;
+}
+
+.task-title-cell h4 {
+  align-self: start !important;
+  display: block !important;
+  align-items: initial !important;
+  min-height: auto !important;
+  margin-top: 0 !important;
+}
+
+.task-card .person-color-pill {
+  background: rgba(255, 255, 255, 0.55) !important;
+  color: #475569 !important;
+  border-color: color-mix(in srgb, var(--person-color) 32%, #E2E8F0 68%) !important;
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--person-color) 45%, transparent 55%) !important;
+  font-weight: 750 !important;
+}
+
+.task-card .person-color-pill:hover {
+  background: rgba(255, 255, 255, 0.82) !important;
+  color: #334155 !important;
+}
+
+/* v5.8.43 — cleaner task rows without default background */
+.task-card {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.task-card:hover {
+  background: rgba(248, 250, 252, 0.9) !important;
+  border-color: transparent !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.045) !important;
+}
+
+.task-card.done {
+  background: transparent !important;
+  opacity: 0.62 !important;
+}
+
+.task-card.done:hover {
+  background: rgba(248, 250, 252, 0.75) !important;
+}
+
+.task-card.done .task-title-cell h4 {
+  text-decoration: line-through !important;
+  text-decoration-thickness: 1.5px !important;
+  text-decoration-color: rgba(15, 23, 42, 0.45) !important;
+}
+
+.task-card.done .task-row-content {
+  color: var(--muted) !important;
+}
+
+.task-card.done .person-color-pill {
+  opacity: 0.72 !important;
+}
+
+/* v5.8.45 — section headings and drag handles aligned with filter panel style */
+.phase-heading.competition-section-heading {
+  align-items: center !important;
+}
+
+.phase-heading.competition-section-heading .section-title-input {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #1E293B !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.085em !important;
+  text-transform: uppercase !important;
+  line-height: 1.2 !important;
+  min-height: auto !important;
+}
+
+.phase-heading.competition-section-heading .section-title-input:focus {
+  outline: 2px solid rgba(37, 99, 235, 0.35) !important;
+  outline-offset: 3px !important;
+  border-radius: 4px !important;
+}
+
+.section-drag-handle,
+.template-task-drag-handle {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #64748B !important;
+  width: 1.45rem !important;
+  height: 1.45rem !important;
+  padding: 0 !important;
+  border-radius: 4px !important;
+  display: inline-grid !important;
+  place-items: center !important;
+}
+
+.section-drag-handle:hover,
+.template-task-drag-handle:hover {
+  background: transparent !important;
+  color: #0F172A !important;
+  box-shadow: none !important;
+}
+
+.section-drag-handle:focus-visible,
+.template-task-drag-handle:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.45) !important;
+  outline-offset: 2px !important;
+}
+
+.template-section-header > label {
+  gap: 0.35rem !important;
+  color: #1E293B !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.085em !important;
+  text-transform: uppercase !important;
+  line-height: 1.2 !important;
+}
+
+.template-section-header > label input {
+  margin-top: 0.2rem !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: #1E293B !important;
+  font-size: 1rem !important;
+  font-weight: 850 !important;
+  letter-spacing: -0.01em !important;
+  text-transform: none !important;
+  min-height: auto !important;
+}
+
+.template-section-header > label input:focus {
+  outline: 2px solid rgba(37, 99, 235, 0.35) !important;
+  outline-offset: 3px !important;
+  border-radius: 4px !important;
+}
+
+/* v5.8.46 — section/task typography aligned with the filter panel */
+.phase-column,
+.template-section,
+.task-card,
+.task-card * {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.phase-heading.competition-section-heading .section-title-input,
+.template-section-header > label {
+  color: #1E293B !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.085em !important;
+  text-transform: uppercase !important;
+}
+
+.task-cell-label {
+  color: #728095 !important;
+  font-size: 0.58rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.075em !important;
+  text-transform: uppercase !important;
+}
+
+.task-title-cell h4,
+.task-title-cell .task-title {
+  color: #0F172A !important;
+  font-size: 0.92rem !important;
+  font-weight: 850 !important;
+  line-height: 1.22 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.task-people-cell,
+.task-people-cell .task-meta,
+.task-card .person-pill,
+.task-card .person-color-pill {
+  color: #64748B !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+}
+
+.task-card .person-pill,
+.task-card .person-color-pill {
+  background: transparent !important;
+  border-color: transparent !important;
+  padding: 0.14rem 0.25rem !important;
+  box-shadow: none !important;
+}
+
+.task-deadline-cell,
+.task-deadline-cell .pill,
+.task-deadline-cell .deadline,
+.task-deadline-cell .pill.deadline,
+.task-deadline-text {
+  color: #334155 !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.task-comment-cell,
+.task-comment-cell .task-note,
+.task-note {
+  color: #66758A !important;
+  font-size: 0.82rem !important;
+  font-weight: 400 !important;
+  line-height: 1.25 !important;
+}
+
+/* v5.8.47 — thinner minimal section/task action icons */
+.section-add-task-btn,
+.template-section-header .template-add-task-icon,
+.delete-section-btn,
+.template-section-header .template-delete-icon,
+.template-section .delete-small.template-delete-icon {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #0F172A !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-weight: 350 !important;
+  line-height: 1 !important;
+  opacity: 0.82 !important;
+}
+
+.section-add-task-btn,
+.template-section-header .template-add-task-icon {
+  font-size: 1.05rem !important;
+}
+
+.delete-section-btn,
+.template-section-header .template-delete-icon,
+.template-section .delete-small.template-delete-icon {
+  font-size: 1.05rem !important;
+}
+
+.section-add-task-btn:hover,
+.template-section-header .template-add-task-icon:hover,
+.delete-section-btn:hover,
+.template-section-header .template-delete-icon:hover,
+.template-section .delete-small.template-delete-icon:hover {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #0F172A !important;
+  opacity: 1 !important;
+}
+
+.task-actions {
+  align-self: start !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-end !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.delete-task-btn {
+  align-self: start !important;
+  justify-self: end !important;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  min-width: 1.25rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #0F172A !important;
+  font-size: 1rem !important;
+  font-weight: 350 !important;
+  line-height: 1 !important;
+  border-radius: 4px !important;
+  opacity: 0.68 !important;
+}
+
+.delete-task-btn:hover {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #0F172A !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.task-card.done .delete-task-btn {
+  color: #0F172A !important;
+  opacity: 0.5 !important;
+}
+
+.task-card.done .delete-task-btn:hover {
+  opacity: 0.85 !important;
+}
+
+/* v5.8.48 — smaller, more refined task checkbox */
+.task-check input[type="checkbox"] {
+  width: 0.86rem !important;
+  height: 0.86rem !important;
+  min-width: 0.86rem !important;
+  min-height: 0.86rem !important;
+  border-width: 1.25px !important;
+  border-radius: 3px !important;
+}
+
+.task-check input[type="checkbox"]::before {
+  width: 0.44rem !important;
+  height: 0.44rem !important;
+}
+
+.task-check input[type="checkbox"]:hover {
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.055) !important;
+}
+
+/* v5.8.49 — even smaller task checkbox */
+.task-check input[type="checkbox"] {
+  width: 0.72rem !important;
+  height: 0.72rem !important;
+  min-width: 0.72rem !important;
+  min-height: 0.72rem !important;
+  border-width: 1.1px !important;
+  border-radius: 2.5px !important;
+}
+
+.task-check input[type="checkbox"]::before {
+  width: 0.36rem !important;
+  height: 0.36rem !important;
+}
+
+.task-check input[type="checkbox"]:hover {
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.045) !important;
+}
+
+/* v5.8.50 — target the actual task completion checkbox on the far left */
+.task-card > .task-check {
+  align-self: center !important;
+  justify-self: center !important;
+  width: 1rem !important;
+  min-width: 1rem !important;
+  height: 1rem !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.task-card > .task-check input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  box-sizing: border-box !important;
+  width: 0.72rem !important;
+  height: 0.72rem !important;
+  min-width: 0.72rem !important;
+  min-height: 0.72rem !important;
+  max-width: 0.72rem !important;
+  max-height: 0.72rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 1px solid rgba(15, 23, 42, 0.34) !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  display: grid !important;
+  place-items: center !important;
+  position: relative !important;
+}
+
+.task-card > .task-check input[type="checkbox"]:hover {
+  border-color: rgba(15, 23, 42, 0.68) !important;
+  background: rgba(15, 23, 42, 0.035) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.task-card > .task-check input[type="checkbox"]:checked {
+  background: #0F172A !important;
+  border-color: #0F172A !important;
+}
+
+.task-card > .task-check input[type="checkbox"]:checked::after {
+  content: "✓" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  color: #FFFFFF !important;
+  font-size: 0.48rem !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+}
+
+/* v5.8.51 — add breathing room below task column labels */
+.task-card-with-labels .task-cell-label {
+  margin-bottom: 0.48rem !important;
+}
+
+@media (max-width: 760px) {
+  .task-card-with-labels .task-cell-label {
+    margin-bottom: 0.4rem !important;
+  }
+}
+
+/* v5.8.52 — align competition card typography with task cards */
+.competition-card h3 {
+  margin: 0 0 0.48rem !important;
+  color: #0F172A !important;
+  font-size: 1rem !important;
+  line-height: 1.22 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.competition-card .card-meta {
+  color: #64748B !important;
+  font-size: 0.84rem !important;
+  line-height: 1.35 !important;
+  font-weight: 450 !important;
+  margin: 0 !important;
+}
+
+.competition-card .mini-progress strong {
+  color: #334155 !important;
+  font-size: 0.84rem !important;
+  line-height: 1.35 !important;
+  font-weight: 700 !important;
+}
+
+.competition-card .open-checklist-btn {
+  font-size: 0.86rem !important;
+  font-weight: 700 !important;
+}
+
+.competition-card .card-delete-btn {
+  color: #0F172A !important;
+  font-size: 1.05rem !important;
+  font-weight: 300 !important;
+  opacity: 0.72 !important;
+}
+
+.competition-card .card-delete-btn:hover {
+  background: rgba(15, 23, 42, 0.055) !important;
+  color: #0F172A !important;
+  opacity: 1 !important;
+}
+
+/* v5.8.53 — align template page styling with task card typography */
+#templatesView .panel {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 14px 38px rgba(15, 23, 42, 0.055) !important;
+}
+
+#templatesView .panel h3,
+.template-section-header label,
+.template-grid-header-simple span,
+.template-roles-header h3 {
+  color: #334155 !important;
+  font-size: 0.76rem !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.055em !important;
+}
+
+#templatesView .panel > h3 {
+  margin-bottom: 0.85rem !important;
+}
+
+#templateList .list-item {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  color: #64748B !important;
+  font-size: 0.88rem !important;
+  line-height: 1.25 !important;
+  font-weight: 500 !important;
+  padding: 0.68rem 0.75rem !important;
+  text-align: left !important;
+}
+
+#templateList .list-item:hover:not(.active) {
+  background: rgba(15, 23, 42, 0.045) !important;
+  color: #0F172A !important;
+}
+
+#templateList .list-item.active,
+#templateList button.active,
+#templateList [data-template-id].active {
+  background: #0F172A !important;
+  color: #FFFFFF !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-weight: 650 !important;
+}
+
+#templateEditor .editor-top label {
+  color: #334155 !important;
+  font-size: 0.76rem !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.055em !important;
+}
+
+#templateNameInput,
+.template-section input,
+.template-role-card input {
+  border: 0 !important;
+  background: rgba(248, 250, 252, 0.82) !important;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.06) !important;
+  border-radius: 8px !important;
+  color: #0F172A !important;
+  font-size: 0.86rem !important;
+  line-height: 1.25 !important;
+  font-weight: 500 !important;
+  padding: 0.62rem 0.7rem !important;
+}
+
+#templateNameInput:focus,
+.template-section input:focus,
+.template-role-card input:focus {
+  outline: none !important;
+  background: #FFFFFF !important;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.16), 0 0 0 3px rgba(15, 23, 42, 0.045) !important;
+}
+
+.template-section {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  padding: 1rem 0 !important;
+  border-top: 1px solid rgba(15, 23, 42, 0.075) !important;
+}
+
+.template-section:first-child {
+  border-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.template-section-header {
+  gap: 0.75rem !important;
+  align-items: start !important;
+  margin-bottom: 0.9rem !important;
+}
+
+.template-section-header .section-drag-handle,
+.template-task-drag-handle {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #94A3B8 !important;
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  opacity: 0.78 !important;
+}
+
+.template-section-header .section-drag-handle:hover,
+.template-task-drag-handle:hover {
+  color: #0F172A !important;
+  opacity: 1 !important;
+}
+
+.template-grid-header-simple {
+  color: #64748B !important;
+  margin-bottom: 0.55rem !important;
+}
+
+.template-task-list {
+  display: grid !important;
+  gap: 0.28rem !important;
+}
+
+.template-task-simple {
+  border: 0 !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+  margin-top: 0 !important;
+  padding: 0.24rem 0 !important;
+  box-shadow: none !important;
+}
+
+.template-task-simple:hover {
+  background: rgba(15, 23, 42, 0.035) !important;
+}
+
+.template-task-simple input[data-task-field="title"] {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+}
+
+.template-task-simple input[data-task-field="note"] {
+  color: #66758A !important;
+  font-weight: 400 !important;
+}
+
+.template-section .delete-small,
+.template-delete-icon,
+.template-task-simple .delete-small {
+  color: #0F172A !important;
+  font-size: 1rem !important;
+  font-weight: 300 !important;
+  opacity: 0.68 !important;
+}
+
+.template-section .delete-small:hover,
+.template-delete-icon:hover,
+.template-task-simple .delete-small:hover {
+  color: #0F172A !important;
+  opacity: 1 !important;
+  background: transparent !important;
+}
+
+.template-roles-panel {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(15, 23, 42, 0.075) !important;
+  border-radius: 0 !important;
+  padding: 1rem 0 !important;
+  margin-top: 1rem !important;
+}
+
+.template-roles-header .page-description,
+#templateEditor .page-description,
+.template-task-list-empty {
+  color: #66758A !important;
+  font-size: 0.84rem !important;
+  font-weight: 400 !important;
+  line-height: 1.35 !important;
+}
+
+.template-role-card {
+  border: 0 !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  padding: 0.35rem 0 !important;
+}
+
+.template-role-card:hover {
+  background: rgba(15, 23, 42, 0.035) !important;
+}
+
+.template-editor-actions .secondary-btn,
+.template-roles-header .secondary-btn {
+  border: 0 !important;
+  background: #0F172A !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+}
+
+.template-editor-actions .danger-btn {
+  border: 0 !important;
+  background: transparent !important;
+  color: #0F172A !important;
+  box-shadow: none !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  opacity: 0.78 !important;
+}
+
+.template-editor-actions .danger-btn:hover {
+  opacity: 1 !important;
+  background: rgba(15, 23, 42, 0.045) !important;
+}
+
+/* v5.8.54 — clearer hierarchy for template page */
+#templatesView .template-layout {
+  gap: 1.15rem !important;
+}
+
+#templatesView .template-layout > .panel:first-child {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(15, 23, 42, 0.075) !important;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.045) !important;
+  padding: 1.15rem !important;
+}
+
+#templateEditor.panel {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(15, 23, 42, 0.075) !important;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.045) !important;
+  padding: 1.2rem !important;
+}
+
+/* Main setup block */
+#templateEditor .editor-top {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%) !important;
+  border: 1px solid rgba(15, 23, 42, 0.075) !important;
+  border-radius: 12px !important;
+  padding: 1rem !important;
+  margin-bottom: 0.95rem !important;
+  gap: 0.7rem !important;
+}
+
+#templateEditor .editor-top .page-description {
+  max-width: 720px !important;
+  margin: 0 !important;
+}
+
+#templateEditor .template-editor-actions {
+  margin: 0 0 1rem !important;
+  padding: 0 0 1rem !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.075) !important;
+  gap: 0.65rem !important;
+}
+
+/* Roles block should read as its own setting area */
+.template-roles-panel {
+  background: #F8FAFC !important;
+  border: 1px solid rgba(15, 23, 42, 0.075) !important;
+  border-radius: 12px !important;
+  padding: 1rem !important;
+  margin: 0 0 1rem !important;
+}
+
+.template-roles-header {
+  align-items: flex-start !important;
+  padding-bottom: 0.85rem !important;
+  margin-bottom: 0.7rem !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.065) !important;
+}
+
+.template-role-list {
+  display: grid !important;
+  gap: 0.4rem !important;
+}
+
+.template-role-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(15, 23, 42, 0.055) !important;
+  border-radius: 10px !important;
+  padding: 0.55rem !important;
+}
+
+.template-role-card:hover {
+  background: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.095) !important;
+}
+
+/* Section/task area: each section should be a clear unit */
+#templateEditor .editor-grid {
+  gap: 0.85rem !important;
+}
+
+#templateEditor .template-section {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(15, 23, 42, 0.075) !important;
+  border-radius: 12px !important;
+  padding: 0.95rem !important;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.035) !important;
+}
+
+#templateEditor .template-section:first-child {
+  border-top: 1px solid rgba(15, 23, 42, 0.075) !important;
+  padding-top: 0.95rem !important;
+}
+
+#templateEditor .template-section-header {
+  margin-bottom: 0.9rem !important;
+  padding-bottom: 0.75rem !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06) !important;
+}
+
+#templateEditor .template-grid-header-simple {
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.55rem !important;
+}
+
+#templateEditor .template-task-simple {
+  padding: 0.28rem 0.35rem !important;
+  border-radius: 8px !important;
+}
+
+#templateEditor .template-task-simple:hover {
+  background: rgba(15, 23, 42, 0.035) !important;
+}
+
+/* Keep the page readable on smaller screens */
+@media (max-width: 860px) {
+  #templateEditor.panel,
+  #templatesView .template-layout > .panel:first-child {
+    padding: 1rem !important;
+  }
+
+  #templateEditor .editor-top,
+  .template-roles-panel,
+  #templateEditor .template-section {
+    padding: 0.85rem !important;
+  }
+}
+
+
+/* v5.8.56 — template section title uses the editable section name directly */
+#templateEditor .template-section-header > label.template-section-title-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  color: #334155 !important;
+  font-size: 0.8rem !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.055em !important;
+}
+
+#templateEditor .template-section-title-heading {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  color: #334155 !important;
+  font-size: 0.8rem !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.055em !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+#templateEditor .template-section-title-heading:focus {
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: 0 2px 0 rgba(15, 23, 42, 0.18) !important;
+}
+
+#templateEditor .template-section-title-heading::placeholder {
+  color: #94A3B8 !important;
+  opacity: 1 !important;
+}
+
+/* v5.8.57 — tighter template section header and top-right section actions */
+#templateEditor .template-section-header {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto auto !important;
+  align-items: start !important;
+  column-gap: 0.45rem !important;
+  row-gap: 0 !important;
+  margin-bottom: 0.38rem !important;
+  padding-bottom: 0.42rem !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.055) !important;
+}
+
+#templateEditor .template-section-header > label.template-section-title-label {
+  align-self: start !important;
+  padding-top: 0.05rem !important;
+}
+
+#templateEditor .template-section-drag-handle {
+  align-self: start !important;
+  margin-top: -0.12rem !important;
+}
+
+#templateEditor .template-add-task-icon,
+#templateEditor .template-delete-icon {
+  align-self: start !important;
+  justify-self: end !important;
+  margin-top: -0.18rem !important;
+}
+
+#templateEditor .template-grid-header-simple {
+  margin-top: 0 !important;
+  margin-bottom: 0.42rem !important;
+}
+
+@media (max-width: 560px) {
+  #templateEditor .template-section-header {
+    grid-template-columns: auto minmax(0, 1fr) auto auto !important;
+  }
+}
+
+/* v5.8.58 — template task column titles match competition task labels */
+#templateEditor .template-grid-header-simple {
+  color: #667085 !important;
+  font-size: 0.62rem !important;
+  line-height: 1.1 !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.055em !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+#templateEditor .template-grid-header-simple span {
+  color: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  font-weight: inherit !important;
+  text-transform: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+
+/* v5.8.60 — template page text cleanup and subtle destructive button */
+.template-editor-actions .subtle-danger-btn {
+  border: 1px solid rgba(185, 28, 28, 0.22) !important;
+  background: rgba(185, 28, 28, 0.035) !important;
+  color: #991B1B !important;
+  box-shadow: none !important;
+  font-size: 0.84rem !important;
+  font-weight: 650 !important;
+  border-radius: 8px !important;
+  opacity: 1 !important;
+}
+
+.template-editor-actions .subtle-danger-btn:hover {
+  background: rgba(185, 28, 28, 0.075) !important;
+  border-color: rgba(185, 28, 28, 0.32) !important;
+  color: #7F1D1D !important;
+}
